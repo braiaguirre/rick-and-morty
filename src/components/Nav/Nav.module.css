@@ -1,0 +1,53 @@
+/* -------- NAVBAR -------- */
+
+.navbar {
+    padding: 15px 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100vw;
+    /* animation: glow 1s infinite alternate; */
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 35px 5px #98ce4c00;
+  }
+  to {
+    box-shadow: 0 0 35px 5px #97ce4c;
+  }
+}
+
+/* -------- MENU -------- */
+
+.menu {
+    margin-left: 50px;
+}
+
+.menu ul{
+    list-style-type: none;
+    padding: 0;
+}
+
+.menu ul li {
+  border-bottom: 1px solid #98ce4c00;
+  cursor: pointer;  
+  display: inline;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-right: 40px;
+  transition: 500ms;
+  padding: 5px;
+}
+
+.menu li:hover {
+  color: #e89ac7;
+  border-bottom: 1px solid #e89ac7;
+  transition: 500ms;
+}
+
+/* -------- SEARCH -------- */
+
+.search {
+    margin-right: 50px;
+}

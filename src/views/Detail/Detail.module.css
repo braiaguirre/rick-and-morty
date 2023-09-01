@@ -1,0 +1,96 @@
+.detail {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card {
+    align-items: center;
+    animation: glow 1s infinite alternate;
+    border: 5px solid #050023;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 680px;
+    margin: 80px;
+    padding: 30px;
+    text-align: center;
+    width: 400px;
+    background-image: url('../../assets/17206928.jpg');
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: 120% 120%;
+}
+
+.card::before {
+    content: "";
+}
+
+@keyframes glow {
+    from {
+      box-shadow: 0 0 20px 3px #98ce4c00;
+    }
+    to {
+      box-shadow: 0 0 20px 3px #98ce4cb0;
+    }
+  }
+
+/* ------- BUTTON ------- */
+
+.card button {
+    margin-top: 25px;
+    margin-bottom: 20px;
+    border-color: #ffffff34;
+    transition: 500ms;
+}
+  
+.card button:hover {
+    transition: 500ms;
+    border-color: #e89ac7;
+  }
+
+/* ------- IMAGES ------- */
+
+.card img {
+    margin: 40px 0;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 0 20px 3px #0f0f0f65;
+}
+
+/* ------- LINKS + TITLES ------- */
+
+a {
+    color: #ffffffe3;
+    cursor: pointer;
+    transition: 500ms;
+}
+  
+a:hover {
+    color: #e89ac7;
+    transition: 500ms;
+}
+
+/* ------- LOADING ------- */
+
+.spinner {
+  width: 55px;
+  height: 55px;
+  border: 5px solid #98ce4cb0;
+  border-bottom-color: #98ce4c50;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+  }
+
+  @keyframes rotation {
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
+  } 

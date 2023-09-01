@@ -1,0 +1,95 @@
+.card {
+    align-items: center;
+    animation: glow 1s infinite alternate;
+    background-image: url('../../assets/17206928.jpg');
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: 120% 120%;
+    border: 5px solid #050023;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 600px;
+    margin: 50px;
+    padding: 30px;
+    text-align: center;
+    width: 350px;
+}
+.card::before {
+    content: "";
+}
+
+@keyframes glow {
+    from {
+      box-shadow: 0 0 20px 3px #98ce4c00;
+    }
+    to {
+      box-shadow: 0 0 20px 3px #98ce4cb0;
+    }
+  }
+
+/* ------- BUTTON ------- */
+
+.card button {
+    margin: 25px 5px 5px;
+    border-color: #ffffff34;
+    padding: 10px 10px 6px 10px;
+    font-size: 10px;
+    transition: 500ms;
+}
+  
+.card button:hover {
+    transition: 500ms;
+    border-color: #e89ac7;
+}
+
+.isFav {
+    color: #e89ac7 !important;
+}
+
+/* ------- IMAGES ------- */
+
+.card img {
+    border-radius: 8px;
+    box-shadow: 0 0 20px 3px #0f0f0f65;
+    cursor: pointer;
+    margin: 40px 0;
+    height: 250px;
+    width: 250px;
+}
+
+/* ------- LINKS + TITLES ------- */
+
+a {
+    color: #ffffffe3;
+    cursor: pointer;
+    transition: 500ms;
+}
+  
+a:hover {
+    color: #e89ac7;
+    transition: 500ms;
+}
+
+/* ------- LOADING ------- */
+
+.spinner {
+  width: 55px;
+  height: 55px;
+  border: 5px solid #98ce4cb0;
+  border-bottom-color: #98ce4c50;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+  }
+
+  @keyframes rotation {
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
+  } 

@@ -1,0 +1,10 @@
+.search button {
+    margin: 5px;
+}
+
+.search input {
+    margin: 5px;
+    padding: 18.5px 0px 18.5px 10px;
+    width: 60px;
+    text-align: center;
+}
