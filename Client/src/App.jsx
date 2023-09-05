@@ -13,7 +13,7 @@ import About from './views/About/About.jsx';
 // COMPONENTS
 import Nav from './components/Nav/Nav.jsx'
 
-// --
+// DEPENDENCIES
 import {useState, useEffect} from 'react';
 import {Route, Routes, useNavigate} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';

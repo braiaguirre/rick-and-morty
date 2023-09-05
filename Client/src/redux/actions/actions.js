@@ -1,5 +1,6 @@
 import {
     GET_CHARACTER, 
+    GET_CHARACTER_DETAIL,
     REMOVE_CHARACTER, 
     ADD_FAV, 
     REMOVE_FAV, 
@@ -12,9 +13,22 @@ import axios from 'axios';
 
 export const getCharacter = (id) => {
     return (dispatch) => {
-        axios.get(`https://rickandmortyapi.com/api/character/${id}`).then(({ data }) => {
+        // axios.get(`https://rickandmortyapi.com/api/character/${id}`).then(({ data }) => {
+        axios.get(`http://localhost:3001/rickandmorty/character/${id}`).then(({ data }) => {
             return dispatch({
                 type: GET_CHARACTER,
+                payload: data
+            });
+        });
+    };
+};
+
+export const getCharacterDetail = (id) => {
+    return (dispatch) => {
+        // axios.get(`https://rickandmortyapi.com/api/character/${id}`).then(({ data }) => {
+        axios.get(`http://localhost:3001/rickandmorty/character/${id}`).then(({ data }) => {
+            return dispatch({
+                type: GET_CHARACTER_DETAIL,
                 payload: data
             });
         });

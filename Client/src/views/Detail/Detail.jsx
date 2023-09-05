@@ -1,30 +1,21 @@
 import styles from './Detail.module.css';
-import axios from 'axios';
+import {useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import {useParams, useNavigate} from 'react-router-dom';
-import {useState, useEffect} from 'react';
+import {getCharacterDetail} from '../../redux/actions/actions';
 
 export default function About() {
     const {id} = useParams();
-    const [character, setCharacter] = useState([]);
+    const character = useSelector(state => state.characterDetail);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const navigateHandler = () => navigate('/home');
-
-    useEffect(() => {
-        axios(`https://rickandmortyapi.com/api/character/${id}`).then(({data}) => {
-           if (data.name) {
-              setCharacter(data);
-           } else {
-              window.alert('No hay personajes con ese ID');
-           }
-        });
-        return setCharacter({});
-     }, []);
+    useEffect(() => dispatch(getCharacterDetail(id)), []);
 
     return (
         <div className={styles.detail}>
             <div className={styles.card}>
-               {console.log(character)}
                <button onClick={navigateHandler}>BACK</button>
                <h2>{character.name}</h2>
                <h3><b>Status:</b> {character.status}</h3>

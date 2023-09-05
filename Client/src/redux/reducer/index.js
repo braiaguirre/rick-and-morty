@@ -5,12 +5,14 @@ import {
     FILTER, 
     ORDER, 
     GET_CHARACTER,
+    GET_CHARACTER_DETAIL,
     ACCESS,
     CLEAR_ERROR
 } from '../actions/action-types.js';
 
 const initialState = {
     allCharacters: [],
+    characterDetail: {},
     allFavs: [],
     filteredFavs: [],
     error: ''
@@ -34,6 +36,14 @@ export default function reducer (state = initialState, action) {
                 ...state,
                 allCharacters: [...state.allCharacters, action.payload],
             };
+
+        // GET CHARACTER DETAIL
+        case GET_CHARACTER_DETAIL:
+            return {
+                ...state,
+                characterDetail: [action.payload],
+            };
+
 
         // REMOVE CHARACTER
         case REMOVE_CHARACTER:
