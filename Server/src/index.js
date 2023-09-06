@@ -1,19 +1,13 @@
 const http = require('http');
-const { useParams } = require('react-router-dom');
-const characters = require('./test/utils/data');
+const { getCharById } = require('./test/controllers/getCharById');
+const PORT = 3001;
 
 http.createServer((req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
-    let {url} = req;
-    let i = url.lastIndexOf('/') + 1;
-    id = url.slice(i);
-    url = url.slice(0, i);
-    if (url === '/rickandmorty/character/') {
-        res.writeHead(200, { 'Content-Type': 'application/json' });
-        characters.forEach(character => {
-            if (character.id === Number(id)) 
-                return res.end(JSON.stringify(character));
-        }) 
+    const {url} = req;
+    if (url.includes('/rickandmorty/character/')) {
+        let id = url.split('/').pop();
+        return getCharById(res, id);
     }
-}).listen(3001);
+}).listen(PORT);
 
