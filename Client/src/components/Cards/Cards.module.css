@@ -1,6 +1,7 @@
 .cards {
     display: grid;
-    grid-template-columns: repeat(4, 25%);
+    grid-auto-flow: column;
+    grid-template-columns: repeat(auto-fill, 350px);
 }
 
 .helper {
