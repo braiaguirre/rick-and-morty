@@ -21,7 +21,7 @@ import {getCharacter, removeCharacter, clearError} from './redux/actions/actions
 
 export default function App() {
    const [mem, setMem] = useState([]);
-   const [access, setAccess] = useState(false);
+   const [access, setAccess] = useState(true);
    const characters = useSelector(state => state.allCharacters);
    const error = useSelector(state => state.error);
    const EMAIL = 'prueba@gmail.com';
@@ -58,7 +58,6 @@ export default function App() {
 
    // REMOVE CHARACTER
    function onClose(id = -1) {
-      console.log(mem);
       if (id === -1) {
          dispatch(removeCharacter(id));
          setMem([]);
@@ -66,7 +65,6 @@ export default function App() {
          dispatch(removeCharacter(id));
          setMem(mem.filter(character => character.id !== Number(id)));
       }
-      console.log(mem);
    }
 
    // APP
@@ -86,7 +84,7 @@ export default function App() {
                   <Route path='/home' element={<Home characters={characters} onClose={onClose} />} />
                   <Route path='/favorites' element={<Favorites />} />
                   <Route path='/about' element={<About />} />
-                  <Route path='/detail/:id' element={<Detail />} />
+                  <Route path='/detail/:id' element={<Detail />}  />
                   <Route path='*' element={<Error404 />} />
                </Routes>
             </div>}

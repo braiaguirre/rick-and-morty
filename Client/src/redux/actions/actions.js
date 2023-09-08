@@ -1,13 +1,14 @@
 import {
     GET_CHARACTER, 
     GET_CHARACTER_DETAIL,
+    CLEAR_CHARACTER_DETAIL,
     REMOVE_CHARACTER, 
     ADD_FAV, 
     REMOVE_FAV, 
     FILTER, 
     ORDER,
     ACCESS,
-    CLEAR_ERROR
+    CLEAR_ERROR,
 } from './action-types';
 import axios from 'axios';
 
@@ -25,12 +26,17 @@ export const getCharacter = (id) => {
 
 export const getCharacterDetail = (id) => {
     return (dispatch) => {
-        // axios.get(`https://rickandmortyapi.com/api/character/${id}`).then(({ data }) => {
-        axios.get(`http://localhost:3001/rickandmorty/character/${id}`).then(({ data }) => {
-            return dispatch({
-                type: GET_CHARACTER_DETAIL,
-                payload: data
-            });
+        return dispatch({
+            type: GET_CHARACTER_DETAIL,
+            payload: id
+        });
+    };
+};
+
+export const clearCharacterDetail = () => {
+    return (dispatch) => {
+        return dispatch({
+            type: CLEAR_CHARACTER_DETAIL,
         });
     };
 };

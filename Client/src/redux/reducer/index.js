@@ -6,6 +6,7 @@ import {
     ORDER, 
     GET_CHARACTER,
     GET_CHARACTER_DETAIL,
+    CLEAR_CHARACTER_DETAIL,
     ACCESS,
     CLEAR_ERROR
 } from '../actions/action-types.js';
@@ -34,14 +35,21 @@ export default function reducer (state = initialState, action) {
             }
             return {
                 ...state,
-                allCharacters: [...state.allCharacters, action.payload],
+                allCharacters: [...state.allCharacters, action.payload]
             };
 
         // GET CHARACTER DETAIL
         case GET_CHARACTER_DETAIL:
             return {
                 ...state,
-                characterDetail: [action.payload],
+                characterDetail: [...state.allCharacters.filter(character => character.id !== Number(action.payload))]
+            };
+
+        // GET CHARACTER DETAIL
+        case CLEAR_CHARACTER_DETAIL:
+            return {
+                ...state,
+                characterDetail: []
             };
 
 
