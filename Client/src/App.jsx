@@ -14,6 +14,7 @@ import About from './views/About/About.jsx';
 import Nav from './components/Nav/Nav.jsx'
 
 // DEPENDENCIES
+import axios from 'axios';
 import {useState, useEffect} from 'react';
 import {Route, Routes, useNavigate} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
@@ -21,7 +22,7 @@ import {getCharacter, removeCharacter, clearError} from './redux/actions/actions
 
 export default function App() {
    const [mem, setMem] = useState([]);
-   const [access, setAccess] = useState(true);
+   const [access, setAccess] = useState(false);
    const characters = useSelector(state => state.allCharacters);
    const error = useSelector(state => state.error);
    const EMAIL = 'prueba@gmail.com';
@@ -31,10 +32,12 @@ export default function App() {
 
    // ACCESS - LOGIN - LOGOUT
    function logIn({email, password}) {
-      if (email.toLowerCase() === EMAIL && password === PASSWORD) {
-         setAccess(true);
-         navigate(`/home`);
-      }
+      const URL = 'http://localhost:3001/rickandmorty/login/';
+      axios(URL + `?email=${email}&password=${password}`).then(({data}) => {
+         const {access} = data;
+         setAccess(data);
+         access && navigate('/home');
+      })
    }
    
    function logOut() {

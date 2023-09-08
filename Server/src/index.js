@@ -1,19 +1,8 @@
-// const http = require('http');
-// const morgan = require('morgan');
+const morgan = require('morgan');
 const getCharById = require('./test/controllers/getCharById');
-// const PORT = 3001;
-
-// http.createServer((req, res) => {
-//     res.setHeader('Access-Control-Allow-Origin', '*');
-//     const {url} = req;
-    
-//     if (url.includes('/rickandmorty/character/')) {
-//         let id = url.split('/').pop();
-//         return getCharById(res, id);
-//     }
-// }).listen(PORT);
 
 const express = require('express');
+const mainRouter = require('./test/routes');
 
 const PORT = 3001;
 const server = express();
@@ -23,7 +12,20 @@ server.listen(PORT, () => {
 
 })
 
+server.use((req, res, next) => {
+    console.log(req.url);
+      res.header('Access-Control-Allow-Origin', '*');
+      res.header('Access-Control-Allow-Credentials', 'true');
+      res.header(
+        'Access-Control-Allow-Headers',
+        'Origin, X-Requested-With, Content-Type, Accept'
+     );
+     res.header(
+        'Access-Control-Allow-Methods',
+        'GET, POST, OPTIONS, PUT, DELETE'
+     );
+     next();
+})
 server.use(express.json());
-// server.use(morgan('dev'));
-
-server.get('/', getCharById);
+server.use(morgan('dev'));
+server.use('/rickandmorty', mainRouter);

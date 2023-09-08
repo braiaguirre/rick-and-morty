@@ -80,8 +80,8 @@ export default function reducer (state = initialState, action) {
         case REMOVE_FAV:
             return {
                 ...state, 
-                allFavs: state.allFavs.filter(character => character.id !== Number(action.payload)),
-                filteredFavs: state.filteredFavs.filter(character => character.id !== Number(action.payload)),
+                allFavs: [...state.allFavs, action.payload],
+                filteredFavs: [...state.filteredFavs, action.payload]
             };
 
         // GENDER FILTER
