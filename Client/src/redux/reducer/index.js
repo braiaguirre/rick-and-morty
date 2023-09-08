@@ -72,16 +72,16 @@ export default function reducer (state = initialState, action) {
         case ADD_FAV:
             return {
                 ...state, 
-                allFavs: [...state.allFavs, action.payload],
-                filteredFavs: [...state.filteredFavs, action.payload]
+                allFavs: action.payload,
+                filteredFavs: action.payload
             };
 
         // REMOVE FAVORITE
         case REMOVE_FAV:
             return {
                 ...state, 
-                allFavs: [...state.allFavs, action.payload],
-                filteredFavs: [...state.filteredFavs, action.payload]
+                allFavs: action.payload,
+                filteredFavs: action.payload
             };
 
         // GENDER FILTER

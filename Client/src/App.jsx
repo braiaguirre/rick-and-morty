@@ -22,7 +22,7 @@ import {getCharacter, removeCharacter, clearError} from './redux/actions/actions
 
 export default function App() {
    const [mem, setMem] = useState([]);
-   const [access, setAccess] = useState(false);
+   const [access, setAccess] = useState(true);
    const characters = useSelector(state => state.allCharacters);
    const error = useSelector(state => state.error);
    const EMAIL = 'prueba@gmail.com';
