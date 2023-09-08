@@ -37,7 +37,7 @@ export default function App() {
       }
    }
    
-   function logOut({email, password}) {
+   function logOut() {
       setAccess(false);
    }
 

@@ -42,10 +42,10 @@ export default function reducer (state = initialState, action) {
         case GET_CHARACTER_DETAIL:
             return {
                 ...state,
-                characterDetail: [...state.allCharacters.filter(character => character.id !== Number(action.payload))]
+                characterDetail: {...state.allCharacters.filter(character => character.id !== Number(action.payload)).pop()}
             };
 
-        // GET CHARACTER DETAIL
+        // CLEAR CHARACTER DETAIL
         case CLEAR_CHARACTER_DETAIL:
             return {
                 ...state,
@@ -115,6 +115,12 @@ export default function reducer (state = initialState, action) {
             return {
                 ...state,
                 error: ''
+            }
+
+        // ACCESS
+        case ACCESS:
+            return {
+                ...state,
             }
 
 		// DEFAULT

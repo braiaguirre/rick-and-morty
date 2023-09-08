@@ -2,11 +2,11 @@ import styles from './Detail.module.css';
 import {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {useParams, useNavigate} from 'react-router-dom';
-import {getCharacterDetail, clearCharacterDetail} from '../../redux/actions/actions';
+import {getCharacterDetail} from '../../redux/actions/actions';
 
 export default function About() {
     const {id} = useParams();
-    const [character] = useSelector(state => state.characterDetail);
+    const character = useSelector(state => state.characterDetail);
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
