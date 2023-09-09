@@ -8,19 +8,26 @@ import {
     FILTER, 
     ORDER,
     ACCESS,
+    ERROR,
     CLEAR_ERROR,
 } from './action-types';
 import axios from 'axios';
 
 export const getCharacter = (id) => {
     return (dispatch) => {
-        // axios.get(`https://rickandmortyapi.com/api/character/${id}`).then(({ data }) => {
-        axios.get(`http://localhost:3001/rickandmorty/character/${id}`).then(({ data }) => {
-            return dispatch({
-                type: GET_CHARACTER,
-                payload: data
+        axios.get(`http://localhost:3001/rickandmorty/character/${id}`)
+            .then(({ data }) => {
+                return dispatch({
+                    type: GET_CHARACTER,
+                    payload: data
+                });
+            })
+            .catch((error) => {
+                return dispatch({
+                    type: ERROR,
+                    payload: error
+                })
             });
-        });
     };
 };
 
