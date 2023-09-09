@@ -12,6 +12,17 @@ import {
     CLEAR_ERROR
 } from '../actions/action-types.js';
 
+const ERROR_CODES = {
+    ERROR_404: {
+        error: 'Not found!',
+        desc: 'You can choose an ID from 1 to 826.'
+    },
+    ERROR_666: {
+        error: 'Already added!',
+        desc: 'This character was already added, try another ID.'
+    }
+}
+
 const initialState = {
     allCharacters: [],
     characterDetail: {},
@@ -29,7 +40,7 @@ export default function reducer (state = initialState, {type, payload}) {
             for (let i = 0; i < state.allCharacters.length; i++) {
                 if (state.allCharacters[i].id === payload.id) return {
                     ...state,
-                    error: 'This character was already added!'
+                    error: ERROR_CODES.ERROR_666
                 };
             }
             return {
@@ -113,7 +124,7 @@ export default function reducer (state = initialState, {type, payload}) {
         case ERROR:
             return {
                 ...state,
-                error: payload.response.data
+                error: ERROR_CODES[payload.response.data]
             }
 
 

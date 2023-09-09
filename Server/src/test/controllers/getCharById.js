@@ -22,7 +22,7 @@ function getCharById(req, res) {
         if (error.response) {
             res
                 .status(404)
-                .send('Character not found!');
+                .send('ERROR_404');
         } else {
             res
                 .status(500)

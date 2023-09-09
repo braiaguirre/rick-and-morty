@@ -4,8 +4,15 @@
     border-color: 1px solid #97ce4c;
     border-radius: 8px;
     padding: 50px;
+}
+
+.errorPopup h2{
     text-transform: uppercase;
-    transition: opacity 1s ease-in-out;
+    margin: 0 0 10px 0;
+}
+
+.errorPopup p {
+    margin-bottom: 25px;
 }
 
 @keyframes glow {
