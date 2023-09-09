@@ -1,9 +1,14 @@
+// COMPONENTS
 import Cards from '../../components/Cards/Cards.jsx';
 
-export default function App({characters, onClose}) {
+function App({characters, onClose}) {
+   document.title = 'Rick and Morty > Home'
+
    return (
       <>
          <Cards characters={characters} onClose={onClose} />
       </>
    );
 }
+
+export default App;

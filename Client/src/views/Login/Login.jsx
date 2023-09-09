@@ -1,7 +1,12 @@
-import {useState} from 'react';
+// STYLES
 import styles from './Login.module.css';
-import validation from '../../utils/validation.js';
+
+// DEPENDENCIES
+import {useState} from 'react';
+
+// ASSETS + UTILS
 import logo from '../../assets/logo.png';
+import validation from '../../utils/validation.js';
 
 export default function Login({logIn}) {
     const [userData, setUserData] = useState({email: '', password: ''})

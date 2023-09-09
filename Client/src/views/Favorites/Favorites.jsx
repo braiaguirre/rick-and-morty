@@ -1,14 +1,23 @@
+// STYLES
 import styles from './Favorites.module.css';
-import {useEffect, useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import {filterCards, orderCards} from '../../redux/actions/actions.js';
+
+// COMPONENTS
 import Cards from '../../components/Cards/Cards.jsx';
 
-export default function Favorites() {
+// DEPENDENCIES
+import {useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+
+// ACTIONS
+import {filterCards, orderCards} from '../../redux/actions/actions.js';
+
+function Favorites() {
+    document.title = 'Rick and Morty > Favorites'
+    const dispatch = useDispatch();
+
+    const filteredFavs = useSelector(state => state.filteredFavs);
     const [orderFilter, setOrderFilter] = useState('N'); // local state -> order filter
     const [genderFilter, setGenderFilter] = useState('All') // local state - gender filter
-    const filteredFavs = useSelector(state => state.filteredFavs);
-    const dispatch = useDispatch();
 
     // FILTERS
     const orderHandler = (e) => {
@@ -29,46 +38,38 @@ export default function Favorites() {
         <>
             <div className={styles.favorites}>
                 <div className={styles.filters}>
-                <select onChange={orderHandler}>
-                    <option value="N">No order</option>
-                    <option value="A">Ascending</option>
-                    <option value="D">Descending</option>
-                </select>
-                <select onChange={statusHandler}>
-                    <option value="All">All status</option>
-                    <option value="Alive">Alive</option>
-                    <option value="Dead">Dead</option>
-                    <option value="unknown">Unknown</option>
-                </select>
-                <select onChange={genderHandler}>
-                    <option value="All">All genders</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Genderless">Genderless</option>
-                    <option value="unknown">Unknown</option>
-                </select>
-                <button>Reset filters</button>
+                    <select onChange={orderHandler}>
+                        <option value="N">No order</option>
+                        <option value="A">Ascending</option>
+                        <option value="D">Descending</option>
+                    </select>
+                    <select onChange={statusHandler}>
+                        <option value="All">All status</option>
+                        <option value="Alive">Alive</option>
+                        <option value="Dead">Dead</option>
+                        <option value="unknown">Unknown</option>
+                    </select>
+                    <select onChange={genderHandler}>
+                        <option value="All">All genders</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Genderless">Genderless</option>
+                        <option value="unknown">Unknown</option>
+                    </select>
+                    <button>Reset filters</button>
                 </div>
                 {filteredFavs.length === 0 &&
                     <div className={styles.helper}>
                     <span>NO FAVORITES YET!</span>
                     <span className={styles.icon}></span>
-                    {/* <span className={`material-symbols-outlined ${styles.arrow}`}>switch_access_shortcut</span> */}
-                </div>}
+                    </div>}
                 {filteredFavs.length > 0 &&
                     <div className={styles.cards}>
                     <Cards characters={filteredFavs} />
-                    {/* {(filteredFavs).map(character=> <Card character={character} key={character.id}/>)} */}
-                </div>}
+                    </div>}
             </div>
         </>
     )
 }
 
-// const mapStateToProps = (state) => {
-//     return {
-//         filteredFavs: state.filteredFavs,
-//     }
-// }
-
-// export default connect(mapStateToProps, null)(Favorites);
+export default Favorites;

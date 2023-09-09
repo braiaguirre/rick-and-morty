@@ -1,7 +1,10 @@
+// STYLES
 import styles from './Error404.module.css';
+
+// DEPENDENCIES
 import {useNavigate} from 'react-router-dom';
 
-export default function Error404() {
+function Error404() {
     const navigate = useNavigate();
 
     const navigateHandler = () => {
@@ -19,3 +22,5 @@ export default function Error404() {
         </div>
     )
 }
+
+export default Error404;

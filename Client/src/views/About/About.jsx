@@ -1,8 +1,16 @@
+// STYLES
 import styles from './About.module.css';
+
+// COMPONENTS
 import Card from '../../components/Card/Card.jsx';
+
+// ASSETS
 import img from '../../assets/about-profile.jpg';
 
-export default function About({onClose}) {
+function About({onClose}) {
+    document.title = 'Rick and Morty > About'
+
+    // PERSONALIZED CHARACTER
     const character = {
         id: 999,
         name: 'Brian Aguirre',
@@ -21,3 +29,5 @@ export default function About({onClose}) {
         </div>
     )
 }
+
+export default About;
