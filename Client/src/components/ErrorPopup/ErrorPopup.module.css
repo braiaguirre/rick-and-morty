@@ -1,0 +1,18 @@
+.errorPopup {
+    animation: glow 1s infinite alternate;
+    background-color: #0f0f0f;
+    border-color: 1px solid #97ce4c;
+    border-radius: 8px;
+    padding: 50px;
+    text-transform: uppercase;
+    transition: opacity 1s ease-in-out;
+}
+
+@keyframes glow {
+    from {
+      box-shadow: 0 0 20px 3px #98ce4c00;
+    }
+    to {
+      box-shadow: 0 0 20px 3px #98ce4cb0;
+    }
+  }
