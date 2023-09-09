@@ -30,7 +30,6 @@ function App() {
    const error = useSelector(state => state.error);
 
    // ACCESS HANDLERS
-
    const logIn = ({email, password}) => dispatch(getAccess(email, password));
    const logOut = () => dispatch(removeAccess);
 
@@ -39,27 +38,32 @@ function App() {
    }, [access]);
    
    // CHARACTERS HANDLERS
-
    const onSearch = (id) => dispatch(getCharacter(id));
    const onClose = (id = -1) => dispatch(removeCharacter(id));
-
+   
    return (
       <>
+         {/* ERROR POPUP */}
          {error !== '' && 
             <div className={styles.errorPopupContainer}>
                <ErrorPopup error={error.error} desc={error.desc}/>
             </div>}
+
+         {/* ACCESS */}
          {access && 
             <div className={styles.navbar}>
                <Nav onSearch={onSearch} logOut={logOut} onClose={onClose} />
             </div>}
          <>
+            {/* LOGIN ROUTE */}
             {!access && 
                <div className={styles.login}>
                   <Routes>
                      <Route path='/' element={<Login logIn={logIn}/>} />
                   </Routes>
                </div>}
+
+            {/* MAIN APP ROUTES */}
             {access && 
                <div className={styles.app}>
                   <Routes>
