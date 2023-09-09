@@ -18,34 +18,29 @@ import axios from 'axios';
 import {useState, useEffect} from 'react';
 import {Route, Routes, useNavigate} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
-import {getCharacter, removeCharacter, clearError} from './redux/actions/actions.js';
+import {getCharacter, removeCharacter, clearError, getAccess, removeAccess} from './redux/actions/actions.js';
 
 export default function App() {
    const [mem, setMem] = useState([]);
-   const [access, setAccess] = useState(true);
+   // const [access, setAccess] = useState(true);
+   const access = useSelector(state => state.access);
    const characters = useSelector(state => state.allCharacters);
    const error = useSelector(state => state.error);
-   const EMAIL = 'prueba@gmail.com';
-   const PASSWORD = 'prueba12';
    const navigate = useNavigate();
    const dispatch = useDispatch();
 
    // ACCESS - LOGIN - LOGOUT
    function logIn({email, password}) {
-      const URL = 'http://localhost:3001/rickandmorty/login/';
-      axios(URL + `?email=${email}&password=${password}`).then(({data}) => {
-         const {access} = data;
-         setAccess(data);
-         access && navigate('/home');
-      })
+      dispatch(getAccess(email, password));
    }
    
    function logOut() {
-      setAccess(false);
+      dispatch(removeAccess);
    }
 
    useEffect(() => {
-      !access && navigate('/');
+      // !access && navigate('/');
+      access ? navigate('/home') : navigate('/')
    }, [access]);
 
    useEffect(() => {
@@ -54,7 +49,7 @@ export default function App() {
    
    // ADD CHARACTER
    function onSearch(id) {
-      dispatch(clearError);
+      dispatch(clearError); // --------------- > MEJORAR
       dispatch(getCharacter(id));
       setMem(mem => [...mem, Number(id)]);
    }

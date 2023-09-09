@@ -24,10 +24,6 @@ export default function reducer (state = initialState, {type, payload}) {
     switch (type) {
         // GET CHARACTER
         case GET_CHARACTER:
-            if (!payload.id) return {
-                ...state,
-                error: 'Introduce a valid ID!'
-            }
             for (let i = 0; i < state.allCharacters.length; i++) {
                 if (state.allCharacters[i].id === payload.id) return {
                     ...state,
@@ -54,7 +50,7 @@ export default function reducer (state = initialState, {type, payload}) {
             };
 
 
-        // REMOVE CHARACTER
+        // REMOVE CHARACTER ----------------------> SE ROMPIÓ
         case REMOVE_CHARACTER:
             if (payload === -1) return {
                 ...state,
@@ -64,9 +60,9 @@ export default function reducer (state = initialState, {type, payload}) {
             }
             return {
                 ...state,
-                allCharacters: [...state.allCharacters.filter(character => character.id !== Number(payload))],
-                allFavs: [...state.allFavs.filter(character => character.id !== Number(payload))],
-                filteredFavs: [...state.filteredFavs.filter(character => character.id !== Number(payload))]
+                allCharacters: [...state.allCharacters.filter(character => character.id !== payload)],
+                allFavs: [...state.allFavs.filter(character => character.id !== payload)],
+                filteredFavs: [...state.filteredFavs.filter(character => character.id !== payload)]
             };
                 
         // ADD FAVORITE
@@ -130,6 +126,7 @@ export default function reducer (state = initialState, {type, payload}) {
         case ACCESS:
             return {
                 ...state,
+                access: payload
             }
 
 		// DEFAULT

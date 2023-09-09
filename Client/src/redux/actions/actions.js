@@ -71,6 +71,7 @@ export const removeFav = (id) => {
     const endpoint = 'http://localhost:3001/rickandmorty/fav/' + id;
     return (dispatch) => {
        axios.delete(endpoint).then(({ data }) => {
+        console.log(data);
           return dispatch({
              type: 'REMOVE_FAV',
              payload: data,
@@ -93,14 +94,23 @@ export const orderCards = (order) => {
     };
 };
 
-export const access = ({email, password}) => {
-    return {
+export const getAccess = (email, password) => {
+    const endpoint = 'http://localhost:3001/rickandmorty/login/';
+    return (dispatch) => {
+        axios(endpoint + `?email=${email}&password=${password}`).then(({data}) => {
+          return dispatch({
+             type: ACCESS,
+             payload: data,
+       });
+       });
+    };
+}
+
+export const removeAccess = () => {
+    return dispatch({
         type: ACCESS,
-        payload: {
-            email: email,
-            password: password
-        }
-    }
+        payload: false,
+       });
 }
 
 export const clearError = () => {

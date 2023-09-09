@@ -10,9 +10,11 @@ function postFav(req, res) {
 
 function deleteFav(req, res) {
     const {id} = req.params;
+    allFavs = allFavs.filter(favorite => favorite.id !== id);
+    console.log(allFavs);
     res
         .status(200)
-        .send(allFavs.filter(favorite => favorite.id !== Number(id)))
+        .send(allFavs)
 }
 
 module.exports = {
