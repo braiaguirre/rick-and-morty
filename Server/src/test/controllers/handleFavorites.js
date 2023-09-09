@@ -1,20 +1,17 @@
-let allFavs = [];
+// let allFavs = []; ---- > esto no me gusta acá, prefiero manejarlo desde el estado global, así que modifiqué la HW
 
 function postFav(req, res) {
     const fav = req.body;
-    allFavs.push(fav);
     res
         .status(200)
-        .send(allFavs)
+        .send(fav)
 }
 
 function deleteFav(req, res) {
     const {id} = req.params;
-    allFavs = allFavs.filter(favorite => favorite.id !== id);
-    console.log(allFavs);
     res
         .status(200)
-        .send(allFavs)
+        .send(id)
 }
 
 module.exports = {

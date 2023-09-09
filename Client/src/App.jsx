@@ -1,5 +1,4 @@
 // STYLES
-document.title = 'Rick And Morty';
 import styles from './App.module.css';
 
 // VIEWS
@@ -14,7 +13,6 @@ import About from './views/About/About.jsx';
 import Nav from './components/Nav/Nav.jsx'
 
 // DEPENDENCIES
-import axios from 'axios';
 import {useState, useEffect} from 'react';
 import {Route, Routes, useNavigate} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';

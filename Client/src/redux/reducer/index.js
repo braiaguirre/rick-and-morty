@@ -17,11 +17,13 @@ const initialState = {
     characterDetail: {},
     allFavs: [],
     filteredFavs: [],
+    access: true,
     error: ''
 };
 
 export default function reducer (state = initialState, {type, payload}) {
     switch (type) {
+        
         // GET CHARACTER
         case GET_CHARACTER:
             for (let i = 0; i < state.allCharacters.length; i++) {
@@ -50,7 +52,7 @@ export default function reducer (state = initialState, {type, payload}) {
             };
 
 
-        // REMOVE CHARACTER ----------------------> SE ROMPIÓ
+        // REMOVE CHARACTER
         case REMOVE_CHARACTER:
             if (payload === -1) return {
                 ...state,
@@ -69,16 +71,16 @@ export default function reducer (state = initialState, {type, payload}) {
         case ADD_FAV:
             return {
                 ...state, 
-                allFavs: payload,
-                filteredFavs: payload
+                allFavs: [...state.allFavs, payload],
+                filteredFavs: [...state.filteredFavs, payload]
             };
 
         // REMOVE FAVORITE
         case REMOVE_FAV:
             return {
                 ...state, 
-                allFavs: payload,
-                filteredFavs: payload
+                allFavs: [...state.allFavs.filter(character => character.id !== String(payload))],
+                filteredFavs: [...state.filteredFavs.filter(character => character.id !== String(payload))]
             };
 
         // GENDER FILTER

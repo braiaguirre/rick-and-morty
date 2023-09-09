@@ -5,7 +5,7 @@
 
 .helper {
     align-items: center;
-    animation: glow 1s infinite alternate;
+    /* animation: glow 1s infinite alternate; */
     display: flex;
     font-family: 'montserrat', serif;
     font-weight: bolder;
@@ -15,14 +15,14 @@
     width: 100%;
 }
 
-@keyframes glow {
+/* @keyframes glow {
     from {
       text-shadow: 0 0 10px #98ce4c00;
     }
     to {
       text-shadow: 0 0 10px #97ce4c;
     }
-}
+} */
 
 .arrow {
     transform: scale(-1, 1);

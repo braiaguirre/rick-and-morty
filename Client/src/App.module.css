@@ -37,7 +37,7 @@ button {
 }
 
 button:hover {
-  border-color: #97ce4c;
+  border-color: #e89ac7;
   transition: 500ms;
 }
 
@@ -55,15 +55,15 @@ input {
 }
 
 input:hover {
-  border: 1px solid #97ce4c;
+  border: 1px solid #e89ac7;
   /* border: 1px solid #e89ac7; */
-  outline: 0px solid #97ce4c;
+  outline: 0px solid #e89ac7;
   transition: 500ms;
 }
 
 input:focus {
-  border: 1px solid #97ce4c;
-  outline: 0px solid #97ce4c;
+  border: 1px solid #e89ac7;
+  outline: 0px solid #e89ac7;
 }
 
 /* ------- SELECT ------- */

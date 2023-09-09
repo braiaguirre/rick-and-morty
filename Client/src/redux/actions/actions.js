@@ -13,6 +13,8 @@ import {
 } from './action-types';
 import axios from 'axios';
 
+// CHARACTERS HANDLERS
+
 export const getCharacter = (id) => {
     return (dispatch) => {
         axios.get(`http://localhost:3001/rickandmorty/character/${id}`)
@@ -55,12 +57,14 @@ export const removeCharacter = (id) => {
     }
 }
 
+// FAVORITES HANDLERS
+
 export const addFav = (character) => {
     const endpoint = 'http://localhost:3001/rickandmorty/fav';
     return (dispatch) => {
         axios.post(endpoint, character).then(({ data }) => {
            return dispatch({
-              type: 'ADD_FAV',
+              type: ADD_FAV,
               payload: data,
            });
         });
@@ -73,12 +77,14 @@ export const removeFav = (id) => {
        axios.delete(endpoint).then(({ data }) => {
         console.log(data);
           return dispatch({
-             type: 'REMOVE_FAV',
+             type: REMOVE_FAV,
              payload: data,
        });
        });
     };
 };
+
+// FILTER HANDLERS
 
 export const filterCards = (gender) => {
     return {
@@ -93,6 +99,8 @@ export const orderCards = (order) => {
         payload: order
     };
 };
+
+// LOGIN - LOGOUT
 
 export const getAccess = (email, password) => {
     const endpoint = 'http://localhost:3001/rickandmorty/login/';
@@ -112,6 +120,8 @@ export const removeAccess = () => {
         payload: false,
        });
 }
+
+// ERROR HANDLERS
 
 export const clearError = () => {
     return {
