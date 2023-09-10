@@ -3,9 +3,10 @@ const axios = require('axios');
 const URL = 'https://rickandmortyapi.com/api/location/';
 
 function getLocation(req, res) {
-    const {id} = req.params;
-    console.log(id);
-    axios.get(`${URL}${id ? id : ''}`)
+    // const {id} = req.params;
+    // console.log(id);
+    // axios.get(`${URL}${id ? id : ''}`)
+    axios.get(`${URL}`)
     .then(({data}) => {
         res
         .status(200)

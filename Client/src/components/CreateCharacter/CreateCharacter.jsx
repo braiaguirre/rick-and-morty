@@ -13,7 +13,7 @@ import {createCharacter} from '../../redux/actions/actions.js';
 // ASSETS + UTILS
 import validation from '../../utils/createCharacterValidation.js';
 
-function CreateCharacter({closeCreateCharacter}) {
+function CreateCharacter({closeCreateCharacter}) {  // TODO: AGREGAR GENERADOR DE IMAGEN RANDOM
     const dispatch = useDispatch();
 
     const [character, setCharacter] = useState({
@@ -30,14 +30,12 @@ function CreateCharacter({closeCreateCharacter}) {
         origin: true,
         status: true
     })
-    const [locations, setLocations] = useState({});
+    const [locations, setLocations] = useState([]);
 
     useEffect(() => {
-        setLocations(() => {
-            axios.get(`http://localhost:3001/rickandmorty/location/`)
-                .then(({ data }) => console.log(data))
-        })
-    })
+        axios.get(`http://localhost:3001/rickandmorty/location/`)
+            .then(({ data }) => setLocations(data.results))     // TODO: TRAER EL RESTO DE LAS PÁGINAS DE LOCATIONS
+    }, []);
 
     // CHANGE HANDLER (LOCAL STATE)
     function changeHandler(e) {        
@@ -49,7 +47,7 @@ function CreateCharacter({closeCreateCharacter}) {
     function submitHandler(e) {
         e.preventDefault();
         for (let error in errors) {
-            if (error) alert('asd');
+            if (error) alert('asd');    // TODO: MEJORAR / DESHABILITAR BOTÓN SUBMIT ?
             return;
         }
         dispatch(createCharacter(character));
@@ -97,16 +95,13 @@ function CreateCharacter({closeCreateCharacter}) {
                     </div>
 
                     {/* ORIGIN */}
-                    {/* // TODO: MAPEAR DESDE API */}
                     <div className={styles.formDiv}>
-                        
                         <select name="origin" onChange={changeHandler}>
                             <option value="">Origin</option>
-                            {/* {locations.map(location => {
-                                <option value={location.name}>{location.name}</option>
-                            })} */}
+                            {locations.map(location => 
+                                <option value={location.name} key={location.id}>{location.name}</option>
+                            )}
                         </select>
-
                         <span className="material-symbols-outlined" width="20px">{errors.origin ? 'close' : 'done'}</span>
                     </div>
                     

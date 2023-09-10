@@ -7,7 +7,7 @@ const {postFav, deleteFav} = require('../controllers/handleFavorites');
 const mainRouter = Router();
 
 mainRouter.get('/character/:id', getCharById);
-mainRouter.get('/location/:id', getLocation);
+mainRouter.get('/location/', getLocation);
 mainRouter.get('/login', login);
 mainRouter.post('/fav', postFav);
 mainRouter.delete('/fav/:id', deleteFav);

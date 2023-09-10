@@ -1,11 +1,20 @@
 // STYLES
 import styles from './App.module.css';
 
+// DEPENDENCIES
+import {useState, useEffect} from 'react';
+import {Route, Routes, useNavigate} from 'react-router-dom';
+import {useDispatch, useSelector} from 'react-redux';
+
+// ACTIONS
+import {getCharacter, removeCharacter, getAccess, removeAccess} from './redux/actions/actions.js';
+
 // VIEWS
 import Home from './views/Home/Home'
 import Detail from './views/Detail/Detail';
 import Login from './views/Login/Login';
 import Favorites from './views/Favorites/Favorites';
+import CustomCharacters from './views/CustomCharacters/CustomCharacters';
 import Error404 from './views/Error404/Error404';
 import About from './views/About/About';
 
@@ -14,13 +23,6 @@ import Nav from './components/Nav/Nav';
 import ErrorPopup from './components/ErrorPopup/ErrorPopup';
 import CreateCharacter from './components/CreateCharacter/CreateCharacter';
 
-// DEPENDENCIES
-import {useState, useEffect} from 'react';
-import {Route, Routes, useNavigate} from 'react-router-dom';
-import {useDispatch, useSelector} from 'react-redux';
-
-// ACTIONS
-import {getCharacter, removeCharacter, getAccess, removeAccess} from './redux/actions/actions.js';
 
 function App() {
    const navigate = useNavigate();
@@ -88,6 +90,7 @@ function App() {
                   <Routes>
                      <Route path='/home' element={<Home characters={characters} onClose={onClose} />} />
                      <Route path='/favorites' element={<Favorites />} />
+                     <Route path='/custom' element={<CustomCharacters />} />
                      <Route path='/about' element={<About />} />
                      <Route path='/detail/:id' element={<Detail />}  />
                      <Route path='*' element={<Error404 />} />

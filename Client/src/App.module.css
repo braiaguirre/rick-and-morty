@@ -87,15 +87,7 @@ select:hover {
 }
 
 option {
-  color: #ffffff34;
-  background-color: #ffffff34 !important;
-  appearance: none;
-  -webkit-appearance: none;
-}
-
-option:hover {
-  background-color: #ffffff34;
-  border: 1px solid #0f0f0f;
+  color: #0f0f0f;
 }
 
 /* ------- ICONS ------- */
