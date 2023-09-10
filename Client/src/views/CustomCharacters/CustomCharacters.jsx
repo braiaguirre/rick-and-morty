@@ -13,31 +13,33 @@ import {filterCards, orderCards} from '../../redux/actions/actions.js';
 
 function CustomCharacters() {
     document.title = 'Rick and Morty > Custom Characters'
+    
     const dispatch = useDispatch();
 
-    const filteredFavs = useSelector(state => state.filteredFavs);
-    const [orderFilter, setOrderFilter] = useState('N'); // local state -> order filter
-    const [genderFilter, setGenderFilter] = useState('All') // local state - gender filter
+    const customCharacters = useSelector(state => state.customCharacters);
+    console.log(customCharacters);
+    // const [orderFilter, setOrderFilter] = useState('N'); // local state -> order filter
+    // const [genderFilter, setGenderFilter] = useState('All') // local state - gender filter
 
     // FILTERS
-    const orderHandler = (e) => {
-        setOrderFilter(e.target.value); // sets new local state
-        dispatch(orderCards(e.target.value)); // dispatches order filter
-        if (genderFilter !== 'All') dispatch(filterCards(genderFilter)); // if a gender filter is selected, dispatch gender filter
-    }
-    const statusHandler = (e) => {
+    // const orderHandler = (e) => {
+    //     setOrderFilter(e.target.value); // sets new local state
+    //     dispatch(orderCards(e.target.value)); // dispatches order filter
+    //     if (genderFilter !== 'All') dispatch(filterCards(genderFilter)); // if a gender filter is selected, dispatch gender filter
+    // }
+    // const statusHandler = (e) => {
         
-    }
-    const genderHandler = (e) => {
-        setGenderFilter(e.target.value); // sets new local state
-        dispatch(filterCards(e.target.value)); // dispatches gender filter
-        if (orderFilter !== 'N') dispatch(orderCards(orderFilter)); // if an order filter is selected, dispatch order filter
-    }
+    // }
+    // const genderHandler = (e) => {
+    //     setGenderFilter(e.target.value); // sets new local state
+    //     dispatch(filterCards(e.target.value)); // dispatches gender filter
+    //     if (orderFilter !== 'N') dispatch(orderCards(orderFilter)); // if an order filter is selected, dispatch order filter
+    // }
 
     return (
         <>
-            <div className={styles.favorites}>
-                <div className={styles.filters}>
+            <div className={styles.customCharacters}>
+                {/* <div className={styles.filters}>
                     <select onChange={orderHandler}>
                         <option value="N">No order</option>
                         <option value="A">Ascending</option>
@@ -57,15 +59,15 @@ function CustomCharacters() {
                         <option value="unknown">Unknown</option>
                     </select>
                     <button>Reset filters</button>
-                </div>
-                {filteredFavs.length === 0 &&
+                </div> */}
+                {customCharacters.length === 0 &&
                     <div className={styles.helper}>
-                    <span>NO FAVORITES YET!</span>
-                    <span className={styles.icon}></span>
+                        <span>NO CUSTOM CHARACTERS YET!</span>
+                        <span className={styles.icon}></span>
                     </div>}
-                {filteredFavs.length > 0 &&
+                {customCharacters.length > 0 &&
                     <div className={styles.cards}>
-                    <Cards characters={filteredFavs} />
+                        <Cards characters={customCharacters} />
                     </div>}
             </div>
         </>
