@@ -30,12 +30,12 @@ export default function Card({character, onClose}) {
       });
    }, [filteredFavs]);
 
-   // LOADING
+   // LOADING // TODO: CREAR LOADING REAL
    useEffect(() => {
       setLoading(true);
       setTimeout(() => {
          setLoading(false)
-      }, 800);
+      }, 500);
    }, []);
 
    return (

@@ -9,7 +9,7 @@ function getCharById(req, res) {
         res
         .status(200)
         .send({
-            id: id,
+            id: data.id,
             name: data.name,
             gender: data.gender,
             species: data.species,

@@ -19,7 +19,9 @@ function CreateCharacter({closeCreateCharacter}) {  // TODO: AGREGAR GENERADOR D
         name: '',
         gender: '',
         species: '',
-        origin: '',
+        origin: {
+            name: ''
+        },
         status: ''
     })
     const [errors, setErrors] = useState({
@@ -37,9 +39,14 @@ function CreateCharacter({closeCreateCharacter}) {  // TODO: AGREGAR GENERADOR D
     }, []);
 
     // CHANGE HANDLER (LOCAL STATE)
-    function changeHandler(e) {        
-        setCharacter({...character, [e.target.name]: e.target.value})
-        setErrors(validation({...character, [e.target.name]: e.target.value}));
+    function changeHandler(e) {      
+        if (e.target.name === 'origin') {
+            setCharacter({...character, origin: {name: e.target.value}});
+            setErrors(validation({...character, origin: {name: e.target.value}}));
+        } else {
+            setCharacter({...character, [e.target.name]: e.target.value})
+            setErrors(validation({...character, [e.target.name]: e.target.value}));
+        }
     }
 
     // SUBMIT FORM

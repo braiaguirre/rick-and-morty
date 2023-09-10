@@ -23,7 +23,6 @@ import Nav from './components/Nav/Nav';
 import ErrorPopup from './components/ErrorPopup/ErrorPopup';
 import CreateCharacter from './components/CreateCharacter/CreateCharacter';
 
-
 function App() {
    const navigate = useNavigate();
    const dispatch = useDispatch();
@@ -36,14 +35,13 @@ function App() {
    // ACCESS HANDLERS
    const logIn = ({email, password}) => dispatch(getAccess(email, password));
    const logOut = () => dispatch(removeAccess);
-
    useEffect(() => {
       access ? navigate('/home') : navigate('/')
    }, [access]);
    
    // CHARACTERS HANDLERS
    const onSearch = (id) => dispatch(getCharacter(id));
-   const onClose = (id = -1) => dispatch(removeCharacter(id));
+   const onClose = (id = -1) => dispatch(removeCharacter(id));    // TODO: PREGUNTAR SI ELIMINAR SI ES CUSTOM
    
    // CREATE CHARACTER
    const createCharacterHandler = () => setCreateCharacter(true);

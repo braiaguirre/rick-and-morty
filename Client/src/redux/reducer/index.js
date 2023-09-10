@@ -75,14 +75,15 @@ export default function reducer (state = initialState, {type, payload}) {
                 ...state,
                 allCharacters: [],
                 allFavs: [],
+                customCharacters: [],
                 filteredFavs: []
             }
             return {
                 ...state,
-                allCharacters: [...state.allCharacters.filter(character => character.id !== payload)],
-                customCharacters: [...state.customCharacters.filter(character => character.id !== payload)],
-                allFavs: [...state.allFavs.filter(character => character.id !== payload)],
-                filteredFavs: [...state.filteredFavs.filter(character => character.id !== payload)]
+                allCharacters: [...state.allCharacters.filter(character => character.id !== Number(payload))],
+                customCharacters: [...state.customCharacters.filter(character => character.id !== Number(payload))],
+                allFavs: [...state.allFavs.filter(character => character.id !== Number(payload))],
+                filteredFavs: [...state.filteredFavs.filter(character => character.id !== Number(payload))]
             };
                 
         // ADD FAVORITE
@@ -97,8 +98,8 @@ export default function reducer (state = initialState, {type, payload}) {
         case REMOVE_FAV:
             return {
                 ...state, 
-                allFavs: [...state.allFavs.filter(character => character.id !== String(payload))],
-                filteredFavs: [...state.filteredFavs.filter(character => character.id !== String(payload))]
+                allFavs: [...state.allFavs.filter(character => character.id !== Number(payload))],
+                filteredFavs: [...state.filteredFavs.filter(character => character.id !== Number(payload))]
             };
 
         // GENDER FILTER
