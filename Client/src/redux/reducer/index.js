@@ -8,7 +8,6 @@ import {
     REMOVE_CHARACTER, 
     ADD_FAV, 
     REMOVE_FAV, 
-    GET_LOCATION,
     FILTER, 
     ORDER, 
     ACCESS,

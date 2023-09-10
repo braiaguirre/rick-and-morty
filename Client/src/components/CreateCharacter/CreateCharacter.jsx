@@ -22,6 +22,7 @@ function CreateCharacter({closeCreateCharacter}) {  // TODO: AGREGAR GENERADOR D
         origin: {
             name: ''
         },
+        image: '',
         status: ''
     })
     const [errors, setErrors] = useState({
@@ -36,6 +37,9 @@ function CreateCharacter({closeCreateCharacter}) {  // TODO: AGREGAR GENERADOR D
     useEffect(() => {
         axios.get(`http://localhost:3001/rickandmorty/location/`)
             .then(({ data }) => setLocations(data.results))     // TODO: TRAER EL RESTO DE LAS PÁGINAS DE LOCATIONS
+        
+        axios.get(`http://localhost:3001/rickandmorty/character/4}`)
+            .then(({ data }) => setCharacter({...character, image: data.image}));
     }, []);
 
     // CHANGE HANDLER (LOCAL STATE)
@@ -47,6 +51,14 @@ function CreateCharacter({closeCreateCharacter}) {  // TODO: AGREGAR GENERADOR D
             setCharacter({...character, [e.target.name]: e.target.value})
             setErrors(validation({...character, [e.target.name]: e.target.value}));
         }
+    }
+
+    // IMAGE
+    function imageHandler(e) {
+        e.preventDefault();
+        // let rand = (Math.random() * 826).toFixed();
+        axios.get(`http://localhost:3001/rickandmorty/character/4`)
+            .then(({ data }) => setCharacter({...character, image: data.image}));
     }
 
     // SUBMIT FORM
@@ -120,6 +132,12 @@ function CreateCharacter({closeCreateCharacter}) {  // TODO: AGREGAR GENERADOR D
                             <option value="unknown">Unknown</option>
                         </select>
                         <span className="material-symbols-outlined" width="20px">{errors.status ? 'close' : 'done'}</span>
+                    </div>
+
+                    {/* IMAAGE */}
+                    <div className={styles.formDiv}>
+                        <button onClick={imageHandler}>Random image</button>
+                        <img src={character.image} alt="Custom character image" />
                     </div>
 
                     <button type="submit">Create</button>
