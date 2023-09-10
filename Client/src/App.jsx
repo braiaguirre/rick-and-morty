@@ -12,9 +12,10 @@ import About from './views/About/About';
 // COMPONENTS
 import Nav from './components/Nav/Nav';
 import ErrorPopup from './components/ErrorPopup/ErrorPopup';
+import CreateCharacter from './components/CreateCharacter/CreateCharacter';
 
 // DEPENDENCIES
-import {useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import {Route, Routes, useNavigate} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 
@@ -25,6 +26,7 @@ function App() {
    const navigate = useNavigate();
    const dispatch = useDispatch();
 
+   const [createCharacter, setCreateCharacter] = useState(false);
    const access = useSelector(state => state.access);
    const characters = useSelector(state => state.allCharacters);
    const error = useSelector(state => state.error);
@@ -41,18 +43,35 @@ function App() {
    const onSearch = (id) => dispatch(getCharacter(id));
    const onClose = (id = -1) => dispatch(removeCharacter(id));
    
+   // CREATE CHARACTER
+   const createCharacterHandler = () => setCreateCharacter(true);
+   const closeCreateCharacter = () => setCreateCharacter(false);
+
    return (
       <>
+         {/* CREATE CHARACTER POPUP */}
+         {createCharacter && 
+               <div className={styles.createCharacterContainer}>
+                  <CreateCharacter
+                     closeCreateCharacter={closeCreateCharacter} />
+               </div>}
+
          {/* ERROR POPUP */}
          {error !== '' && 
             <div className={styles.errorPopupContainer}>
-               <ErrorPopup error={error.error} desc={error.desc}/>
+               <ErrorPopup 
+                  error={error.error} 
+                  desc={error.desc}/>
             </div>}
 
          {/* ACCESS */}
          {access && 
             <div className={styles.navbar}>
-               <Nav onSearch={onSearch} logOut={logOut} onClose={onClose} />
+               <Nav 
+                  onSearch={onSearch} 
+                  logOut={logOut} 
+                  onClose={onClose} 
+                  createCharacterHandler={createCharacterHandler} />
             </div>}
          <>
             {/* LOGIN ROUTE */}

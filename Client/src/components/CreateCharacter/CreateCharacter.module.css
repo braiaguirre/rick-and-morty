@@ -15,6 +15,33 @@
     margin-bottom: 25px;
 }
 
+.formContainer {
+  margin-top: 40px;
+}
+
+.formContainer input {
+  width: 200px;
+  margin-bottom: 4px;
+  margin-right: 6px;
+}
+
+.formContainer select {
+  height: 42px;
+  width: 228px;
+  padding: 10px;
+}
+
+.formContainer button {
+  margin-top: 20px;
+}
+
+.formDiv {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+}
+
 @keyframes glow {
     from {
       box-shadow: 0 0 20px 3px #98ce4c00;

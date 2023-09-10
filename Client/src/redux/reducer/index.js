@@ -1,22 +1,25 @@
+import ERROR_CODES from '../utils/errorCodes.js'
+
 import {
-    ADD_FAV, 
-    REMOVE_CHARACTER, 
-    REMOVE_FAV, 
-    FILTER, 
-    ORDER, 
     GET_CHARACTER,
     GET_CHARACTER_DETAIL,
     CLEAR_CHARACTER_DETAIL,
+    CREATE_CHARACTER,
+    REMOVE_CHARACTER, 
+    ADD_FAV, 
+    REMOVE_FAV, 
+    GET_LOCATION,
+    FILTER, 
+    ORDER, 
     ACCESS,
     ERROR,
     CLEAR_ERROR
 } from '../actions/action-types.js';
 
-import ERROR_CODES from '../utils/errorCodes.js'
-
 const initialState = {
     allCharacters: [],
     characterDetail: {},
+    customCharacters: [],
     allFavs: [],
     filteredFavs: [],
     access: true,
@@ -53,6 +56,18 @@ export default function reducer (state = initialState, {type, payload}) {
                 characterDetail: []
             };
 
+        // CREATE CHARACTER
+        case CREATE_CHARACTER:
+            payload = {
+                ...payload, 
+                id: 826 + state.customCharacters.length,
+                image: 'https://rickandmortyapi.com/api/character/avatar/2.jpeg'
+            }
+            return {
+                ...state,
+                allCharacters: [...state.allCharacters, payload],
+                customCharacters: [...state.customCharacters, payload]
+            }
 
         // REMOVE CHARACTER
         case REMOVE_CHARACTER:
@@ -65,6 +80,7 @@ export default function reducer (state = initialState, {type, payload}) {
             return {
                 ...state,
                 allCharacters: [...state.allCharacters.filter(character => character.id !== payload)],
+                customCharacters: [...state.customCharacters.filter(character => character.id !== payload)],
                 allFavs: [...state.allFavs.filter(character => character.id !== payload)],
                 filteredFavs: [...state.filteredFavs.filter(character => character.id !== payload)]
             };

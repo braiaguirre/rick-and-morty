@@ -6,7 +6,7 @@ import {useState} from 'react';
 
 // ASSETS + UTILS
 import logo from '../../assets/logo.png';
-import validation from '../../utils/validation.js';
+import validation from '../../utils/loginValidation.js';
 
 export default function Login({logIn}) {
     const [userData, setUserData] = useState({email: '', password: ''})

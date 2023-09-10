@@ -1,9 +1,11 @@
 export const GET_CHARACTER = 'GET_CHARACTER';
 export const GET_CHARACTER_DETAIL = 'GET_CHARACTER_DETAIL';
 export const CLEAR_CHARACTER_DETAIL = 'CLEAR_CHARACTER_DETAIL';
+export const CREATE_CHARACTER = 'CREATE_CHARACTER';
 export const REMOVE_CHARACTER = 'REMOVE_CHARACTER';
 export const ADD_FAV = 'ADD_FAV';
 export const REMOVE_FAV = 'REMOVE_FAV';
+export const GET_LOCATION = 'GET_LOCATION';
 export const FILTER = 'FILTER';
 export const ORDER = 'ORDER';
 export const ACCESS = 'ACCESS';

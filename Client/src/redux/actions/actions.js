@@ -1,20 +1,22 @@
+import axios from 'axios';
+
 import {
-    GET_CHARACTER, 
+    GET_CHARACTER,
     GET_CHARACTER_DETAIL,
     CLEAR_CHARACTER_DETAIL,
+    CREATE_CHARACTER,
     REMOVE_CHARACTER, 
     ADD_FAV, 
     REMOVE_FAV, 
+    GET_LOCATION,
     FILTER, 
-    ORDER,
+    ORDER, 
     ACCESS,
     ERROR,
-    CLEAR_ERROR,
+    CLEAR_ERROR
 } from './action-types';
-import axios from 'axios';
 
-// CHARACTERS HANDLERS
-
+// GET CHARACTER
 export const getCharacter = (id) => {
     return (dispatch) => {
         axios.get(`http://localhost:3001/rickandmorty/character/${id}`)
@@ -33,32 +35,38 @@ export const getCharacter = (id) => {
     };
 };
 
+// GET CHARACTER DETAIL
 export const getCharacterDetail = (id) => {
-    return (dispatch) => {
-        return dispatch({
-            type: GET_CHARACTER_DETAIL,
-            payload: id
-        });
+    return {
+        type: GET_CHARACTER_DETAIL,
+        payload: id
     };
 };
 
+// CLEAR CHARACTER DETAIL
 export const clearCharacterDetail = () => {
-    return (dispatch) => {
-        return dispatch({
-            type: CLEAR_CHARACTER_DETAIL,
-        });
+    return {
+        type: CLEAR_CHARACTER_DETAIL,
     };
 };
 
+// CREATE CHARACTER
+export const createCharacter = (character) => {
+    return {
+        type: CREATE_CHARACTER,
+        payload: character
+    };
+}
+
+// REMOVE CHARACTER
 export const removeCharacter = (id) => {
     return {
         type: REMOVE_CHARACTER,
         payload: id
-    }
+    };
 }
 
-// FAVORITES HANDLERS
-
+// ADDF AVORITE
 export const addFav = (character) => {
     const endpoint = 'http://localhost:3001/rickandmorty/fav';
     return (dispatch) => {
@@ -71,6 +79,7 @@ export const addFav = (character) => {
      };
 };
 
+// REMOVE FAVORITE
 export const removeFav = (id) => {
     const endpoint = 'http://localhost:3001/rickandmorty/fav/' + id;
     return (dispatch) => {
@@ -85,7 +94,6 @@ export const removeFav = (id) => {
 };
 
 // FILTER HANDLERS
-
 export const filterCards = (gender) => {
     return {
         type: FILTER,
@@ -100,8 +108,7 @@ export const orderCards = (order) => {
     };
 };
 
-// LOGIN - LOGOUT
-
+// ACCESS HANDLERS
 export const getAccess = (email, password) => {
     const endpoint = 'http://localhost:3001/rickandmorty/login/';
     return (dispatch) => {
@@ -115,14 +122,13 @@ export const getAccess = (email, password) => {
 }
 
 export const removeAccess = () => {
-    return dispatch({
+    return {
         type: ACCESS,
         payload: false,
-       });
+       };
 }
 
 // ERROR HANDLERS
-
 export const clearError = () => {
     return {
         type: CLEAR_ERROR,

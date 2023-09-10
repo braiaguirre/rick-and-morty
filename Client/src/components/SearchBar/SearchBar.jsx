@@ -2,16 +2,14 @@
 import styles from './SearchBar.module.css';
 
 // COMPONENTS
-import CreateCharacter from '../CreateCharacter/CreateCharacter';
 
 // DEPENDENCIES
 import {useRef, useState} from 'react';
 
-function SearchBar({onSearch, onClose}) {
+function SearchBar({onSearch, onClose, createCharacterHandler}) {
    const inputRef = useRef(null);
 
    const [inputValue, setInputValue] = useState('');
-   const [createPopup, setCreatePopup] = useState(false);
    
    // SEARCH FROM API
    
@@ -25,18 +23,8 @@ function SearchBar({onSearch, onClose}) {
       inputRef.current.focus();
    }
 
-   // CREATE CHARACTER
-   const createCharacterHandler = () => setCreatePopup(true);
-
    return (
       <>
-         {/* CREATE CHARACTER POPUP */}
-         {createPopup && 
-            <div className={styles.createCharacterContainer}>
-               <CreateCharacter />
-            </div>}
-
-         {/* MAIN SEARCH BAR */}
          <div className={styles.search}>
             <input type='search' ref={inputRef} value={inputValue} onChange={changeHandler} placeholder="ID" />
             <button onClick={clickHandler}>Add</button>

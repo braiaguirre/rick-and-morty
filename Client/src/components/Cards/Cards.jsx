@@ -8,7 +8,6 @@ export default function Cards({characters, onClose}) {
             <div className={styles.helper}>
                <span>ADD SOME CHARACTERS!</span>
                <span className={styles.icon}></span>
-               {/* <span className={`material-symbols-outlined ${styles.arrow}`}>switch_access_shortcut</span> */}
             </div>
          }
          <div className={styles.cards}>

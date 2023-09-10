@@ -2,7 +2,7 @@ import styles from './Nav.module.css'
 import SearchBar from '../SearchBar/SearchBar.jsx';
 import {useNavigate} from 'react-router-dom';
 
-export default function Nav({onSearch, logOut, onClose}) {
+export default function Nav({onSearch, logOut, onClose, createCharacterHandler}) {
     const navigate = useNavigate();
 
     return (
@@ -16,7 +16,10 @@ export default function Nav({onSearch, logOut, onClose}) {
                 </ul>
             </div>
             <div className={styles.search}>
-                <SearchBar onSearch={onSearch} onClose={onClose} />
+                <SearchBar 
+                    onSearch={onSearch} 
+                    onClose={onClose} 
+                    createCharacterHandler={createCharacterHandler} />
             </div>
         </div>
     )
