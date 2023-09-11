@@ -59,8 +59,7 @@ export default function reducer (state = initialState, {type, payload}) {
         case CREATE_CHARACTER:
             payload = {
                 ...payload, 
-                id: 826 + state.customCharacters.length,
-                image: 'https://rickandmortyapi.com/api/character/avatar/2.jpeg'
+                id: 826 + state.customCharacters.length,    // TODO: TRAER CANT DE PERSONAJES DESDE API
             }
             return {
                 ...state,

@@ -15,6 +15,7 @@ import validation from '../../utils/createCharacterValidation.js';
 function CreateCharacter({closeCreateCharacter}) {  // TODO: AGREGAR GENERADOR DE IMAGEN RANDOM
     const dispatch = useDispatch();
 
+    const [loading, setLoading] = useState(false);
     const [character, setCharacter] = useState({
         name: '',
         gender: '',
@@ -34,8 +35,17 @@ function CreateCharacter({closeCreateCharacter}) {  // TODO: AGREGAR GENERADOR D
     })
     const [locations, setLocations] = useState([]);
 
+    // UTILS
     const rand = () => (Math.random() * 826).toFixed();
 
+    const loader = (time) => {
+        setLoading(true);
+        setTimeout(() => {
+            setLoading(false)
+        }, time);
+    }
+
+    // LOAD DATA
     useEffect(() => {
         axios.get(`http://localhost:3001/rickandmorty/location/`)
             .then(({ data }) => setLocations(data.results))     // TODO: TRAER EL RESTO DE LAS PÁGINAS DE LOCATIONS
@@ -45,6 +55,8 @@ function CreateCharacter({closeCreateCharacter}) {  // TODO: AGREGAR GENERADOR D
         let id = rand();
         axios.get(`http://localhost:3001/rickandmorty/character/${id}`)
             .then(({ data }) => setCharacter({...character, image: data.image}));
+        
+        loader(1000);
     }, [])
 
     // CHANGE HANDLER (LOCAL STATE)
@@ -61,10 +73,10 @@ function CreateCharacter({closeCreateCharacter}) {  // TODO: AGREGAR GENERADOR D
     // IMAGE
     function imageHandler(e) {
         e.preventDefault();
-        console.log('asd');
         let id = rand();
         axios.get(`http://localhost:3001/rickandmorty/character/${id}`)
             .then(({ data }) => setCharacter({...character, image: data.image}));
+        loader(1000);
     }
 
     // SUBMIT FORM
@@ -78,6 +90,7 @@ function CreateCharacter({closeCreateCharacter}) {  // TODO: AGREGAR GENERADOR D
         closeCreateCharacter();
     }
 
+    // CLOSE POPUP
     function closeHandler(e) {
         e.preventDefault();
         closeCreateCharacter();
@@ -148,7 +161,10 @@ function CreateCharacter({closeCreateCharacter}) {  // TODO: AGREGAR GENERADOR D
                         {/* IMAAGE */}
                         <div className={styles.formDiv}>
                             <button onClick={imageHandler}>Random image</button>
-                            <img alt="Custom character image" src={character.image} />
+                            {loading ? 
+                                <div className={styles.spinner}></div>
+                            :
+                                <img alt="Custom character image" src={character.image} />}
                         </div>
                     </div>
                 </div>
