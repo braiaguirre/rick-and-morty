@@ -7,7 +7,7 @@ import {Route, Routes, useNavigate} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 
 // ACTIONS
-import {getCharacter, removeCharacter, getAccess, removeAccess} from './redux/actions/actions.js';
+import {getCharacter, removeCharacter, getAccess, removeAccess, sendAlert} from './redux/actions/actions.js';
 
 // VIEWS
 import Home from './views/Home/Home'
@@ -21,6 +21,7 @@ import About from './views/About/About';
 // COMPONENTS
 import Nav from './components/Nav/Nav';
 import ErrorPopup from './components/ErrorPopup/ErrorPopup';
+import Alert from './components/Alert/Alert';
 import CreateCharacter from './components/CreateCharacter/CreateCharacter';
 
 function App() {
@@ -31,10 +32,11 @@ function App() {
    const access = useSelector(state => state.access);
    const characters = useSelector(state => state.allCharacters);
    const error = useSelector(state => state.error);
+   const alert = useSelector(state => state.alert);
 
    // ACCESS HANDLERS
    const logIn = ({email, password}) => dispatch(getAccess(email, password));
-   const logOut = () => dispatch(removeAccess);
+   const logOut = () => dispatch(sendAlert('Are you sure you want to leave?', 'YesNo', dispatch(removeAccess)));
    useEffect(() => {
       access ? navigate('/home') : navigate('/')
    }, [access]);
@@ -58,12 +60,19 @@ function App() {
 
          {/* ERROR POPUP */}
          {error !== '' && 
-            <div className={styles.errorPopupContainer}>
+            <div className={styles.popupContainer}>
                <ErrorPopup 
                   error={error.error} 
-                  desc={error.desc}/>
+                  desc={error.desc} />
             </div>}
-
+         {/* ALERT POPUP */}
+         {Object.keys(alert).length > 0 && 
+            <div className={styles.popupContainer}>
+               <Alert 
+                  message={alert.message} 
+                  alertType={alert.alertType}
+                  action={alert.action} />
+            </div>}
          {/* ACCESS */}
          {access && 
             <div className={styles.navbar}>

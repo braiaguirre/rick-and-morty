@@ -12,7 +12,9 @@ import {
     ORDER, 
     ACCESS,
     ERROR,
-    CLEAR_ERROR
+    CLEAR_ERROR,
+    ALERT,
+    CLEAR_ALERT
 } from '../actions/action-types.js';
 
 const initialState = {
@@ -21,8 +23,9 @@ const initialState = {
     customCharacters: [],
     allFavs: [],
     filteredFavs: [],
-    access: true,
-    error: ''
+    access: false,
+    error: '',
+    alert: {}
 };
 
 export default function reducer (state = initialState, {type, payload}) {
@@ -127,6 +130,13 @@ export default function reducer (state = initialState, {type, payload}) {
 				filteredFavs: [...state.filteredFavs]
 			};
 
+        // ACCESS
+        case ACCESS:
+            return {
+                ...state,
+                access: payload
+            }
+
         // ERROR
         case ERROR:
             return {
@@ -142,11 +152,17 @@ export default function reducer (state = initialState, {type, payload}) {
                 error: ''
             }
 
-        // ACCESS
-        case ACCESS:
+        // ALERT
+        case ALERT:
             return {
                 ...state,
-                access: payload
+                alert: payload
+            }
+        
+        case CLEAR_ALERT:
+            return {
+                ...state,
+                alert: {}
             }
 
 		// DEFAULT

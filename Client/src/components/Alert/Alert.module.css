@@ -1,0 +1,25 @@
+.alert {
+    animation: glow 1s infinite alternate;
+    background-color: #0f0f0f;
+    border-color: 1px solid #97ce4c;
+    border-radius: 8px;
+    padding: 50px;
+}
+
+.alert h2{
+    text-transform: uppercase;
+    margin: 0 0 10px 0;
+}
+
+.alert p {
+    margin-bottom: 25px;
+}
+
+@keyframes glow {
+    from {
+      box-shadow: 0 0 20px 3px #98ce4c00;
+    }
+    to {
+      box-shadow: 0 0 20px 3px #98ce4cb0;
+    }
+  }

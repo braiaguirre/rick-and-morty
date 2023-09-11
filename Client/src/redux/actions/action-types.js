@@ -10,3 +10,5 @@ export const ORDER = 'ORDER';
 export const ACCESS = 'ACCESS';
 export const ERROR = 'ERROR';
 export const CLEAR_ERROR = 'CLEAR_ERROR';
+export const ALERT = 'ALERT';
+export const CLEAR_ALERT = 'CLEAR_ALERT';

@@ -12,7 +12,9 @@ import {
     ORDER, 
     ACCESS,
     ERROR,
-    CLEAR_ERROR
+    CLEAR_ERROR,
+    ALERT,
+    CLEAR_ALERT
 } from './action-types';
 
 // GET CHARACTER
@@ -131,5 +133,25 @@ export const removeAccess = () => {
 export const clearError = () => {
     return {
         type: CLEAR_ERROR,
+    }
+}
+
+// ALERT
+export const sendAlert = (message, alertType, action) => {
+    console.log(action);
+
+    return {
+        type: ALERT,
+        payload: {
+            message: message,
+            alertType: alertType,
+            action: action
+        }
+    }
+}
+
+export const clearAlert = () => {
+    return {
+        type: CLEAR_ALERT
     }
 }
