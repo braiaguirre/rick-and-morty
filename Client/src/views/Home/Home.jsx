@@ -1,12 +1,12 @@
 // COMPONENTS
 import Cards from '../../components/Cards/Cards.jsx';
 
-function App({characters, onClose}) {
+function App({characters, closeHandler}) {
    document.title = 'Rick and Morty > Home'
 
    return (
       <>
-         <Cards characters={characters} onClose={onClose} />
+         <Cards characters={characters} closeHandler={closeHandler} />
       </>
    );
 }

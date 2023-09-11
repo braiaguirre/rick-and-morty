@@ -3,24 +3,36 @@ import styles from './Alert.module.css';
 
 // DEPENDENCIES
 import React from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 
 // ACTIONS
 import {clearAlert} from '../../redux/actions/actions.js';
 
-function Alert({message, alertType, action}) {
+function Alert({title, message, alertType, action}) {
     const dispatch = useDispatch();
-    
-    function clearAlertHandler() {
+
+    function acceptAlertHandler() {
         dispatch(action);
+        dispatch(clearAlert());
+    }
+
+    function clearAlertHandler() {
         dispatch(clearAlert());
     }
 
     return (
         <div className={styles.alert}>
-            <h2>Wait!</h2>
+            <h2>{title}</h2>
             <p>{message}</p>
-            <button onClick={clearAlertHandler}>Close</button>
+            {alertType === 'yesno' && 
+                <>
+                    <button onClick={clearAlertHandler}>No</button>
+                    <button onClick={acceptAlertHandler}>Yes</button>
+                </>}
+            {alertType === 'accept' && 
+                <>
+                    <button onClick={clearAlertHandler}>Accept</button>
+                </>}
         </div>
     )
 }

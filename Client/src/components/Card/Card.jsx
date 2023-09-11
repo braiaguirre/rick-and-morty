@@ -4,7 +4,7 @@ import {useNavigate} from 'react-router-dom';
 import {addFav, removeFav} from '../../redux/actions/actions.js';
 import {useSelector, useDispatch} from 'react-redux';
 
-function Card({character, onClose}) {
+function Card({character, closeHandler}) {
    // HOOKS
    const dispatch = useDispatch();
    const navigate = useNavigate();
@@ -56,8 +56,8 @@ function Card({character, onClose}) {
                                 <button onClick={favoriteHandler}>
                                     <span className={`material-symbols-outlined ${styles.isFav}`}>favorite</span>
                                 </button>}
-                                {onClose ? 
-                                <button onClick={() => onClose(character.id)}>
+                                {closeHandler ? 
+                                <button onClick={() => closeHandler(character.id)}>
                                     <span className='material-symbols-outlined'>close</span>
                                 </button> 
                             :

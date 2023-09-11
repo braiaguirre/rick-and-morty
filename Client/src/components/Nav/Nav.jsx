@@ -7,7 +7,7 @@ import SearchBar from '../SearchBar/SearchBar.jsx';
 // DEPENDENCIES
 import {useNavigate} from 'react-router-dom';
 
-export default function Nav({onSearch, logOut, onClose, createCharacterHandler}) {
+export default function Nav({addHandler, logOut, closeHandler, createCharacterHandler}) {
     const navigate = useNavigate();
 
     return (
@@ -23,8 +23,8 @@ export default function Nav({onSearch, logOut, onClose, createCharacterHandler})
             </div>
             <div className={styles.search}>
                 <SearchBar 
-                    onSearch={onSearch} 
-                    onClose={onClose} 
+                    addHandler={addHandler} 
+                    closeHandler={closeHandler} 
                     createCharacterHandler={createCharacterHandler} />
             </div>
         </div>

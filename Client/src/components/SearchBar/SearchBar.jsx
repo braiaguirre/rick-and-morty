@@ -6,7 +6,7 @@ import styles from './SearchBar.module.css';
 // DEPENDENCIES
 import {useRef, useState} from 'react';
 
-function SearchBar({onSearch, onClose, createCharacterHandler}) {
+function SearchBar({addHandler, closeHandler, createCharacterHandler}) {
    const inputRef = useRef(null);
 
    const [inputValue, setInputValue] = useState('');
@@ -18,7 +18,7 @@ function SearchBar({onSearch, onClose, createCharacterHandler}) {
    let rand = () => (Math.random() * 826).toFixed();
 
    let clickHandler = () => {
-      onSearch(inputValue);
+      addHandler(inputValue);
       setInputValue('');
       inputRef.current.focus();
    }
@@ -28,9 +28,9 @@ function SearchBar({onSearch, onClose, createCharacterHandler}) {
          <div className={styles.search}>
             <input type='search' ref={inputRef} value={inputValue} onChange={changeHandler} placeholder="ID" />
             <button onClick={clickHandler}>Add</button>
-            <button onClick={() => onSearch(rand())}>Random</button>
+            <button onClick={() => addHandler(rand())}>Random</button>
             <button onClick={createCharacterHandler}>Create</button>
-            <button onClick={() => onClose(-1)}>Clear</button>
+            <button onClick={() => closeHandler(-1)}>Clear</button>
          </div>
       </>
    );

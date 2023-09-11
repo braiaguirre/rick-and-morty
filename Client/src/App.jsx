@@ -36,14 +36,18 @@ function App() {
 
    // ACCESS HANDLERS
    const logIn = ({email, password}) => dispatch(getAccess(email, password));
-   const logOut = () => dispatch(sendAlert('Are you sure you want to leave?', 'YesNo', dispatch(removeAccess)));
+   const logOut = () => dispatch(sendAlert('Wait!', 'Are you sure you want to leave?', 'yesno', () => dispatch(removeAccess())));
    useEffect(() => {
       access ? navigate('/home') : navigate('/')
    }, [access]);
    
    // CHARACTERS HANDLERS
-   const onSearch = (id) => dispatch(getCharacter(id));
-   const onClose = (id = -1) => dispatch(removeCharacter(id));    // TODO: PREGUNTAR SI ELIMINAR SI ES CUSTOM
+   const addHandler = (id) => dispatch(getCharacter(id));
+   const closeHandler = (id = -1) => {
+      if (id === -1) dispatch(sendAlert('Wait!', 'Are you sure you want to remove all characters?', 'yesno', () => dispatch(removeCharacter(id))));
+      else if (id >= 826) dispatch(sendAlert('Wait!', 'This is a custom character, are you sure you want to remove it?', 'yesno', () => dispatch(removeCharacter(id))));
+      else dispatch(removeCharacter(id))
+   };
    
    // CREATE CHARACTER
    const createCharacterHandler = () => setCreateCharacter(true);
@@ -69,6 +73,7 @@ function App() {
          {Object.keys(alert).length > 0 && 
             <div className={styles.popupContainer}>
                <Alert 
+                  title={alert.title}
                   message={alert.message} 
                   alertType={alert.alertType}
                   action={alert.action} />
@@ -77,9 +82,9 @@ function App() {
          {access && 
             <div className={styles.navbar}>
                <Nav 
-                  onSearch={onSearch} 
+                  addHandler={addHandler} 
                   logOut={logOut} 
-                  onClose={onClose} 
+                  closeHandler={closeHandler} 
                   createCharacterHandler={createCharacterHandler} />
             </div>}
          <>
@@ -87,7 +92,7 @@ function App() {
             {!access && 
                <div className={styles.login}>
                   <Routes>
-                     <Route path='/' element={<Login logIn={logIn}/>} />
+                     <Route path='/' element={<Login logIn={logIn} />} />
                   </Routes>
                </div>}
 
@@ -95,7 +100,7 @@ function App() {
             {access && 
                <div className={styles.app}>
                   <Routes>
-                     <Route path='/home' element={<Home characters={characters} onClose={onClose} />} />
+                     <Route path='/home' element={<Home characters={characters} closeHandler={closeHandler} />} />
                      <Route path='/favorites' element={<Favorites />} />
                      <Route path='/custom' element={<CustomCharacters />} />
                      <Route path='/about' element={<About />} />

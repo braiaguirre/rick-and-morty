@@ -1,7 +1,7 @@
 import styles from './Cards.module.css';
 import Card from '../Card/Card.jsx';
 
-export default function Cards({characters, onClose}) {
+export default function Cards({characters, closeHandler}) {
    return (
       <>
          {characters.length === 0 &&
@@ -12,7 +12,7 @@ export default function Cards({characters, onClose}) {
          }
          <div className={styles.cards}>
             {characters.map(character => 
-               <Card character={character} onClose={onClose} key={character.id} />
+               <Card character={character} closeHandler={closeHandler} key={character.id} />
             )}
          </div>
       </>

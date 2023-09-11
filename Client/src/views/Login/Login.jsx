@@ -3,12 +3,18 @@ import styles from './Login.module.css';
 
 // DEPENDENCIES
 import {useState} from 'react';
+import {useDispatch} from 'react-redux';
+
+// ACTIONS
+import {sendAlert} from '../../redux/actions/actions';
 
 // ASSETS + UTILS
 import logo from '../../assets/logo.png';
 import validation from '../../utils/loginValidation.js';
 
 export default function Login({logIn}) {
+    const dispatch = useDispatch();
+
     const [userData, setUserData] = useState({email: '', password: ''})
     const [errors, setErrors] = useState({email: true, password: true});
 
@@ -20,10 +26,7 @@ export default function Login({logIn}) {
     function submitHandler(e) {
         e.preventDefault();
         if (!errors.email && !errors.password) logIn(userData);
-        else {
-            alert('El email o la contraseña son incorrectos');
-            return;
-        }
+        else dispatch(sendAlert('Error', 'Incorrect email or password.', 'accept'));
     }
 
     return (

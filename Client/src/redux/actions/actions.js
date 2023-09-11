@@ -137,15 +137,14 @@ export const clearError = () => {
 }
 
 // ALERT
-export const sendAlert = (message, alertType, action) => {
-    console.log(action);
-
+export const sendAlert = (title, message, alertType, action) => {
     return {
         type: ALERT,
         payload: {
+            title: title,
             message: message,
             alertType: alertType,
-            action: action
+            action: action,
         }
     }
 }
