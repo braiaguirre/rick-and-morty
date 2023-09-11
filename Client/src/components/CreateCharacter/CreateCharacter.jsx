@@ -7,7 +7,7 @@ import {useEffect, useState} from 'react';
 import {useDispatch} from 'react-redux';
 
 // ACTIONS
-import {createCharacter} from '../../redux/actions/actions.js';
+import {createCharacter, sendAlert} from '../../redux/actions/actions.js';
 
 // ASSETS + UTILS
 import validation from '../../utils/createCharacterValidation.js';
@@ -83,7 +83,7 @@ function CreateCharacter({closeCreateCharacter}) {  // TODO: AGREGAR GENERADOR D
     function submitHandler(e) {
         e.preventDefault();
         for (let error in errors) {
-            if (error) alert('asd');    // TODO: MEJORAR / DESHABILITAR BOTÓN SUBMIT ?
+            if (error) dispatch(sendAlert('Wait!', 'All fields are required to create a new character.', 'accept'));
             return;
         }
         dispatch(createCharacter(character));

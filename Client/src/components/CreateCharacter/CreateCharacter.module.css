@@ -25,9 +25,8 @@
 }
 
 .formContainer input {
-  width: 200px;
-  margin-bottom: 4px;
-  margin-right: 6px;
+  width: 205px;
+  margin: 0 6px 4px 8px;
 }
 
 .formContainer select {
