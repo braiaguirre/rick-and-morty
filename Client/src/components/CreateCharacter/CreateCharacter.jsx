@@ -34,13 +34,18 @@ function CreateCharacter({closeCreateCharacter}) {  // TODO: AGREGAR GENERADOR D
     })
     const [locations, setLocations] = useState([]);
 
+    const rand = () => (Math.random() * 826).toFixed();
+
     useEffect(() => {
         axios.get(`http://localhost:3001/rickandmorty/location/`)
             .then(({ data }) => setLocations(data.results))     // TODO: TRAER EL RESTO DE LAS PÁGINAS DE LOCATIONS
-        
-        axios.get(`http://localhost:3001/rickandmorty/character/4}`)
-            .then(({ data }) => setCharacter({...character, image: data.image}));
     }, []);
+
+    useEffect(() => {
+        let id = rand();
+        axios.get(`http://localhost:3001/rickandmorty/character/${id}`)
+            .then(({ data }) => setCharacter({...character, image: data.image}));
+    }, [])
 
     // CHANGE HANDLER (LOCAL STATE)
     function changeHandler(e) {      
@@ -56,8 +61,9 @@ function CreateCharacter({closeCreateCharacter}) {  // TODO: AGREGAR GENERADOR D
     // IMAGE
     function imageHandler(e) {
         e.preventDefault();
-        // let rand = (Math.random() * 826).toFixed();
-        axios.get(`http://localhost:3001/rickandmorty/character/4`)
+        console.log('asd');
+        let id = rand();
+        axios.get(`http://localhost:3001/rickandmorty/character/${id}`)
             .then(({ data }) => setCharacter({...character, image: data.image}));
     }
 
@@ -81,69 +87,75 @@ function CreateCharacter({closeCreateCharacter}) {  // TODO: AGREGAR GENERADOR D
         <div className={styles.createCharacter}>
             <h2>Create Character</h2>
             <p>You can add your own personalized character.</p>
-            <div className={styles.formContainer}>
-                <form onSubmit={submitHandler}>
+            <form onSubmit={submitHandler}>
+                <div className={styles.formContainer}>
+                    {/* FIRST COLUMN */}
+                    <div className={`${styles.col} ${styles.dataCol}`}>
 
-                    {/* NAME */}
-                    <div className={styles.formDiv}>
-                        <input name="name" onChange={changeHandler} placeholder="Name" /> 
-                        <span className="material-symbols-outlined" width="20px">{errors.name ? 'close' : 'done'}</span>
-                    </div>
+                        {/* NAME */}
+                        <div className={styles.formDiv}>
+                            <input name="name" onChange={changeHandler} placeholder="Name" /> 
+                            <span className="material-symbols-outlined" width="20px">{errors.name ? 'close' : 'done'}</span>
+                        </div>
 
-                    {/* GENDER */}
-                    <div className={styles.formDiv}>
-                        <select name="gender" onChange={changeHandler}>
-                            <option value="">Gender</option>
-                            <option value="Male">Male</option>
-                            <option value="Female">Female</option>
-                            <option value="Genderless">Genderless</option>
-                            <option value="unknown">Unknown</option>
-                        </select>
-                        <span className="material-symbols-outlined" width="20px">{errors.gender ? 'close' : 'done'}</span>
-                    </div>
+                        {/* GENDER */}
+                        <div className={styles.formDiv}>
+                            <select name="gender" onChange={changeHandler}>
+                                <option value="">Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Genderless">Genderless</option>
+                                <option value="unknown">Unknown</option>
+                            </select>
+                            <span className="material-symbols-outlined" width="20px">{errors.gender ? 'close' : 'done'}</span>
+                        </div>
 
-                    {/* SPECIES */}
-                    <div className={styles.formDiv}>
-                        <select name="species" onChange={changeHandler}>
-                            <option value="">Species</option>
-                            <option value="Human">Human</option>
-                            <option value="Alien">Alien</option>
-                        </select>
-                        <span className="material-symbols-outlined" width="20px">{errors.species ? 'close' : 'done'}</span>
-                    </div>
+                        {/* SPECIES */}
+                        <div className={styles.formDiv}>
+                            <select name="species" onChange={changeHandler}>
+                                <option value="">Species</option>
+                                <option value="Human">Human</option>
+                                <option value="Alien">Alien</option>
+                            </select>
+                            <span className="material-symbols-outlined" width="20px">{errors.species ? 'close' : 'done'}</span>
+                        </div>
 
-                    {/* ORIGIN */}
-                    <div className={styles.formDiv}>
-                        <select name="origin" onChange={changeHandler}>
-                            <option value="">Origin</option>
-                            {locations.map(location => 
-                                <option value={location.name} key={location.id}>{location.name}</option>
-                            )}
-                        </select>
-                        <span className="material-symbols-outlined" width="20px">{errors.origin ? 'close' : 'done'}</span>
+                        {/* ORIGIN */}
+                        <div className={styles.formDiv}>
+                            <select name="origin" onChange={changeHandler}>
+                                <option value="">Origin</option>
+                                {locations.map(location => 
+                                    <option value={location.name} key={location.id}>{location.name}</option>
+                                )}
+                            </select>
+                            <span className="material-symbols-outlined" width="20px">{errors.origin ? 'close' : 'done'}</span>
+                        </div>
+                        
+                        {/* STATUS */}
+                        <div className={styles.formDiv}>
+                            <select name="status" onChange={changeHandler}>
+                                <option value="">Status</option>
+                                <option value="Alive">Alive</option>
+                                <option value="Dead">Dead</option>
+                                <option value="unknown">Unknown</option>
+                            </select>
+                            <span className="material-symbols-outlined" width="20px">{errors.status ? 'close' : 'done'}</span>
+                        </div>
                     </div>
                     
-                    {/* STATUS */}
-                    <div className={styles.formDiv}>
-                        <select name="status" onChange={changeHandler}>
-                            <option value="">Status</option>
-                            <option value="Alive">Alive</option>
-                            <option value="Dead">Dead</option>
-                            <option value="unknown">Unknown</option>
-                        </select>
-                        <span className="material-symbols-outlined" width="20px">{errors.status ? 'close' : 'done'}</span>
+                    {/* SECOND COLUMN */}
+                    <div className={`${styles.col} ${styles.imageCol}`}>
+                        {/* IMAAGE */}
+                        <div className={styles.formDiv}>
+                            <button onClick={imageHandler}>Random image</button>
+                            <img alt="Custom character image" src={character.image} />
+                        </div>
                     </div>
-
-                    {/* IMAAGE */}
-                    <div className={styles.formDiv}>
-                        <button onClick={imageHandler}>Random image</button>
-                        <img src={character.image} alt="Custom character image" />
-                    </div>
+                </div>
 
                     <button type="submit">Create</button>
                     <button onClick={closeHandler}>Close</button>
-                </form>
-            </div>
+            </form>
         </div>
     )
 }

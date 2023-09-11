@@ -15,7 +15,12 @@
     margin-bottom: 25px;
 }
 
+.createCharacter button {
+  margin: 20px 5px 0 5px;
+}
+
 .formContainer {
+  display: flex;
   margin-top: 40px;
 }
 
@@ -31,8 +36,18 @@
   padding: 10px;
 }
 
-.formContainer button {
-  margin: 20px 5px 0 5px;
+.formContainer .col {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.formContainer .imageCol .formDiv {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .formDiv {
@@ -40,6 +55,15 @@
   display: flex;
   justify-content: center;
   margin: 10px;
+}
+
+.formDiv img {
+  border-radius: 100%;
+  box-shadow: 0 0 20px 3px #0f0f0f65;
+  cursor: pointer;
+  margin: 20px;
+  height: 250px;
+  width: 250px;
 }
 
 @keyframes glow {
