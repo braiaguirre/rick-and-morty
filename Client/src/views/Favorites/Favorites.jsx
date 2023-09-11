@@ -1,19 +1,23 @@
 // STYLES
 import styles from './Favorites.module.css';
 
-// COMPONENTS
-import Cards from '../../components/Cards/Cards.jsx';
-
 // DEPENDENCIES
-import {useState} from 'react';
+import {useState, useRef} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 
 // ACTIONS
 import {filterCards, orderCards} from '../../redux/actions/actions.js';
 
+// COMPONENTS
+import Cards from '../../components/Cards/Cards.jsx';
+
 function Favorites() {
     document.title = 'Rick and Morty > Favorites'
+    
     const dispatch = useDispatch();
+    const genderRef = useRef();
+    const orderRef = useRef();
+    const statusRef = useRef();
 
     const filteredFavs = useSelector(state => state.filteredFavs);
     const [orderFilter, setOrderFilter] = useState('N'); // local state -> order filter
@@ -28,36 +32,50 @@ function Favorites() {
     const statusHandler = (e) => {
         
     }
+
     const genderHandler = (e) => {
         setGenderFilter(e.target.value); // sets new local state
         dispatch(filterCards(e.target.value)); // dispatches gender filter
         if (orderFilter !== 'N') dispatch(orderCards(orderFilter)); // if an order filter is selected, dispatch order filter
     }
 
+    const resetHandler = () => {
+        setGenderFilter('All'); // local states
+        setOrderFilter('N'); // 
+        dispatch(filterCards('All')); // actions
+        dispatch(orderCards('N')); //
+        orderRef.current.value = 'N'; // reset selection
+        statusRef.current.value = 'All';
+        genderRef.current.value = 'All';
+    }
+
     return (
         <>
+            {/* FILTERS */}
             <div className={styles.favorites}>
                 <div className={styles.filters}>
-                    <select onChange={orderHandler}>
+                    <select ref={orderRef} onChange={orderHandler}>
                         <option value="N">No order</option>
                         <option value="A">Ascending</option>
                         <option value="D">Descending</option>
                     </select>
-                    <select onChange={statusHandler}>
+                    <select ref={statusRef} onChange={statusHandler}>
                         <option value="All">All status</option>
                         <option value="Alive">Alive</option>
                         <option value="Dead">Dead</option>
                         <option value="unknown">Unknown</option>
                     </select>
-                    <select onChange={genderHandler}>
+                    <select ref={genderRef} onChange={genderHandler}>
                         <option value="All">All genders</option>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                         <option value="Genderless">Genderless</option>
                         <option value="unknown">Unknown</option>
                     </select>
-                    <button>Reset filters</button>
+                    <button onClick={resetHandler}>Reset filters</button>
                 </div>
+
+                {/* CONTENT */}
                 {filteredFavs.length === 0 &&
                     <div className={styles.helper}>
                     <span>NO FAVORITES YET!</span>

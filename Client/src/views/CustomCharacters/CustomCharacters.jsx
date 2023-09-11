@@ -17,7 +17,6 @@ function CustomCharacters() {
     const dispatch = useDispatch();
 
     const customCharacters = useSelector(state => state.customCharacters);
-    console.log(customCharacters);
     // const [orderFilter, setOrderFilter] = useState('N'); // local state -> order filter
     // const [genderFilter, setGenderFilter] = useState('All') // local state - gender filter
 

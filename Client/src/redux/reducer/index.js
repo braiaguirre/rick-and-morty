@@ -60,6 +60,7 @@ export default function reducer (state = initialState, {type, payload}) {
             payload = {
                 ...payload, 
                 id: 826 + state.customCharacters.length,    // TODO: TRAER CANT DE PERSONAJES DESDE API
+                custom: true
             }
             return {
                 ...state,
