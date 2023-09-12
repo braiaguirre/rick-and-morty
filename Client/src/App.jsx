@@ -20,7 +20,6 @@ import About from './views/About/About';
 
 // COMPONENTS
 import Nav from './components/Nav/Nav';
-import ErrorPopup from './components/ErrorPopup/ErrorPopup';
 import Alert from './components/Alert/Alert';
 import CreateCharacter from './components/CreateCharacter/CreateCharacter';
 
@@ -62,13 +61,6 @@ function App() {
                      closeCreateCharacter={closeCreateCharacter} />
                </div>}
 
-         {/* ERROR POPUP */}
-         {error !== '' && 
-            <div className={styles.popupContainer}>
-               <ErrorPopup 
-                  error={error.error} 
-                  desc={error.desc} />
-            </div>}
          {/* ALERT POPUP */}
          {Object.keys(alert).length > 0 && 
             <div className={styles.popupContainer}>

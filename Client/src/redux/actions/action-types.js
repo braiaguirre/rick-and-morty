@@ -8,7 +8,5 @@ export const REMOVE_FAV = 'REMOVE_FAV';
 export const FILTER = 'FILTER';
 export const ORDER = 'ORDER';
 export const ACCESS = 'ACCESS';
-export const ERROR = 'ERROR';
-export const CLEAR_ERROR = 'CLEAR_ERROR';
 export const ALERT = 'ALERT';
 export const CLEAR_ALERT = 'CLEAR_ALERT';

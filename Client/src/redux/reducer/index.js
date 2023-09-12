@@ -11,8 +11,6 @@ import {
     FILTER, 
     ORDER, 
     ACCESS,
-    ERROR,
-    CLEAR_ERROR,
     ALERT,
     CLEAR_ALERT
 } from '../actions/action-types.js';
@@ -135,21 +133,6 @@ export default function reducer (state = initialState, {type, payload}) {
             return {
                 ...state,
                 access: payload
-            }
-
-        // ERROR
-        case ERROR:
-            return {
-                ...state,
-                error: ERROR_CODES[payload.response.data]
-            }
-
-
-        // CLEAR ERROR
-        case CLEAR_ERROR:
-            return {
-                ...state,
-                error: ''
             }
 
         // ALERT

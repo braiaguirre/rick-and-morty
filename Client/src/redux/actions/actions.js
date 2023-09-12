@@ -11,28 +11,31 @@ import {
     FILTER, 
     ORDER, 
     ACCESS,
-    ERROR,
-    CLEAR_ERROR,
     ALERT,
     CLEAR_ALERT
 } from './action-types';
 
+const URL = 'http://localhost:3001/rickandmorty';
+
 // GET CHARACTER
 export const getCharacter = (id) => {
-    return (dispatch) => {
-        axios.get(`http://localhost:3001/rickandmorty/character/${id}`)
-            .then(({ data }) => {
-                return dispatch({
-                    type: GET_CHARACTER,
-                    payload: data
-                });
-            })
-            .catch((error) => {
-                return dispatch({
-                    type: ERROR,
-                    payload: error
-                })
+    return async (dispatch) => {
+        try {
+            const {data} = await axios.get(`${URL}/character/${id}`);
+            return dispatch({
+                type: GET_CHARACTER,
+                payload: data
             });
+        } catch (error) {
+            return dispatch({
+                type: ALERT,
+                payload: {
+                    title: 'Error',
+                    message: error,
+                    alertType: 'accept'
+                }
+            })
+        };
     };
 };
 
@@ -69,27 +72,22 @@ export const removeCharacter = (id) => {
 
 // ADDF AVORITE
 export const addFav = (character) => {
-    const endpoint = 'http://localhost:3001/rickandmorty/fav';
-    return (dispatch) => {
-        axios.post(endpoint, character).then(({ data }) => {
+    return async (dispatch) => {
+        const {data} = await axios.post(`${URL}/fav`, character);
            return dispatch({
               type: ADD_FAV,
               payload: data,
            });
-        });
      };
 };
 
 // REMOVE FAVORITE
 export const removeFav = (id) => {
-    const endpoint = 'http://localhost:3001/rickandmorty/fav/' + id;
-    return (dispatch) => {
-       axios.delete(endpoint).then(({ data }) => {
-        console.log(data);
+    return async (dispatch) => {
+       const {data} = await axios.delete(`${URL}/fav/${id}`);
           return dispatch({
              type: REMOVE_FAV,
              payload: data,
-       });
        });
     };
 };
@@ -111,14 +109,12 @@ export const orderCards = (order) => {
 
 // ACCESS HANDLERS
 export const getAccess = (email, password) => {
-    const endpoint = 'http://localhost:3001/rickandmorty/login/';
-    return (dispatch) => {
-        axios(endpoint + `?email=${email}&password=${password}`).then(({data}) => {
-          return dispatch({
-             type: ACCESS,
-             payload: data,
-       });
-       });
+    return async (dispatch) => {
+        const {data} = await axios.get(`${URL}/login/?email=${email}&password=${password}`);
+        return dispatch({
+            type: ACCESS,
+            payload: data,
+        });
     };
 }
 
@@ -127,13 +123,6 @@ export const removeAccess = () => {
         type: ACCESS,
         payload: false,
        };
-}
-
-// ERROR HANDLERS
-export const clearError = () => {
-    return {
-        type: CLEAR_ERROR,
-    }
 }
 
 // ALERT

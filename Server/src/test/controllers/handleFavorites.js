@@ -2,16 +2,13 @@
 
 function postFav(req, res) {
     const fav = req.body;
-    res
-        .status(200)
-        .send(fav)
+    console.log('aaaaaaaaaaa');
+    res.status(200).send(fav)
 }
 
 function deleteFav(req, res) {
     const {id} = req.params;
-    res
-        .status(200)
-        .send(id)
+    res.status(200).send(id)
 }
 
 module.exports = {
