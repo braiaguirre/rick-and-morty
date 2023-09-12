@@ -1,6 +1,9 @@
 // STYLES
 import styles from './About.module.css';
 
+// DEPENDENCIES
+import {useNavigate} from 'react-router-dom';
+
 // COMPONENTS
 import Card from '../../components/Card/Card.jsx';
 
@@ -10,9 +13,13 @@ import img from '../../assets/about-profile.jpg';
 function About({onClose}) {
     document.title = 'Rick and Morty > About'
 
+    const navigate = useNavigate();
+
+    const closeHandler = () => navigate('/home');
+
     // PERSONALIZED CHARACTER
     const character = {
-        id: 999,
+        id: 9999,
         name: 'Brian Aguirre',
         status: 'Alive',
         species: 'Human',
@@ -25,7 +32,10 @@ function About({onClose}) {
 
     return (
         <div className={styles.about}>
-            <Card character={character} onClose={onClose} />
+            <Card 
+                character={character} 
+                closeHandler={closeHandler}
+                key = {character.id} />
         </div>
     )
 }

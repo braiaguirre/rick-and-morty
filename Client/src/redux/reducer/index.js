@@ -46,7 +46,7 @@ export default function reducer (state = initialState, {type, payload}) {
         case GET_CHARACTER_DETAIL:
             return {
                 ...state,
-                characterDetail: {...state.allCharacters.filter(character => character.id !== Number(payload)).pop()}
+                characterDetail: {...state.allCharacters.filter(character => character.id !== payload).pop()}
             };
 
         // CLEAR CHARACTER DETAIL
