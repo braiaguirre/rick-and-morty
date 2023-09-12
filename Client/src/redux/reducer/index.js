@@ -21,7 +21,7 @@ const initialState = {
     customCharacters: [],
     allFavs: [],
     filteredFavs: [],
-    access: false,
+    access: true,
     error: '',
     alert: {}
 };

@@ -6,9 +6,7 @@ async function getCharById(req, res) {
     try {
         const {id} = req.params;
         const {data} = await axios.get(`${URL}${id}`)
-        res
-        .status(200)
-        .send({
+        res.status(200).send({
             id: data.id,
             name: data.name,
             gender: data.gender,
@@ -18,8 +16,11 @@ async function getCharById(req, res) {
             status: data.status
         });
     } catch (error) {
-        if (error.response) res.status(404).send('ERROR_404');
-        else res.status(500).end(error.message);
+        if (error.response) {
+            console.log('asd');
+            res.status(404).send('Character not found, enter a valid ID.');
+        }
+        else res.status(500).end('Could not connect.');
     };
 }
 

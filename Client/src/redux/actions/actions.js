@@ -31,7 +31,7 @@ export const getCharacter = (id) => {
                 type: ALERT,
                 payload: {
                     title: 'Error',
-                    message: error,
+                    message: error.response.data,
                     alertType: 'accept'
                 }
             })
