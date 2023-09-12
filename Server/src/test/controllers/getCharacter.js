@@ -16,10 +16,7 @@ async function getCharById(req, res) {
             status: data.status
         });
     } catch (error) {
-        if (error.response) {
-            console.log('asd');
-            res.status(404).send('Character not found, enter a valid ID.');
-        }
+        if (error.response) res.status(404).send('Character not found, enter a valid ID.');
         else res.status(500).end('Could not connect.');
     };
 }
