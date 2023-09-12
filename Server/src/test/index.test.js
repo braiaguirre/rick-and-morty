@@ -36,7 +36,7 @@ describe('Test de RUTAS', () => {
     describe('POST /rickandmorty/fav', () => {
 
         it('Devuelve el character enviado', async () => {
-            const {body} = await agent.post('/rickandmorty/fav', {
+            const character = {
                 id: 1,
                 name: 'name1',
                 species: 'species1',
@@ -46,9 +46,15 @@ describe('Test de RUTAS', () => {
                     name: 'origin.name1'
                 },
                 image: 'image'
-            })
-            expect(body)
+            };
+
+            const {body} = await agent.post('/rickandmorty/fav', character)
+            console.log('body -- ', body);
+            console.log('character -- ', character);
+            expect(body).toHaveProperty('id');
         });
     });
+
+    // TODO: ARMAR TESTS
 
 });

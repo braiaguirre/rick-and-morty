@@ -1,16 +1,17 @@
 // let allFavs = []; ---- > esto no me gusta acá, prefiero manejarlo desde el estado global, así que modifiqué la HW
 
-function postFav(req, res) {
+function addFav(req, res) {
     const character = req.body;
-    res.status(200).send(character)
+    console.log('postFav -- ', character);
+    res.status(200).send(character);
 }
 
-function deleteFav(req, res) {
+function removeFav(req, res) {
     const {id} = req.params;
-    res.status(200).send(id)
+    res.status(200).send(id);
 }
 
 module.exports = {
-    postFav,
-    deleteFav
+    addFav,
+    removeFav
 }
