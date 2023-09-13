@@ -2,6 +2,7 @@
 import styles from './SearchBar.module.css';
 
 // DEPENDENCIES
+import rand from '../../utils/rand';
 import {useRef, useState} from 'react';
 
 function SearchBar({addHandler, closeHandler, createCharacterHandler, advancedSearchHandler}) {
@@ -12,8 +13,6 @@ function SearchBar({addHandler, closeHandler, createCharacterHandler, advancedSe
    // SEARCH FROM API
    let changeHandler = (e) => setInputValue(e.target.value);
    
-   let rand = () => (Math.random() * 826).toFixed();
-
    let clickHandler = () => {
       addHandler(inputValue);
       setInputValue('');

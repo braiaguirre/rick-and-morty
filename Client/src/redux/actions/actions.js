@@ -11,6 +11,10 @@ import {
     ORDER_FILTER, 
     STATUS_FILTER,
     GENDER_FILTER, 
+    GET_LOCATIONS,
+    CLEAR_LOCATIONS,
+    GET_IMAGE,
+    CLEAR_IMAGE,
     ACCESS,
     ALERT,
     CLEAR_ALERT
@@ -115,6 +119,59 @@ export const genderFilter = (gender) => {
     };
 };
 
+// GET LOCATIONS
+export const getLocations = (id = '') => {
+    return async (dispatch) => {
+        try {
+        const {data} = await axios.get(`${URL}/location/${id}`);
+        return dispatch({
+            type: GET_LOCATIONS,
+            payload: data
+        });
+    } catch (error) {
+        return dispatch({
+            type: ALERT,
+            payload: {
+                title: 'Error',
+                message: error.response.data,
+                alertType: 'accept'
+            }
+        })
+    }};
+}
+
+export const clearLocations = () => {
+    return {
+        type: CLEAR_LOCATIONS
+    }
+}
+
+// GET IMAGE
+export const getImage = (id) => {
+    return async (dispatch) => {
+    try {
+        const {data} = await axios.get(`${URL}/image/${id}`);
+        return dispatch({
+            type: GET_IMAGE,
+            payload: data
+        });
+    } catch (error) {
+        return dispatch({
+            type: ALERT,
+            payload: {
+                title: 'Error',
+                message: error.response.data,
+                alertType: 'accept'
+            }
+        })
+    }};
+}
+
+export const clearImage = () => {
+    return {
+        type: CLEAR_IMAGE
+    }
+}
 
 // ACCESS HANDLERS
 export const getAccess = (email, password) => {

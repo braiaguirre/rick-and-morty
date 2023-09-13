@@ -11,6 +11,10 @@ import {
     ORDER_FILTER, 
     STATUS_FILTER,
     GENDER_FILTER, 
+    GET_LOCATIONS,
+    CLEAR_LOCATIONS,
+    GET_IMAGE,
+    CLEAR_IMAGE,
     ACCESS,
     ALERT,
     CLEAR_ALERT
@@ -22,6 +26,8 @@ const initialState = {
     customCharacters: [],
     allFavs: [],
     filteredFavs: [],
+    locations: [],
+    image: '',
     access: true,
     error: '',
     alert: {}
@@ -138,6 +144,34 @@ export default function reducer (state = initialState, {type, payload}) {
             else return {
                 ...state, 
                 filteredFavs: state.allFavs.filter(character => character.gender === payload)};
+
+        // GET LOCATIONS
+        case GET_LOCATIONS:
+            return {
+                ...state,
+                locations: payload
+            }
+
+        // GET LOCATIONS
+        case CLEAR_LOCATIONS:
+            return {
+                ...state,
+                locations: []
+            }
+
+        // GET IMAGE
+        case GET_IMAGE:
+            return {
+                ...state,
+                image: payload
+            }
+
+        // GET LOCATIONS
+        case CLEAR_IMAGE:
+            return {
+                ...state,
+                image: ''
+            }
 
         // ACCESS
         case ACCESS:

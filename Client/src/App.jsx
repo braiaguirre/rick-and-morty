@@ -56,6 +56,7 @@ function App() {
 
    // ADVANCED SEARCH
    const advancedSearchHandler = () => setAdvancedSearch(true);
+   const closeAdvancedSearch = () => setAdvancedSearch(false);
 
    return (
       <>
@@ -63,7 +64,7 @@ function App() {
          {advancedSearch && 
                <div className={styles.popupContainer}>
                   <AdvancedSearch
-                     advancedSearch={advancedSearch} />
+                     closeAdvancedSearch={closeAdvancedSearch} />
                </div>}
 
          {/* CREATE CHARACTER POPUP */}
@@ -89,7 +90,8 @@ function App() {
                   addHandler={addHandler} 
                   logOut={logOut} 
                   closeHandler={closeHandler} 
-                  createCharacterHandler={createCharacterHandler} />
+                  createCharacterHandler={createCharacterHandler}
+                  advancedSearchHandler={advancedSearchHandler} />
             </div>}
          <>
             {/* LOGIN ROUTE */}

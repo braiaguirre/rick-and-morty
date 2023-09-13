@@ -3,18 +3,20 @@ import styles from './CreateCharacter.module.css';
 
 // DEPENDENCIES
 import axios from 'axios';
+import rand from '../../utils/rand';
 import {useEffect, useState} from 'react';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 
 // ACTIONS
-import {createCharacter, sendAlert} from '../../redux/actions/actions.js';
+import {createCharacter, sendAlert, getLocations, getImage} from '../../redux/actions/actions.js';
 
 // ASSETS + UTILS
 import validation from '../../utils/createCharacterValidation.js';
 
-function CreateCharacter({closeCreateCharacter}) {  // TODO: AGREGAR GENERADOR DE IMAGEN RANDOM
+function CreateCharacter({closeCreateCharacter}) {
     const dispatch = useDispatch();
 
+    const image = useSelector(state => state.image);
     const [loading, setLoading] = useState(false);
     const [character, setCharacter] = useState({
         name: '',
@@ -23,7 +25,6 @@ function CreateCharacter({closeCreateCharacter}) {  // TODO: AGREGAR GENERADOR D
         origin: {
             name: ''
         },
-        image: '',
         status: ''
     })
     const [errors, setErrors] = useState({
@@ -33,10 +34,7 @@ function CreateCharacter({closeCreateCharacter}) {  // TODO: AGREGAR GENERADOR D
         origin: true,
         status: true
     })
-    const [locations, setLocations] = useState([]);
-
-    // UTILS
-    const rand = () => (Math.random() * 826).toFixed();
+    const locations = useSelector(state => state.locations);
 
     const loader = (time) => {
         setLoading(true);
@@ -47,17 +45,11 @@ function CreateCharacter({closeCreateCharacter}) {  // TODO: AGREGAR GENERADOR D
 
     // LOAD DATA
     useEffect(() => {
-        axios.get(`http://localhost:3001/rickandmorty/location/`)
-            .then(({ data }) => setLocations(data.results))     // TODO: TRAER EL RESTO DE LAS PÁGINAS DE LOCATIONS
-    }, []);
-
-    useEffect(() => {
         let id = rand();
-        axios.get(`http://localhost:3001/rickandmorty/character/${id}`)
-            .then(({ data }) => setCharacter({...character, image: data.image}));
-        
+        dispatch(getLocations());
+        dispatch(getImage(id));
         loader(1000);
-    }, [])
+    }, []);
 
     // CHANGE HANDLER (LOCAL STATE)
     function changeHandler(e) {      
@@ -74,8 +66,7 @@ function CreateCharacter({closeCreateCharacter}) {  // TODO: AGREGAR GENERADOR D
     function imageHandler(e) {
         e.preventDefault();
         let id = rand();
-        axios.get(`http://localhost:3001/rickandmorty/character/${id}`)
-            .then(({ data }) => setCharacter({...character, image: data.image}));
+        dispatch(getImage(id));
         loader(1000);
     }
 
@@ -86,7 +77,7 @@ function CreateCharacter({closeCreateCharacter}) {  // TODO: AGREGAR GENERADOR D
             if (error) dispatch(sendAlert('Wait!', 'All fields are required to create a new character.', 'accept'));
             return;
         }
-        dispatch(createCharacter(character));
+        dispatch(createCharacter({...character, image: image}));
         closeCreateCharacter();
     }
 
@@ -164,7 +155,7 @@ function CreateCharacter({closeCreateCharacter}) {  // TODO: AGREGAR GENERADOR D
                             {loading ? 
                                 <div className={styles.spinner}></div>
                             :
-                                <img alt="Custom character image" src={character.image} />}
+                                <img alt="Custom character image" src={image} />}
                         </div>
                     </div>
                 </div>
