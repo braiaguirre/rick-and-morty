@@ -7,12 +7,15 @@ export default function Cards({characters, closeHandler}) {
          {characters.length === 0 &&
             <div className={styles.helper}>
                <span>ADD SOME CHARACTERS!</span>
-               <span className={styles.icon}></span>
+               {/* <span className={styles.icon}></span> */}
             </div>
          }
          <div className={styles.cards}>
             {characters.map(character => 
-               <Card character={character} closeHandler={closeHandler} key={character.id} />
+               <Card 
+                  character={character} 
+                  closeHandler={closeHandler} 
+                  key={character.id} />
             )}
          </div>
       </>

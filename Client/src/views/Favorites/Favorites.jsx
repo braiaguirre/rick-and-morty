@@ -78,7 +78,7 @@ function Favorites() {
                 {/* CONTENT */}
                 {filteredFavs.length === 0 &&
                     <div className={styles.helper}>
-                    <span>NO FAVORITES YET!</span>
+                    <span>NO FAVORITES YET</span>
                     <span className={styles.icon}></span>
                     </div>}
                 {filteredFavs.length > 0 &&
