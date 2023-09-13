@@ -22,7 +22,7 @@ function About() {
     const closeHandler = () => navigate('/home');
     
     useEffect(() => {
-        dispatch(getCharacterDetail(id))
+        dispatch(getCharacterDetail(Number(id)))
     }, []);
 
     return (

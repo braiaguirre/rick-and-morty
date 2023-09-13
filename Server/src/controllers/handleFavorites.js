@@ -2,7 +2,6 @@
 
 function addFav(req, res) {
     const character = req.body;
-    console.log('postFav -- ', character);
     res.status(200).send(character);
 }
 
