@@ -6,7 +6,7 @@ import {useState, useRef} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 
 // ACTIONS
-import {filterCards, orderCards} from '../../redux/actions/actions.js';
+import {orderFilter, statusFilter, genderFilter} from '../../redux/actions/actions.js';
 
 // COMPONENTS
 import Cards from '../../components/Cards/Cards.jsx';
@@ -19,32 +19,42 @@ function Favorites() {
     const orderRef = useRef();
     const statusRef = useRef();
 
+    const initialFiltersState = {
+        order: 'N',
+        status: 'All',
+        gender: 'All'
+    };
+
     const filteredFavs = useSelector(state => state.filteredFavs);
-    const [orderFilter, setOrderFilter] = useState('N'); // local state -> order filter
-    const [genderFilter, setGenderFilter] = useState('All') // local state - gender filter
+    const [filtersState, setfiltersState] = useState(initialFiltersState);
 
     // FILTERS
     const orderHandler = (e) => {
-        setOrderFilter(e.target.value); // sets new local state
-        dispatch(orderCards(e.target.value)); // dispatches order filter
-        if (genderFilter !== 'All') dispatch(filterCards(genderFilter)); // if a gender filter is selected, dispatch gender filter
+        setfiltersState({...filtersState, order: e.target.value});
+        dispatch(orderFilter(e.target.value));
+        if (filtersState.status !== 'All') dispatch(statusFilter(filtersState.status));
+        if (filtersState.gender !== 'All') dispatch(genderFilter(filtersState.gender));
     }
     const statusHandler = (e) => {
-        
+        setfiltersState({...filtersState, status: e.target.value});
+        dispatch(statusFilter(e.target.value));
+        if (filtersState.gender !== 'All') dispatch(genderFilter(filtersState.gender));
+        if (filtersState.order !== 'N') dispatch(orderFilter(filtersState.order));
     }
 
     const genderHandler = (e) => {
-        setGenderFilter(e.target.value); // sets new local state
-        dispatch(filterCards(e.target.value)); // dispatches gender filter
-        if (orderFilter !== 'N') dispatch(orderCards(orderFilter)); // if an order filter is selected, dispatch order filter
+        setfiltersState({...filtersState, gender: e.target.value}); 
+        dispatch(genderFilter(e.target.value)); 
+        if (filtersState.status !== 'All') dispatch(statusFilter(filtersState.status));
+        if (filtersState.order !== 'N') dispatch(orderFilter(filtersState.order));
     }
 
     const resetHandler = () => {
-        setGenderFilter('All'); // local states
-        setOrderFilter('N'); // 
-        dispatch(filterCards('All')); // actions
-        dispatch(orderCards('N')); //
-        orderRef.current.value = 'N'; // reset selection
+        setfiltersState(initialFiltersState)
+        dispatch(orderFilter('N'));
+        dispatch(statusFilter('All'));
+        dispatch(genderFilter('All'));
+        orderRef.current.value = 'N';
         statusRef.current.value = 'All';
         genderRef.current.value = 'All';
     }

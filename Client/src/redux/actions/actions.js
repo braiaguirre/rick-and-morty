@@ -8,8 +8,9 @@ import {
     REMOVE_CHARACTER, 
     ADD_FAV, 
     REMOVE_FAV, 
-    FILTER, 
-    ORDER, 
+    ORDER_FILTER, 
+    STATUS_FILTER,
+    GENDER_FILTER, 
     ACCESS,
     ALERT,
     CLEAR_ALERT
@@ -93,19 +94,27 @@ export const removeFav = (id) => {
 };
 
 // FILTER HANDLERS
-export const filterCards = (gender) => {
+export const orderFilter = (order) => {
     return {
-        type: FILTER,
+        type: ORDER_FILTER,
+        payload: order
+    };
+};
+
+export const statusFilter = (status) => {
+    return {
+        type: STATUS_FILTER,
+        payload: status
+    };
+};
+
+export const genderFilter = (gender) => {
+    return {
+        type: GENDER_FILTER,
         payload: gender
     };
 };
 
-export const orderCards = (order) => {
-    return {
-        type: ORDER,
-        payload: order
-    };
-};
 
 // ACCESS HANDLERS
 export const getAccess = (email, password) => {

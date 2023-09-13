@@ -8,8 +8,9 @@ import {
     REMOVE_CHARACTER, 
     ADD_FAV, 
     REMOVE_FAV, 
-    FILTER, 
-    ORDER, 
+    ORDER_FILTER, 
+    STATUS_FILTER,
+    GENDER_FILTER, 
     ACCESS,
     ALERT,
     CLEAR_ALERT
@@ -102,18 +103,8 @@ export default function reducer (state = initialState, {type, payload}) {
                 filteredFavs: [...state.filteredFavs.filter(character => character.id !== Number(payload))]
             };
 
-        // GENDER FILTER
-        case FILTER:
-            if (payload === 'All') return {
-				...state, 
-				filteredFavs: [...state.allFavs]};
-
-            else return {
-                ...state, 
-                filteredFavs: state.allFavs.filter(character => character.gender === payload)};
-
         // ORDER FITLER
-        case ORDER:
+        case ORDER_FILTER:
 			if (payload === 'N')
 				state.filteredFavs = [...state.allFavs]
 
@@ -127,6 +118,26 @@ export default function reducer (state = initialState, {type, payload}) {
 				...state, 
 				filteredFavs: [...state.filteredFavs]
 			};
+
+        // STATUS FILTER
+        case STATUS_FILTER:
+            if (payload === 'All') return {
+				...state, 
+				filteredFavs: [...state.allFavs]};
+
+            else return {
+                ...state, 
+                filteredFavs: state.allFavs.filter(character => character.status === payload)};
+        
+        // GENDER FILTER
+        case GENDER_FILTER:
+            if (payload === 'All') return {
+                ...state, 
+                filteredFavs: [...state.allFavs]};
+
+            else return {
+                ...state, 
+                filteredFavs: state.allFavs.filter(character => character.gender === payload)};
 
         // ACCESS
         case ACCESS:
