@@ -4,7 +4,7 @@ import {useNavigate} from 'react-router-dom';
 import {addFav, removeFav} from '../../redux/actions/actions.js';
 import {useSelector, useDispatch} from 'react-redux';
 
-function Card({character, closeHandler}) {
+function Card({character, closeHandler, about}) {
    // HOOKS
    const dispatch = useDispatch();
    const navigate = useNavigate();
@@ -26,6 +26,11 @@ function Card({character, closeHandler}) {
          setIsFav(true);
          dispatch(addFav(character));
    }  }
+
+   // ABOUT CARD
+   const aboutHandler = () => {
+      window.open('https://github.com/braiaguirre', '_blank', 'noreferrer');
+   }
    
    useEffect(() => {
       filteredFavs.forEach(fav => {
@@ -49,19 +54,32 @@ function Card({character, closeHandler}) {
                     <>
                         {/* CARD BUTTONS */}
                         <div>
+                            
                             {!isFav ? 
                                 <button onClick={favoriteHandler}>
-                                    <span className='material-symbols-outlined'>favorite</span>
-                                </button> : 
+                                    <span className='material-symbols-outlined'>
+                                        favorite
+                                    </span>
+                                </button> 
+                            : 
                                 <button onClick={favoriteHandler}>
-                                    <span className={`material-symbols-outlined ${styles.isFav}`}>favorite</span>
+                                    <span className={`material-symbols-outlined ${styles.isFav}`}>
+                                        favorite
+                                    </span>
                                 </button>}
-                                {closeHandler ? 
+                            {closeHandler ? 
                                 <button onClick={() => closeHandler(character.id)}>
                                     <span className='material-symbols-outlined'>close</span>
                                 </button> 
                             :
                                 <></>}
+                            {about && 
+                                <button onClick={aboutHandler}>
+                                    <span class="material-symbols-outlined">
+                                        open_in_new
+                                    </span>
+                                </button>
+                            }
                         </div>
 
                         {/* CHARACTER INFO */}
@@ -70,7 +88,7 @@ function Card({character, closeHandler}) {
                         <h3><b>Species:</b> {character.species}</h3>
                         <h3><b>Gender:</b> {character.gender}</h3>
                         <h3><b>Origin:</b> {character.origin?.name}</h3>
-                        <img src={character.image} alt='imagen' onClick={navigateHandler} />
+                        <img src={character.image} alt='imagen' onClick={about ? aboutHandler : navigateHandler} />
                     </>
                 }
         </div>

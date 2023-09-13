@@ -10,7 +10,7 @@ import Card from '../../components/Card/Card.jsx';
 // ASSETS
 import img from '../../assets/about-profile.jpg';
 
-function About({onClose}) {
+function About() {
     document.title = 'Rick and Morty > About'
 
     const navigate = useNavigate();
@@ -34,8 +34,8 @@ function About({onClose}) {
         <div className={styles.about}>
             <Card 
                 character={character} 
-                closeHandler={closeHandler}
-                key = {character.id} />
+                key = {character.id}
+                about = {true} />
         </div>
     )
 }
