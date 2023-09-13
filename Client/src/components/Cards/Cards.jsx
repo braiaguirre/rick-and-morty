@@ -1,7 +1,10 @@
+// STYLES
 import styles from './Cards.module.css';
+
+// COMPONENTS
 import Card from '../Card/Card.jsx';
 
-export default function Cards({characters, closeHandler}) {
+function Cards({characters, closeHandler, asd}) {
    return (
       <>
          {characters.length === 0 &&
@@ -21,3 +24,5 @@ export default function Cards({characters, closeHandler}) {
       </>
    );
 }
+
+export default Cards;

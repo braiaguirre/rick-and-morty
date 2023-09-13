@@ -6,7 +6,10 @@ function App({characters, closeHandler}) {
 
    return (
       <>
-         <Cards characters={characters} closeHandler={closeHandler} />
+         <Cards 
+            characters={characters} 
+            closeHandler={closeHandler} 
+            asd='/home' />
       </>
    );
 }

@@ -15,18 +15,18 @@ function Favorites() {
 
     return (
         <>
+            <Filters />
             <div className={styles.favorites}>
-                <Filters />
-
-                {/* CONTENT */}
                 {filteredFavs.length === 0 &&
                     <div className={styles.helper}>
-                    <span>NO FAVORITES YET</span>
-                    <span className={styles.icon}></span>
+                        <span>NO FAVORITES YET</span>
+                        <span className={styles.icon}></span>
                     </div>}
                 {filteredFavs.length > 0 &&
                     <div className={styles.cards}>
-                    <Cards characters={filteredFavs} />
+                        <Cards 
+                            characters={filteredFavs} 
+                            asd='/favorites' />
                     </div>}
             </div>
         </>

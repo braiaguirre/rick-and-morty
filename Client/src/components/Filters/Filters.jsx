@@ -3,7 +3,7 @@ import styles from './Filters.module.css';
 
 // DEPENDENCIES
 import {useState, useRef} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 
 // ACTIONS
 import {orderFilter, statusFilter, genderFilter} from '../../redux/actions/actions.js';
@@ -20,7 +20,6 @@ function Filters() {
         gender: 'All'
     };
 
-    const filteredFavs = useSelector(state => state.filteredFavs);
     const [filtersState, setfiltersState] = useState(initialFiltersState);
 
     // FILTERS
