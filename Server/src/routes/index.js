@@ -11,6 +11,7 @@ const {addFav, removeFav} = require('../controllers/handleFavorites');
 
 const mainRouter = Router();
 
+mainRouter.get('/character/', getCharacter);
 mainRouter.get('/character/:id', getCharacter);
 mainRouter.post('/character', postCustomCharacter);
 mainRouter.get('/location', getLocations);

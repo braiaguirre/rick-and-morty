@@ -35,14 +35,14 @@
   padding: 10px;
 }
 
-.formContainer .col {
+.formContainer {
   align-items: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-.formContainer .imageCol .formDiv {
+.formContainer .formDiv {
   flex-direction: column;
 }
 

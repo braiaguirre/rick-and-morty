@@ -22,6 +22,7 @@ import {
 
 const initialState = {
     allCharacters: [],
+    allCharactersID: [],
     characterDetail: {},
     customCharacters: [],
     allFavs: [],
@@ -38,6 +39,7 @@ export default function reducer (state = initialState, {type, payload}) {
         
         // GET CHARACTER
         case GET_CHARACTER:
+            // TODO: CHEQUEAR YA AGREGADOS PARA CARGA MASIVA TAMBIÉN
             for (let i = 0; i < state.allCharacters.length; i++) {
                 if (state.allCharacters[i].id === payload.id) return {
                     ...state,
@@ -46,7 +48,7 @@ export default function reducer (state = initialState, {type, payload}) {
             }
             return {
                 ...state,
-                allCharacters: [...state.allCharacters, payload]
+                allCharacters: [...state.allCharacters, ...payload]
             };
 
         // GET CHARACTER DETAIL
@@ -67,12 +69,13 @@ export default function reducer (state = initialState, {type, payload}) {
         case CREATE_CHARACTER:
             payload = {
                 ...payload, 
-                id: 826 + state.customCharacters.length,    // TODO: TRAER CANT DE PERSONAJES DESDE API
+                id: 826 + state.customCharacters.length,
                 custom: true
             }
             return {
                 ...state,
                 allCharacters: [...state.allCharacters, payload],
+                allCharactersID: [...allCharactersID, payload.id],
                 customCharacters: [...state.customCharacters, payload]
             }
 
@@ -81,6 +84,7 @@ export default function reducer (state = initialState, {type, payload}) {
             if (payload === -1) return {
                 ...state,
                 allCharacters: [],
+                allCharactersID: [],
                 allFavs: [],
                 customCharacters: [],
                 filteredFavs: []
@@ -89,6 +93,7 @@ export default function reducer (state = initialState, {type, payload}) {
                 ...state,
                 allCharacters: [...state.allCharacters.filter(character => character.id !== Number(payload))],
                 customCharacters: [...state.customCharacters.filter(character => character.id !== Number(payload))],
+                allCharactersID: [...state.customCharacters.filter(id => character.id !== Number(payload))],
                 allFavs: [...state.allFavs.filter(character => character.id !== Number(payload))],
                 filteredFavs: [...state.filteredFavs.filter(character => character.id !== Number(payload))]
             };

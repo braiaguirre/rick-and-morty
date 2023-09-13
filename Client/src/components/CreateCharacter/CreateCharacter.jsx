@@ -2,13 +2,12 @@
 import styles from './CreateCharacter.module.css';
 
 // DEPENDENCIES
-import axios from 'axios';
 import rand from '../../utils/rand';
 import {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 
 // ACTIONS
-import {createCharacter, sendAlert, getLocations, getImage} from '../../redux/actions/actions.js';
+import {createCharacter, sendAlert, getLocations, clearLocations, getImage, clearImage} from '../../redux/actions/actions.js';
 
 // ASSETS + UTILS
 import validation from '../../utils/createCharacterValidation.js';
@@ -16,26 +15,13 @@ import validation from '../../utils/createCharacterValidation.js';
 function CreateCharacter({closeCreateCharacter}) {
     const dispatch = useDispatch();
 
+    const locations = useSelector(state => state.locations);
     const image = useSelector(state => state.image);
     const [loading, setLoading] = useState(false);
-    const [character, setCharacter] = useState({
-        name: '',
-        gender: '',
-        species: '',
-        origin: {
-            name: ''
-        },
-        status: ''
-    })
-    const [errors, setErrors] = useState({
-        name: true,
-        gender: true,
-        species: true,
-        origin: true,
-        status: true
-    })
-    const locations = useSelector(state => state.locations);
+    const [character, setCharacter] = useState({name: '', gender: '', species: '', origin: {name: ''}, status: ''});
+    const [errors, setErrors] = useState({name: true, gender: true, species: true, origin: true, status: true});
 
+    // UTILS
     const loader = (time) => {
         setLoading(true);
         setTimeout(() => {
@@ -43,22 +29,18 @@ function CreateCharacter({closeCreateCharacter}) {
         }, time);
     }
 
-    // LOAD DATA
-    useEffect(() => {
-        let id = rand();
-        dispatch(getLocations());
-        dispatch(getImage(id));
-        loader(1000);
-    }, []);
-
     // CHANGE HANDLER (LOCAL STATE)
     function changeHandler(e) {      
         if (e.target.name === 'origin') {
-            setCharacter({...character, origin: {name: e.target.value}});
-            setErrors(validation({...character, origin: {name: e.target.value}}));
+            setCharacter({
+                ...character, origin: {name: e.target.value}});
+            setErrors(validation({
+                ...character, origin: {name: e.target.value}}));
         } else {
-            setCharacter({...character, [e.target.name]: e.target.value})
-            setErrors(validation({...character, [e.target.name]: e.target.value}));
+            setCharacter({
+                ...character, [e.target.name]: e.target.value})
+            setErrors(validation({
+                ...character, [e.target.name]: e.target.value}));
         }
     }
 
@@ -86,6 +68,18 @@ function CreateCharacter({closeCreateCharacter}) {
         e.preventDefault();
         closeCreateCharacter();
     }
+
+    // LOAD DATA
+    useEffect(() => {
+        let id = rand();
+        dispatch(getLocations());
+        dispatch(getImage(id));
+        loader(1000);
+        return () => {
+            dispatch(clearLocations());
+            dispatch(clearImage());
+        };
+    }, []);
 
     return (
         <div className={styles.createCharacter}>

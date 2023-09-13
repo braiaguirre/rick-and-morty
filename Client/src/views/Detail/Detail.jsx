@@ -7,7 +7,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {useParams, useNavigate} from 'react-router-dom';
 
 // ACTIONS
-import {getCharacterDetail} from '../../redux/actions/actions';
+import {getCharacterDetail, clearCharacterDetail} from '../../redux/actions/actions';
 
 // CARD
 import Card from '../../components/Card/Card';
@@ -23,6 +23,7 @@ function About() {
     
     useEffect(() => {
         dispatch(getCharacterDetail(Number(id)))
+        return () => dispatch(clearCharacterDetail());
     }, []);
 
     return (
