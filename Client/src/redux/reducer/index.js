@@ -39,13 +39,26 @@ export default function reducer (state = initialState, {type, payload}) {
         
         // GET CHARACTER
         case GET_CHARACTER:
-            // TODO: CHEQUEAR YA AGREGADOS PARA CARGA MASIVA TAMBIÉN
-            for (let i = 0; i < state.allCharacters.length; i++) {
-                if (state.allCharacters[i].id === payload.id) return {
-                    ...state,
-                    error: ERROR_CODES.ERROR_666
-                };
-            }
+            // console.log(payload);
+            // for (let i = 0; i < payload.length; i++) {
+            //     if (allCharactersID.includes(payload[i].id)) {
+            //         return {
+            //             ...state,
+            //             alert: {
+            //                 title: 'Error',
+            //                 message: 'Already added.',
+            //                 alertType: 'accept'
+            //             }
+            //         }
+            //     }
+            // }
+            
+            // for (let i = 0; i < state.allCharacters.length; i++) {
+            //     if (state.allCharacters[i].id === payload.id) return {
+            //         ...state,
+            //         error: ERROR_CODES.ERROR_666
+            //     };
+            // }
             return {
                 ...state,
                 allCharacters: [...state.allCharacters, ...payload]

@@ -25,7 +25,7 @@ function CreateCharacter({closeCreateCharacter}) {
     const loader = (time) => {
         setLoading(true);
         setTimeout(() => {
-            setLoading(false)
+            setLoading(false);
         }, time);
     }
 

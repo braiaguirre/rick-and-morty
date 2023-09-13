@@ -27,7 +27,6 @@ export const getCharacter = (id, name, gender, species, origin, status) => {
     return async (dispatch) => {
         try {
             const {data} = await axios.get(`${URL}/character/${id ? id : '?name=' + name}`);
-            console.log(data);
             return dispatch({
                 type: GET_CHARACTER,
                 payload: data
