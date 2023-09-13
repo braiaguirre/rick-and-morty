@@ -8,8 +8,7 @@ function App({characters, closeHandler}) {
       <>
          <Cards 
             characters={characters} 
-            closeHandler={closeHandler} 
-            asd='/home' />
+            closeHandler={closeHandler} />
       </>
    );
 }

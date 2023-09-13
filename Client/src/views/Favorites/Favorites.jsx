@@ -25,8 +25,7 @@ function Favorites() {
                 {filteredFavs.length > 0 &&
                     <div className={styles.cards}>
                         <Cards 
-                            characters={filteredFavs} 
-                            asd='/favorites' />
+                            characters={filteredFavs} />
                     </div>}
             </div>
         </>

@@ -22,12 +22,14 @@ import About from './views/About/About';
 import Nav from './components/Nav/Nav';
 import Alert from './components/Alert/Alert';
 import CreateCharacter from './components/CreateCharacter/CreateCharacter';
+import AdvancedSearch from './components/AdvancedSearch/AdvancedSearch';
 
 function App() {
    const navigate = useNavigate();
    const dispatch = useDispatch();
 
    const [createCharacter, setCreateCharacter] = useState(false);
+   const [advancedSearch, setAdvancedSearch] = useState(false);
    const access = useSelector(state => state.access);
    const characters = useSelector(state => state.allCharacters);
    const error = useSelector(state => state.error);
@@ -52,11 +54,21 @@ function App() {
    const createCharacterHandler = () => setCreateCharacter(true);
    const closeCreateCharacter = () => setCreateCharacter(false);
 
+   // ADVANCED SEARCH
+   const advancedSearchHandler = () => setAdvancedSearch(true);
+
    return (
       <>
+         {/* ADVANCED SEARCH */}
+         {advancedSearch && 
+               <div className={styles.popupContainer}>
+                  <AdvancedSearch
+                     advancedSearch={advancedSearch} />
+               </div>}
+
          {/* CREATE CHARACTER POPUP */}
          {createCharacter && 
-               <div className={styles.createCharacterContainer}>
+               <div className={styles.popupContainer}>
                   <CreateCharacter
                      closeCreateCharacter={closeCreateCharacter} />
                </div>}
