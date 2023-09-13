@@ -1,3 +1,21 @@
+.filters {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.filters button {
+    padding: 8px 18px;
+    font-size: 14px;
+}
+
+.filters button:hover {
+    border-color: #e89ac7;
+    transition: 500ms;
+}
+
 .helper {
     align-items: center;
     /* animation: glow 1s infinite alternate; */
