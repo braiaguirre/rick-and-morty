@@ -42,6 +42,7 @@ export default function Login({logIn}) {
                     <span className="material-symbols-outlined" width="20px">{errors.password ? 'close' : 'done'}</span>
                 </div>
                 <button type="submit">Login</button>
+                <button>Register</button>
             </form>
         </div>
     )

@@ -22,7 +22,6 @@ import {
 
 const initialState = {
     allCharacters: [],
-    allCharactersID: [],
     characterDetail: {},
     customCharacters: [],
     allFavs: [],
@@ -39,29 +38,23 @@ export default function reducer (state = initialState, {type, payload}) {
         
         // GET CHARACTER
         case GET_CHARACTER:
-            // console.log(payload);
-            // for (let i = 0; i < payload.length; i++) {
-            //     if (allCharactersID.includes(payload[i].id)) {
-            //         return {
-            //             ...state,
-            //             alert: {
-            //                 title: 'Error',
-            //                 message: 'Already added.',
-            //                 alertType: 'accept'
-            //             }
-            //         }
-            //     }
-            // }
-            
-            // for (let i = 0; i < state.allCharacters.length; i++) {
-            //     if (state.allCharacters[i].id === payload.id) return {
-            //         ...state,
-            //         error: ERROR_CODES.ERROR_666
-            //     };
-            // }
-            return {
+            let duplicate = false;
+
+            for (let i = 0; i < payload.length; i++) {
+                duplicate = state.allCharacters.some(character => character.id === payload[i].id);
+            }
+
+            return duplicate ? {
                 ...state,
-                allCharacters: [...state.allCharacters, ...payload]
+                alert: {
+                    title: 'Error',
+                    message: 'Character already added.',
+                    alertType: 'accept'
+                    }
+                }
+            : {
+                ...state,
+                allCharacters: [...state.allCharacters, ...payload],
             };
 
         // GET CHARACTER DETAIL
@@ -88,7 +81,6 @@ export default function reducer (state = initialState, {type, payload}) {
             return {
                 ...state,
                 allCharacters: [...state.allCharacters, payload],
-                allCharactersID: [...allCharactersID, payload.id],
                 customCharacters: [...state.customCharacters, payload]
             }
 
@@ -97,7 +89,6 @@ export default function reducer (state = initialState, {type, payload}) {
             if (payload === -1) return {
                 ...state,
                 allCharacters: [],
-                allCharactersID: [],
                 allFavs: [],
                 customCharacters: [],
                 filteredFavs: []
@@ -106,7 +97,6 @@ export default function reducer (state = initialState, {type, payload}) {
                 ...state,
                 allCharacters: [...state.allCharacters.filter(character => character.id !== Number(payload))],
                 customCharacters: [...state.customCharacters.filter(character => character.id !== Number(payload))],
-                allCharactersID: [...state.customCharacters.filter(id => character.id !== Number(payload))],
                 allFavs: [...state.allFavs.filter(character => character.id !== Number(payload))],
                 filteredFavs: [...state.filteredFavs.filter(character => character.id !== Number(payload))]
             };
