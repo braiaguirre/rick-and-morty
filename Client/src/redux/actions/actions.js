@@ -6,6 +6,7 @@ import {
     CLEAR_CHARACTER_DETAIL,
     CREATE_CHARACTER,
     REMOVE_CHARACTER, 
+    EDIT_CHARACTER,
     ADD_FAV, 
     REMOVE_FAV, 
     ORDER_FILTER, 
@@ -79,6 +80,17 @@ export const removeCharacter = (id) => {
         type: REMOVE_CHARACTER,
         payload: id
     };
+}
+
+// EDIT CHARACTER
+export const editCharacter = (oldCharacter, newCharacter) => {
+    return {
+        type: EDIT_CHARACTER,
+        payload: {
+            oldCharacter: oldCharacter,
+            newCharacter: newCharacter
+        }
+    }
 }
 
 // ADDF AVORITE

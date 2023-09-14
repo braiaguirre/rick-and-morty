@@ -9,7 +9,7 @@ import rand from '../../utils/rand';
 import {useSelector} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 
-function App({characters, closeHandler, addHandler, advancedSearchHandler}) {
+function App({characters, closeHandler, addHandler, advancedSearchHandler, editCharacterHandler}) {
    document.title = 'Rick and Morty > Home'
 
    // HOOKS
@@ -41,7 +41,8 @@ function App({characters, closeHandler, addHandler, advancedSearchHandler}) {
                 {allCharacters.length > 0 &&
                     <Cards 
                         characters={characters} 
-                        closeHandler={closeHandler} />}
+                        closeHandler={closeHandler}
+                        editCharacterHandler={editCharacterHandler} />}
             </div>
          
       </>

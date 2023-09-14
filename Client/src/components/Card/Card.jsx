@@ -4,7 +4,7 @@ import {useNavigate} from 'react-router-dom';
 import {addFav, removeFav} from '../../redux/actions/actions.js';
 import {useSelector, useDispatch} from 'react-redux';
 
-function Card({character, closeHandler, about}) {
+function Card({character, closeHandler, about, editCharacterHandler}) {
     // HOOKS
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -31,6 +31,10 @@ function Card({character, closeHandler, about}) {
     const aboutHandler = () => {
         const URL = 'https://github.com/braiaguirre';
         window.open(URL, '_blank', 'noreferrer');
+    }
+
+    const editHandler = () => {
+        editCharacterHandler(character);
     }
 
     useEffect(() => {
@@ -67,6 +71,10 @@ function Card({character, closeHandler, about}) {
                                 <span className={`material-symbols-outlined ${styles.isFav}`}>
                                     favorite
                                 </span>
+                            </button>}
+                        {editCharacterHandler &&
+                            <button onClick={editHandler}>
+                                <span className='material-symbols-outlined'>edit_document</span>
                             </button>}
                         {closeHandler ? 
                             <button onClick={() => closeHandler(character.id)}>

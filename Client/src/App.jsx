@@ -23,6 +23,7 @@ import About from './views/About/About';
 import Nav from './components/Nav/Nav';
 import Alert from './components/Alert/Alert';
 import CreateCharacter from './components/CreateCharacter/CreateCharacter';
+import EditCharacter from './components/EditCharacter/EditCharacter';
 import AdvancedSearch from './components/AdvancedSearch/AdvancedSearch';
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
    const dispatch = useDispatch();
 
    const [createCharacter, setCreateCharacter] = useState(false);
+   const [editCharacter, setEditCharacter] = useState(false);
    const [advancedSearch, setAdvancedSearch] = useState(false);
    const access = useSelector(state => state.access);
    const characters = useSelector(state => state.allCharacters);
@@ -55,6 +57,10 @@ function App() {
    const createCharacterHandler = () => setCreateCharacter(true);
    const closeCreateCharacter = () => setCreateCharacter(false);
 
+   // EDIT CHARACTER
+   const editCharacterHandler = () => setEditCharacter(true);
+   const closeEditCharacter = () => setEditCharacter(false);
+
    // ADVANCED SEARCH
    const advancedSearchHandler = () => setAdvancedSearch(true);
    const closeAdvancedSearch = () => setAdvancedSearch(false);
@@ -73,6 +79,13 @@ function App() {
                <div className={styles.popupContainer}>
                   <CreateCharacter
                      closeCreateCharacter={closeCreateCharacter} />
+               </div>}
+
+         {/* CREATE CHARACTER POPUP */}
+         {editCharacter && 
+               <div className={styles.popupContainer}>
+                  <EditCharacter
+                     closeEditCharacter={closeEditCharacter} />
                </div>}
 
          {/* ALERT POPUP */}
@@ -108,7 +121,7 @@ function App() {
             {access && 
                <div className={styles.app}>
                   <Routes>
-                     <Route path='/home' element={<Home characters={characters} closeHandler={closeHandler} addHandler={addHandler} advancedSearchHandler={advancedSearchHandler} />} />
+                     <Route path='/home' element={<Home characters={characters} closeHandler={closeHandler} addHandler={addHandler} advancedSearchHandler={advancedSearchHandler} editCharacterHandler={editCharacterHandler} />} />
                      <Route path='/favorites' element={<Favorites />} />
                      <Route path='/custom' element={<CustomCharacters createCharacterHandler={createCharacterHandler} />} />
                      <Route path='/about' element={<About />} />

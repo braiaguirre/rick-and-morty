@@ -6,6 +6,7 @@ import {
     CLEAR_CHARACTER_DETAIL,
     CREATE_CHARACTER,
     REMOVE_CHARACTER, 
+    EDIT_CHARACTER,
     ADD_FAV, 
     REMOVE_FAV, 
     ORDER_FILTER, 
@@ -103,6 +104,18 @@ export default function reducer (state = initialState, {type, payload}) {
                 allFavs: [...state.allFavs.filter(character => character.id !== Number(payload))],
                 filteredFavs: [...state.filteredFavs.filter(character => character.id !== Number(payload))]
             };
+
+        // EDIT CHARACTER
+        case EDIT_CHARACTER:
+            return {
+                ...state,
+                allCharacters: [
+                    ...state.allCharacters.filter(character => character.id !== Number(payload.oldCharacter))
+                    , payload.newCharacter],
+                customCharacters: [
+                    ...state.allCharacters.filter(character => character.id !== Number(payload.oldCharacter))
+                    , payload.newCharacter],
+            }
                 
         // ADD FAVORITE
         case ADD_FAV:

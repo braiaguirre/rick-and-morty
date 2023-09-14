@@ -1,0 +1,96 @@
+.editCharacter {
+    animation: glow 1s infinite alternate;
+    background-color: #0f0f0f;
+    border-color: 1px solid #97ce4c;
+    border-radius: 8px;
+    padding: 50px;
+}
+
+.editCharacter h2{
+    text-transform: uppercase;
+    margin: 0 0 10px 0;
+}
+
+.editCharacter p {
+    margin-bottom: 25px;
+}
+
+.editCharacter button {
+  margin: 20px 5px 0 5px;
+}
+
+.formContainer {
+  display: flex;
+  margin-top: 40px;
+}
+
+.formContainer input {
+  width: 205px;
+  margin: 0 6px 4px 8px;
+}
+
+.formContainer select {
+  height: 42px;
+  width: 228px;
+  padding: 10px;
+}
+
+.formContainer .col {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.formContainer .imageCol .formDiv {
+  flex-direction: column;
+}
+
+.formDiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+}
+
+.formDiv img {
+  border-radius: 100%;
+  box-shadow: 0 0 20px 3px #0f0f0f65;
+  cursor: pointer;
+  margin: 20px;
+  height: 250px;
+  width: 250px;
+}
+
+@keyframes glow {
+    from {
+      box-shadow: 0 0 20px 3px #98ce4c00;
+    }
+    to {
+      box-shadow: 0 0 20px 3px #98ce4cb0;
+    }
+  }
+
+  
+/* ------- LOADING ------- */
+
+.spinner {
+  width: 55px;
+  height: 55px;
+  margin: 117.5px;
+  border: 5px solid #98ce4cb0;
+  border-bottom-color: #98ce4c50;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+  }
+
+  @keyframes rotation {
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
+  } 
