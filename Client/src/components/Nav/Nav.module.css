@@ -1,11 +1,12 @@
 /* -------- NAVBAR -------- */
 
 .navbar {
-  padding: 15px 0;
+  align-items: center;
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
+  padding: 15px 0;
   width: 100vw;
+
   /* animation: glow 1s infinite alternate; */
 }
 
@@ -54,8 +55,36 @@
   transition: 500ms;
 }
 
-/* -------- SEARCH -------- */
+.active {
+  border-bottom: 1px solid #e89ac7 !important;
+}
 
-.search {
+/* -------- RIGHT -------- */
+
+.navRight {
+  display: flex;
+  align-items: center;
   margin-right: 50px;
+}
+
+.navRight span {
+  cursor: pointer;
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.profile {
+  align-items: center;
+  display: flex;
+  margin-left: 10px;
+}
+
+.profile span {
+  font-weight: 500;
+  font-size: 25px;
+}
+.collapse {
+  align-items: center;
+  display: flex;
+  margin: 4.5px 5px 0 0;
 }

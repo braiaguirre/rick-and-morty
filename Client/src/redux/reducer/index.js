@@ -18,7 +18,8 @@ import {
     ACCESS,
     SIGNUP,
     ALERT,
-    CLEAR_ALERT
+    CLEAR_ALERT,
+    MENU_COLLAPSE
 } from '../actions/action-types.js';
 
 const initialState = {
@@ -31,7 +32,8 @@ const initialState = {
     image: '',
     access: true,
     error: '',
-    alert: {}
+    alert: {},
+    menuCollapse: false
 };
 
 export default function reducer (state = initialState, {type, payload}) {
@@ -200,6 +202,13 @@ export default function reducer (state = initialState, {type, payload}) {
             return {
                 ...state,
                 alert: {}
+            }
+
+        // MENU COLLAPSE
+        case MENU_COLLAPSE:
+            return {
+                ...state,
+                menuCollapse: !state.menuCollapse
             }
 
 		// DEFAULT

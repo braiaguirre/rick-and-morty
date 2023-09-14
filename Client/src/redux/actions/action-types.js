@@ -16,3 +16,4 @@ export const ACCESS = 'ACCESS';
 export const SIGNUP = 'SIGNUP';
 export const ALERT = 'ALERT';
 export const CLEAR_ALERT = 'CLEAR_ALERT';
+export const MENU_COLLAPSE = 'MENU_COLLAPSE';

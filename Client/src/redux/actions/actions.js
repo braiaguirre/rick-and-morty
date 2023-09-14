@@ -18,7 +18,8 @@ import {
     ACCESS,
     SIGNUP,
     ALERT,
-    CLEAR_ALERT
+    CLEAR_ALERT,
+    MENU_COLLAPSE
 } from './action-types';
 
 const URL = 'http://localhost:3001/rickandmorty';
@@ -212,5 +213,11 @@ export const sendAlert = (title, message, alertType, action) => {
 export const clearAlert = () => {
     return {
         type: CLEAR_ALERT
+    }
+}
+
+export const menuCollapse = () => {
+    return {
+        type: MENU_COLLAPSE
     }
 }
