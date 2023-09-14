@@ -13,7 +13,7 @@ function AdvancedSearch({closeAdvancedSearch}) {
     const dispatch = useDispatch();
 
     const locations = useSelector(state => state.locations);
-    const [filters, setFilters] = useState({name: null, gender: null, species: null, origin: {name: null}, status: null});
+    const [filters, setFilters] = useState({name: '', gender: '', species: '', origin: {name: ''}, status: ''});
 
     // SUBMIT FORM
     function submitHandler(e) {
@@ -62,9 +62,9 @@ function AdvancedSearch({closeAdvancedSearch}) {
                         <div className={styles.formDiv}>
                             <select name="gender" onChange={changeHandler}>
                                 <option value="">Gender</option>
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
-                                <option value="Genderless">Genderless</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="genderless">Genderless</option>
                                 <option value="unknown">Unknown</option>
                             </select>
                         </div>
@@ -73,8 +73,8 @@ function AdvancedSearch({closeAdvancedSearch}) {
                         <div className={styles.formDiv}>
                             <select name="species" onChange={changeHandler}>
                                 <option value="">Species</option>
-                                <option value="Human">Human</option>
-                                <option value="Alien">Alien</option>
+                                <option value="human">Human</option>
+                                <option value="alien">Alien</option>
                             </select>
                         </div>
 
@@ -92,8 +92,8 @@ function AdvancedSearch({closeAdvancedSearch}) {
                         <div className={styles.formDiv}>
                             <select name="status" onChange={changeHandler}>
                                 <option value="">Status</option>
-                                <option value="Alive">Alive</option>
-                                <option value="Dead">Dead</option>
+                                <option value="alive">Alive</option>
+                                <option value="dead">Dead</option>
                                 <option value="unknown">Unknown</option>
                             </select>
                         </div>

@@ -24,9 +24,13 @@ const URL = 'http://localhost:3001/rickandmorty';
 
 // GET CHARACTER
 export const getCharacter = (id, name, gender, species, origin, status) => {
+    let endpoint = `${URL}/character/`;
+    if (id) endpoint = `${endpoint}${id}`;
+    else endpoint = `${endpoint}?name=${name}&gender=${gender}&species=${species}&status=${status}`;
+
     return async (dispatch) => {
         try {
-            const {data} = await axios.get(`${URL}/character/${id ? id : '?name=' + name}`);
+            const {data} = await axios.get(endpoint);
             return dispatch({
                 type: GET_CHARACTER,
                 payload: data
