@@ -18,7 +18,11 @@ export default function Nav({addHandler, logOut, closeHandler, createCharacterHa
                     <li onClick={() => navigate('/favorites')}>Favorites</li>
                     <li onClick={() => navigate('/custom')}>Custom</li>
                     <li onClick={() => navigate('/about')}>About</li>
-                    <li onClick={logOut}>Logout</li>
+                    <li onClick={logOut}>Logout
+                        <span class="material-symbols-outlined">
+                            logout
+                        </span>
+                    </li>
                 </ul>
             </div>
             <div className={styles.search}>
