@@ -12,6 +12,10 @@
     width: 100%;
 }
 
+.helper button {
+  margin: 0 5px 0 5px;
+}
+
 /* @keyframes glow {
     from {
       text-shadow: 0 0 10px #98ce4c00;

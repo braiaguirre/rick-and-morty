@@ -1,42 +1,41 @@
 .login {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 40px 60px 70px 60px;
-  border-radius: 10px;
-  animation: glow 1s infinite alternate;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 40px 60px 70px 60px;
+    border-radius: 10px;
+    animation: glow 1s infinite alternate;
 }
 
 @keyframes glow {
-  from {
+    from {
     box-shadow: 0 0 50px 15px #98ce4c62;
-  }
-  to {
+    }
+    to {
     box-shadow: 0 0 50px 15px #97ce4c;
-  }
+    }
 }
 
 .login div {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 .login img {
-  display: block;
-  max-width: 350px;
+    display: block;
+    max-width: 350px;
 }
 
 .login form {
-  display: block;
+    display: block;
 }
 
 .login button {
-  margin-top: 40px;
+    margin: 35px 5px 0 5px;
 }
 
 .login input {
-  
-  margin: 5px;
+    margin: 5px;
 }

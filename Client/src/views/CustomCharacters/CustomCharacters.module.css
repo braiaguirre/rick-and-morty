@@ -20,6 +20,7 @@
     align-items: center;
     /* animation: glow 1s infinite alternate; */
     display: flex;
+    flex-direction: column;
     font-family: 'montserrat', serif;
     font-weight: bolder;
     font-size: 40px;

@@ -16,6 +16,7 @@ import {
     GET_IMAGE,
     CLEAR_IMAGE,
     ACCESS,
+    SIGNUP,
     ALERT,
     CLEAR_ALERT
 } from '../actions/action-types.js';

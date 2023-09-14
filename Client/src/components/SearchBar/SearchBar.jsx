@@ -11,7 +11,9 @@ function SearchBar({addHandler, closeHandler, createCharacterHandler, advancedSe
    const [inputValue, setInputValue] = useState('');
    
    // SEARCH FROM API
-   let changeHandler = (e) => setInputValue(e.target.value);
+   let changeHandler = (e) => {
+      setInputValue(e.target.value);
+   }
    
    let clickHandler = () => {
       addHandler(inputValue);
@@ -24,7 +26,7 @@ function SearchBar({addHandler, closeHandler, createCharacterHandler, advancedSe
          <div className={styles.search}>
             <input type='search' ref={inputRef} value={inputValue} onChange={changeHandler} placeholder="ID" />
             <button onClick={clickHandler}>Quick Add</button>
-            <button onClick={() => addHandler(rand())}>Add Random</button>
+            <button onClick={() => addHandler(rand())}>Random</button>
             <button onClick={advancedSearchHandler}>Search</button>
             <button onClick={createCharacterHandler}>Create</button>
             <button onClick={() => closeHandler(-1)}>Clear</button>

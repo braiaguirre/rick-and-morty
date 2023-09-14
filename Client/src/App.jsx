@@ -13,6 +13,7 @@ import {getCharacter, removeCharacter, getAccess, removeAccess, sendAlert} from 
 import Home from './views/Home/Home'
 import Detail from './views/Detail/Detail';
 import Login from './views/Login/Login';
+import Register from './views/Register/Register';
 import Favorites from './views/Favorites/Favorites';
 import CustomCharacters from './views/CustomCharacters/CustomCharacters';
 import Error404 from './views/Error404/Error404';
@@ -99,6 +100,7 @@ function App() {
                <div className={styles.login}>
                   <Routes>
                      <Route path='/' element={<Login logIn={logIn} />} />
+                     <Route path='/register' element={<Register />} />
                   </Routes>
                </div>}
 
@@ -106,9 +108,9 @@ function App() {
             {access && 
                <div className={styles.app}>
                   <Routes>
-                     <Route path='/home' element={<Home characters={characters} closeHandler={closeHandler} />} />
+                     <Route path='/home' element={<Home characters={characters} closeHandler={closeHandler} addHandler={addHandler} advancedSearchHandler={advancedSearchHandler} />} />
                      <Route path='/favorites' element={<Favorites />} />
-                     <Route path='/custom' element={<CustomCharacters />} />
+                     <Route path='/custom' element={<CustomCharacters createCharacterHandler={createCharacterHandler} />} />
                      <Route path='/about' element={<About />} />
                      <Route path='/detail/:id' element={<Detail />}  />
                      <Route path='*' element={<Error404 />} />

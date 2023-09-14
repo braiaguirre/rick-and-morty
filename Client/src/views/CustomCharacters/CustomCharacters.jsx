@@ -7,7 +7,7 @@ import Cards from '../../components/Cards/Cards.jsx';
 // DEPENDENCIES
 import {useDispatch, useSelector} from 'react-redux';
 
-function CustomCharacters() { // TODO: ADD FILTERS
+function CustomCharacters({createCharacterHandler}) { // TODO: ADD FILTERS
     document.title = 'Rick and Morty > Custom Characters'
     
     const dispatch = useDispatch();
@@ -18,8 +18,13 @@ function CustomCharacters() { // TODO: ADD FILTERS
             <div className={styles.customCharacters}>
                 {customCharacters.length === 0 &&
                     <div className={styles.helper}>
-                        <span>NO CUSTOM CHARACTERS YET!</span>
+                        <div>
+                        <span>NO CUSTOM CHARACTERS YET</span>
                         <span className={styles.icon}></span>
+                        </div>
+                        <div>
+                        <button onClick={createCharacterHandler}>Create</button>
+                        </div>
                     </div>}
                 {customCharacters.length > 0 &&
                     <div className={styles.cards}>
