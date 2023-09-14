@@ -19,7 +19,7 @@ export default function Nav({addHandler, logOut, closeHandler, createCharacterHa
                     <li onClick={() => navigate('/custom')}>Custom</li>
                     <li onClick={() => navigate('/about')}>About</li>
                     <li onClick={logOut}>Logout
-                        <span class="material-symbols-outlined">
+                        <span className="material-symbols-outlined">
                             logout
                         </span>
                     </li>

@@ -33,7 +33,7 @@
 
 .menu span {
   font-size: 15px;
-  padding: 5px;
+  padding: 5px 0 5px 5px;
 }
 
 .menu ul li {
