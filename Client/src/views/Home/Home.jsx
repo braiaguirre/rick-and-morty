@@ -29,8 +29,9 @@ function App({characters, closeHandler, addHandler, advancedSearchHandler, editC
          <div className={styles.home}>
                 {allCharacters.length === 0 &&
                     <div className={styles.helper}>
-                        <div>
-                            <span>ADD SOME CHARACTERS</span>
+                        <div className={styles.title}>
+                            <h3>WHY DON'T YOU</h3>
+                            <h2>ADD SOME CHARACTERS?</h2>
                             <span className={styles.icon}></span>
                         </div>
                         <div>

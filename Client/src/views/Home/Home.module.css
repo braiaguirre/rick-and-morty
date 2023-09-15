@@ -1,15 +1,30 @@
 .helper {
-    align-items: center;
-    /* animation: glow 1s infinite alternate; */
-    display: flex;
-    flex-direction: column;
-    font-family: 'montserrat', serif;
-    font-weight: bolder;
-    font-size: 40px;
-    justify-content: center;
-    height: 82vh;
-    transition: opacity 2s ease-in;
-    width: 100%;
+  align-items: center;
+  /* animation: glow 1s infinite alternate; */
+  display: flex;
+  font-family: 'montserrat', serif;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  height: 82vh;
+  transition: opacity 2s ease-in;
+  width: 100%;
+}
+
+.helper .title {
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-weight: bolder;
+  font-size: 40px;
+  margin: 0;
+}
+
+h3 {
+  font-weight: 300;
+  font-size: 25px;
+  margin: 0 0;
 }
 
 .helper button {
