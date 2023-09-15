@@ -14,6 +14,7 @@ import validation from '../../utils/createCharacterValidation.js';
 
 function EditCharacter({character, closeEditCharacter}) {
     const dispatch = useDispatch();
+    console.log(character);
 
     const locations = useSelector(state => state.locations);
     const image = useSelector(state => state.image);

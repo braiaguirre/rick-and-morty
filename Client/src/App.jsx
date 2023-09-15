@@ -31,7 +31,7 @@ function App() {
    const dispatch = useDispatch();
 
    const [createCharacter, setCreateCharacter] = useState(false);
-   const [editCharacter, setEditCharacter] = useState(false);
+   const [editCharacter, setEditCharacter] = useState({character: {}, open: false});
    const [advancedSearch, setAdvancedSearch] = useState(false);
    const access = useSelector(state => state.access);
    const characters = useSelector(state => state.allCharacters);
@@ -58,8 +58,8 @@ function App() {
    const closeCreateCharacter = () => setCreateCharacter(false);
 
    // EDIT CHARACTER
-   const editCharacterHandler = () => setEditCharacter(true);
-   const closeEditCharacter = () => setEditCharacter(false);
+   const editCharacterHandler = (character) => setEditCharacter({character: character, open: true});
+   const closeEditCharacter = () => setEditCharacter({character: {name: '', gender: '', species: '', origin: '', status: ''}, open: false});
 
    // ADVANCED SEARCH
    const advancedSearchHandler = () => setAdvancedSearch(true);
@@ -81,11 +81,12 @@ function App() {
                      closeCreateCharacter={closeCreateCharacter} />
                </div>}
 
-         {/* CREATE CHARACTER POPUP */}
-         {editCharacter && 
+         {/* EDIT CHARACTER POPUP */}
+         {editCharacter.open && 
                <div className={styles.popupContainer}>
                   <EditCharacter
-                     closeEditCharacter={closeEditCharacter} />
+                     closeEditCharacter={closeEditCharacter}
+                     character={editCharacter.character} />
                </div>}
 
          {/* ALERT POPUP */}
@@ -97,6 +98,7 @@ function App() {
                   alertType={alert.alertType}
                   action={alert.action} />
             </div>}
+            
          {/* ACCESS */}
          {access && 
             <div className={styles.navbar}>
