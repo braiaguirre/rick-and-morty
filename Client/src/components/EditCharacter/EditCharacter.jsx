@@ -157,8 +157,8 @@ function EditCharacter({character, closeEditCharacter}) {
                     </div>
                 </div>
 
-                <button type="submit">Edit</button>
                 <button onClick={closeHandler}>Close</button>
+                <button type="submit">Edit</button>
             </form>
         </div>
     )

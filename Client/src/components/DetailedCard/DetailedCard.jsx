@@ -78,7 +78,7 @@ function DetailedCard({character, closeHandler, editCharacterHandler}) {
                             </button>}
                         {closeHandler ? 
                             <button onClick={() => closeHandler(character.id)}>
-                                <span className='material-symbols-outlined'>close</span>
+                                <span className='material-symbols-outlined'>arrow_back</span>
                             </button> 
                         :
                             <></>}
@@ -89,6 +89,7 @@ function DetailedCard({character, closeHandler, editCharacterHandler}) {
                     <h3><b>Status:</b> {character.status}</h3>
                     <h3><b>Species:</b> {character.species}</h3>
                     <h3><b>Gender:</b> {character.gender}</h3>
+                    <h3><b>Episodes:</b> {character.episode?.length}</h3>
                     <h3><b>Origin:</b> {character.origin?.name}</h3>
                     <img src={character.image} alt='imagen' onClick={about ? aboutHandler : navigateHandler} />
                 </>
