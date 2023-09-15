@@ -113,7 +113,7 @@ export default function reducer (state = initialState, {type, payload}) {
                     ...state.allCharacters.filter(character => character.id !== Number(payload.oldCharacter.id))
                     , {...payload.newCharacter, id: state.customCharacters.length + 826}],
                 customCharacters: [
-                    ...state.allCharacters.filter(character => character.id !== Number(payload.oldCharacter.id))
+                    ...state.customCharacters.filter(character => character.id !== Number(payload.oldCharacter.id))
                     , {...payload.newCharacter, id: state.customCharacters.length + 826}],
             }
                 

@@ -6,6 +6,9 @@ import rand from '../../utils/rand';
 import {useRef, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 
+// ACTIONS
+import {sendAlert} from '../../redux/actions/actions';
+
 function SearchBar({addHandler, closeHandler, createCharacterHandler, advancedSearchHandler}) {
    const inputRef = useRef(null);
    const dispatch= useDispatch();
@@ -19,9 +22,12 @@ function SearchBar({addHandler, closeHandler, createCharacterHandler, advancedSe
    const randomHandler = () => addHandler(rand());
    const clearHandler = () => closeHandler();
    const clickHandler = () => {
-      addHandler(inputValue);
-      setInputValue('');
-      inputRef.current.focus();
+      if (!inputValue) dispatch(sendAlert('Error', 'Have you entered an ID?', 'accept'));
+      else {
+         addHandler(inputValue);
+         setInputValue('');
+         inputRef.current.focus();
+      }
    }
 
    return (
