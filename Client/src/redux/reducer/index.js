@@ -110,11 +110,11 @@ export default function reducer (state = initialState, {type, payload}) {
             return {
                 ...state,
                 allCharacters: [
-                    ...state.allCharacters.filter(character => character.id !== Number(payload.oldCharacter))
-                    , payload.newCharacter],
+                    ...state.allCharacters.filter(character => character.id !== Number(payload.oldCharacter.id))
+                    , {...payload.newCharacter, id: state.customCharacters.length + 826}],
                 customCharacters: [
-                    ...state.allCharacters.filter(character => character.id !== Number(payload.oldCharacter))
-                    , payload.newCharacter],
+                    ...state.allCharacters.filter(character => character.id !== Number(payload.oldCharacter.id))
+                    , {...payload.newCharacter, id: state.customCharacters.length + 826}],
             }
                 
         // ADD FAVORITE

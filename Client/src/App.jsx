@@ -58,7 +58,13 @@ function App() {
    const closeCreateCharacter = () => setCreateCharacter(false);
 
    // EDIT CHARACTER
-   const editCharacterHandler = (character) => setEditCharacter({character: character, open: true});
+   const editCharacterHandler = (character) => {
+      if (character.id < 825) {
+         dispatch(sendAlert('Wait!', 'Editing this character will convert it to a custom character, are you sure?', 'yesno', () => setEditCharacter({character: character, open: true})));
+      } else {
+         setEditCharacter({character: character, open: true});
+      }
+   }
    const closeEditCharacter = () => setEditCharacter({character: {name: '', gender: '', species: '', origin: '', status: ''}, open: false});
 
    // ADVANCED SEARCH
@@ -124,10 +130,10 @@ function App() {
                <div className={styles.app}>
                   <Routes>
                      <Route path='/home' element={<Home characters={characters} closeHandler={closeHandler} addHandler={addHandler} advancedSearchHandler={advancedSearchHandler} editCharacterHandler={editCharacterHandler} />} />
-                     <Route path='/favorites' element={<Favorites />} />
-                     <Route path='/custom' element={<CustomCharacters createCharacterHandler={createCharacterHandler} />} />
+                     <Route path='/favorites' element={<Favorites closeHandler={closeHandler} editCharacterHandler={editCharacterHandler} />} />
+                     <Route path='/custom' element={<CustomCharacters createCharacterHandler={createCharacterHandler} closeHandler={closeHandler} editCharacterHandler={editCharacterHandler} />} />
                      <Route path='/about' element={<About />} />
-                     <Route path='/detail/:id' element={<Detail editCharacterHandler={editCharacterHandler}/>}  />
+                     <Route path='/detail/:id' element={<Detail editCharacterHandler={editCharacterHandler} />}  />
                      <Route path='*' element={<Error404 />} />
                   </Routes>
                </div>}

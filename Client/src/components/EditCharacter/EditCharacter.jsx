@@ -14,12 +14,11 @@ import validation from '../../utils/createCharacterValidation.js';
 
 function EditCharacter({character, closeEditCharacter}) {
     const dispatch = useDispatch();
-    console.log(character);
 
     const locations = useSelector(state => state.locations);
     const image = useSelector(state => state.image);
     const [loading, setLoading] = useState(false);
-    const [newCharacter, setNewCharacter] = useState({name: character.name, gender: character.gender, species: character.species, origin: character.origin, status: character.status});
+    const [newCharacter, setNewCharacter] = useState({id: character.id, name: character.name, gender: character.gender, species: character.species, origin: character.origin, image: character.image, status: character.status});
     const [errors, setErrors] = useState({name: false, gender: false, species: false, origin: false, status: false});
 
     // UTILS
@@ -50,6 +49,7 @@ function EditCharacter({character, closeEditCharacter}) {
         e.preventDefault();
         let id = rand();
         dispatch(getImage(id));
+        setNewCharacter({...newCharacter, image: image});
         loader(1000);
     }
 
@@ -57,10 +57,11 @@ function EditCharacter({character, closeEditCharacter}) {
     function submitHandler(e) {
         e.preventDefault();
         for (let error in errors) {
-            if (error) dispatch(sendAlert('Wait!', 'All fields are required to create a new newCharacter.', 'accept'));
+            if (error) dispatch(sendAlert('Wait!', 'All fields are required to edit a character.', 'accept'));
             return;
         }
-        dispatch(editCharacter({...newCharacter, image: image}));
+
+        dispatch(editCharacter(character, newCharacter));
         closeEditCharacter();
     }
 
@@ -74,7 +75,7 @@ function EditCharacter({character, closeEditCharacter}) {
     useEffect(() => {
         let id = rand();
         dispatch(getLocations());
-        dispatch(getImage(id));
+        dispatch(getImage(newCharacter.id));
         loader(1000);
         return () => {
             dispatch(clearLocations());
@@ -85,7 +86,7 @@ function EditCharacter({character, closeEditCharacter}) {
     return (
         <div className={styles.editCharacter}>
             <h2>Edit Character</h2>
-            <p>Editing this character will convert it to a custom newCharacter.</p>
+            <p>Change the character data to convert it into a custom character.</p>
             <form onSubmit={submitHandler}>
                 <div className={styles.formContainer}>
                     {/* FIRST COLUMN */}
@@ -93,13 +94,13 @@ function EditCharacter({character, closeEditCharacter}) {
 
                         {/* NAME */}
                         <div className={styles.formDiv}>
-                            <input name="name" onChange={changeHandler} placeholder="Name" /> 
+                            <input name="name" onChange={changeHandler} value={newCharacter.name} placeholder="Name" /> 
                             <span className="material-symbols-outlined" width="20px">{errors.name ? 'close' : 'done'}</span>
                         </div>
 
                         {/* GENDER */}
                         <div className={styles.formDiv}>
-                            <select name="gender" onChange={changeHandler}>
+                            <select name="gender" onChange={changeHandler} value={newCharacter.gender}>
                                 <option value="">Gender</option>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
@@ -111,17 +112,18 @@ function EditCharacter({character, closeEditCharacter}) {
 
                         {/* SPECIES */}
                         <div className={styles.formDiv}>
-                            <select name="species" onChange={changeHandler}>
+                            <select name="species" onChange={changeHandler} value={newCharacter.species}>
                                 <option value="">Species</option>
                                 <option value="Human">Human</option>
                                 <option value="Alien">Alien</option>
+                                <option value="Robot">Robot</option>
                             </select>
                             <span className="material-symbols-outlined" width="20px">{errors.species ? 'close' : 'done'}</span>
                         </div>
 
                         {/* ORIGIN */}
                         <div className={styles.formDiv}>
-                            <select name="origin" onChange={changeHandler}>
+                            <select name="origin" onChange={changeHandler} value={newCharacter.origin.name}>
                                 <option value="">Origin</option>
                                 {locations.map(location => 
                                     <option value={location.name} key={location.id}>{location.name}</option>
@@ -132,7 +134,7 @@ function EditCharacter({character, closeEditCharacter}) {
                         
                         {/* STATUS */}
                         <div className={styles.formDiv}>
-                            <select name="status" onChange={changeHandler}>
+                            <select name="status" onChange={changeHandler} value={newCharacter.status}>
                                 <option value="">Status</option>
                                 <option value="Alive">Alive</option>
                                 <option value="Dead">Dead</option>
@@ -155,7 +157,7 @@ function EditCharacter({character, closeEditCharacter}) {
                     </div>
                 </div>
 
-                <button type="submit">Create</button>
+                <button type="submit">Edit</button>
                 <button onClick={closeHandler}>Close</button>
             </form>
         </div>

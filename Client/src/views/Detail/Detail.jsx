@@ -9,7 +9,7 @@ import {useParams, useNavigate} from 'react-router-dom';
 // ACTIONS
 import {getCharacterDetail, clearCharacterDetail} from '../../redux/actions/actions';
 
-import Card from '../../components/Card/Card';
+import DetailedCard from '../../components/DetailedCard/DetailedCard';
 
 function Detail(editCharacterHandler) {
     const navigate = useNavigate();
@@ -21,18 +21,18 @@ function Detail(editCharacterHandler) {
     const closeHandler = () => navigate('/home');
     
     useEffect(() => {
-        dispatch(getCharacterDetail(Number(id)))
+        dispatch(getCharacterDetail(Number(id)));
         return () => dispatch(clearCharacterDetail());
     }, []);
 
     return (
         <div className={styles.detail}>
-            <Card 
-                character={character} 
+            <DetailedCard 
+                character={character}
                 closeHandler={closeHandler} 
                 editCharacterHandler={editCharacterHandler}
                 key={character.id} />
-      </div>
+        </div>
     )
 }
 

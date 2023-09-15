@@ -9,7 +9,7 @@ import {useNavigate} from 'react-router-dom';
 import Cards from '../../components/Cards/Cards';
 import Filters from '../../components/Filters/Filters';
 
-function Favorites() {
+function Favorites({closeHandler, editCharacterHandler}) {
     document.title = 'Rick and Morty > Favorites'
 
     // HOOKS
@@ -38,7 +38,9 @@ function Favorites() {
                 {filteredFavs.length > 0 &&
                     <div className={styles.cards}>
                         <Cards 
-                            characters={filteredFavs} />
+                            characters={filteredFavs} 
+                            closeHandler={closeHandler}
+                            editCharacterHandler={editCharacterHandler} />
                     </div>}
             </div>
         </>

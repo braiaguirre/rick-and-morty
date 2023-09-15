@@ -114,6 +114,7 @@ function CreateCharacter({closeCreateCharacter}) {
                                 <option value="">Species</option>
                                 <option value="Human">Human</option>
                                 <option value="Alien">Alien</option>
+                                <option value="Robot">Robot</option>
                             </select>
                             <span className="material-symbols-outlined" width="20px">{errors.species ? 'close' : 'done'}</span>
                         </div>
