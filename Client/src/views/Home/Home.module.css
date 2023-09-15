@@ -11,17 +11,20 @@
   width: 100%;
 }
 
-.helper .title {
+.title {
+  align-items: center;
+  flex-direction: column;
+  display: flex;
   margin-bottom: 20px;
 }
 
-h2 {
+.title1 {
   font-weight: bolder;
   font-size: 40px;
   margin: 0;
 }
 
-h3 {
+.title2 {
   font-weight: 300;
   font-size: 25px;
   margin: 0 0;

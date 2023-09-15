@@ -127,7 +127,7 @@ function App() {
                      <Route path='/favorites' element={<Favorites />} />
                      <Route path='/custom' element={<CustomCharacters createCharacterHandler={createCharacterHandler} />} />
                      <Route path='/about' element={<About />} />
-                     <Route path='/detail/:id' element={<Detail />}  />
+                     <Route path='/detail/:id' element={<Detail editCharacterHandler={editCharacterHandler}/>}  />
                      <Route path='*' element={<Error404 />} />
                   </Routes>
                </div>}

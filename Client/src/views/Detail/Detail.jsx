@@ -9,10 +9,9 @@ import {useParams, useNavigate} from 'react-router-dom';
 // ACTIONS
 import {getCharacterDetail, clearCharacterDetail} from '../../redux/actions/actions';
 
-// CARD
 import Card from '../../components/Card/Card';
 
-function About() {
+function Detail(editCharacterHandler) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -31,9 +30,10 @@ function About() {
             <Card 
                 character={character} 
                 closeHandler={closeHandler} 
+                editCharacterHandler={editCharacterHandler}
                 key={character.id} />
       </div>
     )
 }
 
-export default About;
+export default Detail;

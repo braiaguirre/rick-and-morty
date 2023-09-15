@@ -30,9 +30,9 @@ function App({characters, closeHandler, addHandler, advancedSearchHandler, editC
                 {allCharacters.length === 0 &&
                     <div className={styles.helper}>
                         <div className={styles.title}>
-                            <h3>WHY DON'T YOU</h3>
-                            <h2>ADD SOME CHARACTERS?</h2>
-                            <span className={styles.icon}></span>
+                            <span className={styles.title2}>WHY DON'T YOU</span>
+                            <span className={styles.title1}>ADD SOME CHARACTERS?</span>
+                            {/* <span className={styles.icon}></span> */}
                         </div>
                         <div>
                             <button onClick={randomHandler}>Random</button>

@@ -16,9 +16,11 @@
     text-align: center;
     width: 350px;
 }
+
+/* 
 .card::before {
     content: "";
-}
+} */
 
 @keyframes glow {
     from {
