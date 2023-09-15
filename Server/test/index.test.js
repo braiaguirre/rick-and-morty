@@ -55,6 +55,6 @@ describe('Test de RUTAS', () => {
         });
     });
 
-    // TODO: ARMAR TESTS
+    // TODO: COMPLETAR TESTS CUANDO HAYA DB
 
 });
