@@ -7,7 +7,7 @@ import {Route, Routes, useNavigate} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 
 // ACTIONS
-import {getCharacter, removeCharacter, getAccess, removeAccess, sendAlert} from './redux/actions/actions.js';
+import {sendAlert} from './redux/actions/actions.js';
 
 // VIEWS
 import Home from './views/Home/Home'
@@ -27,37 +27,24 @@ import EditCharacter from './components/EditCharacter/EditCharacter';
 import AdvancedSearch from './components/AdvancedSearch/AdvancedSearch';
 
 function App() {
+
+   // HOOKS
    const navigate = useNavigate();
    const dispatch = useDispatch();
 
+   // STATES
    const [createCharacter, setCreateCharacter] = useState(false);
    const [editCharacter, setEditCharacter] = useState({character: {}, open: false});
    const [advancedSearch, setAdvancedSearch] = useState(false);
    const access = useSelector(state => state.access);
-   const characters = useSelector(state => state.allCharacters);
-   const error = useSelector(state => state.error);
    const alert = useSelector(state => state.alert);
 
-   // ACCESS HANDLERS
-   const logIn = ({emailUsername, password}) => dispatch(getAccess(emailUsername, password));
-   const logOut = () => dispatch(sendAlert('Wait!', 'Are you sure you want to leave?', 'yesno', () => dispatch(removeAccess())));
-   useEffect(() => {
-      access ? navigate('/home') : navigate('/')
-   }, [access]);
-   
-   // CHARACTERS HANDLERS
-   const addHandler = (id) => dispatch(getCharacter(id));
-   const closeHandler = (id = -1) => {
-      if (id === -1) dispatch(sendAlert('Wait!', 'Are you sure you want to remove all characters?', 'yesno', () => dispatch(removeCharacter(id))));
-      else if (id >= 826) dispatch(sendAlert('Wait!', 'This is a custom character, are you sure you want to remove it?', 'yesno', () => dispatch(removeCharacter(id))));
-      else dispatch(removeCharacter(id))
-   };
-   
-   // CREATE CHARACTER
-   const createCharacterHandler = () => setCreateCharacter(true);
+   // HANDLERS
    const closeCreateCharacter = () => setCreateCharacter(false);
-
-   // EDIT CHARACTER
+   const createCharacterHandler = () => setCreateCharacter(true);
+   const closeAdvancedSearch = () => setAdvancedSearch(false);
+   const advancedSearchHandler = () => setAdvancedSearch(true);
+   const closeEditCharacter = () => setEditCharacter({character: {name: '', gender: '', species: '', origin: '', status: ''}, open: false});
    const editCharacterHandler = (character) => {
       if (character.id < 825) {
          dispatch(sendAlert('Wait!', 'Editing this character will convert it to a custom character, are you sure?', 'yesno', () => setEditCharacter({character: character, open: true})));
@@ -65,12 +52,11 @@ function App() {
          setEditCharacter({character: character, open: true});
       }
    }
-   const closeEditCharacter = () => setEditCharacter({character: {name: '', gender: '', species: '', origin: '', status: ''}, open: false});
 
-   // ADVANCED SEARCH
-   const advancedSearchHandler = () => setAdvancedSearch(true);
-   const closeAdvancedSearch = () => setAdvancedSearch(false);
-
+   useEffect(() => {
+      access ? navigate('/home') : navigate('/')
+   }, [access]);
+   
    return (
       <>
          {/* ADVANCED SEARCH */}
@@ -109,9 +95,6 @@ function App() {
          {access && 
             <div className={styles.navbar}>
                <Nav 
-                  addHandler={addHandler} 
-                  logOut={logOut} 
-                  closeHandler={closeHandler} 
                   createCharacterHandler={createCharacterHandler}
                   advancedSearchHandler={advancedSearchHandler} />
             </div>}
@@ -120,7 +103,7 @@ function App() {
             {!access && 
                <div className={styles.login}>
                   <Routes>
-                     <Route path='/' element={<Login logIn={logIn} />} />
+                     <Route path='/' element={<Login />} />
                      <Route path='/register' element={<Register />} />
                   </Routes>
                </div>}
@@ -129,9 +112,9 @@ function App() {
             {access && 
                <div className={styles.app}>
                   <Routes>
-                     <Route path='/home' element={<Home characters={characters} closeHandler={closeHandler} addHandler={addHandler} advancedSearchHandler={advancedSearchHandler} editCharacterHandler={editCharacterHandler} />} />
-                     <Route path='/favorites' element={<Favorites closeHandler={closeHandler} editCharacterHandler={editCharacterHandler} />} />
-                     <Route path='/custom' element={<CustomCharacters createCharacterHandler={createCharacterHandler} closeHandler={closeHandler} editCharacterHandler={editCharacterHandler} />} />
+                     <Route path='/home' element={<Home advancedSearchHandler={advancedSearchHandler} editCharacterHandler={editCharacterHandler} />} />
+                     <Route path='/favorites' element={<Favorites editCharacterHandler={editCharacterHandler} />} />
+                     <Route path='/custom' element={<CustomCharacters createCharacterHandler={createCharacterHandler} editCharacterHandler={editCharacterHandler} />} />
                      <Route path='/about' element={<About />} />
                      <Route path='/detail/:id' element={<Detail editCharacterHandler={editCharacterHandler} />}  />
                      <Route path='*' element={<Error404 />} />

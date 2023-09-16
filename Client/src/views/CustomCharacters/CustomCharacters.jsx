@@ -10,7 +10,10 @@ import {useDispatch, useSelector} from 'react-redux';
 function CustomCharacters({createCharacterHandler, closeHandler, editCharacterHandler}) { // TODO: ADD FILTERS
     document.title = 'Rick and Morty > Custom Characters';
     
+    // HOOKS
     const dispatch = useDispatch();
+    
+    // STATES
     const customCharacters = useSelector(state => state.customCharacters);
 
     return (

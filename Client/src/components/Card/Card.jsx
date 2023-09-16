@@ -1,10 +1,15 @@
+// STYLES
 import styles from './Card.module.css'
-import {useState, useEffect} from 'react';
-import {useNavigate} from 'react-router-dom';
-import {addFav, removeFav} from '../../redux/actions/actions.js';
-import {useSelector, useDispatch} from 'react-redux';
 
-function Card({character, closeHandler, about, editCharacterHandler}) {
+// DEPENDENCIES
+import {useState, useEffect} from 'react';
+import {useSelector, useDispatch} from 'react-redux';
+import {useNavigate} from 'react-router-dom';
+
+// ACTIONS
+import {removeCharacter, addFav, removeFav} from '../../redux/actions/actions.js';
+
+function Card({character, about, editCharacterHandler}) {
     // HOOKS
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -12,10 +17,15 @@ function Card({character, closeHandler, about, editCharacterHandler}) {
     // STATES
     const [loading, setLoading] = useState(false);
     const [isFav, setIsFav] = useState(false);
-    const filteredFavs = useSelector(state => state.filteredFavs)
+    const filteredFavs = useSelector(state => state.filteredFavs);
 
     // NAVIGATE
     const navigateHandler = () => navigate(`/detail/${character.id}`);
+
+    const closeHandler = (id) => {
+        if (id >= 826) dispatch(sendAlert('Wait!', 'This is a custom character, are you sure you want to remove it?', 'yesno', () => dispatch(removeCharacter(id))));
+        else dispatch(removeCharacter(id))
+    };
 
     // FAVORITES
     const favoriteHandler = () => {

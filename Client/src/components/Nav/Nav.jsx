@@ -9,9 +9,9 @@ import {useDispatch, useSelector} from 'react-redux';
 import {useNavigate, useLocation} from 'react-router-dom';
 
 // ACTIONS
-import {menuCollapse} from '../../redux/actions/actions';
+import {getCharacter, removeCharacter, menuCollapse, removeAccess} from '../../redux/actions/actions';
 
-function Nav({addHandler, logOut, closeHandler, createCharacterHandler, advancedSearchHandler}) {
+function Nav({createCharacterHandler, advancedSearchHandler}) {
 
     // HOOKS
     const navigate = useNavigate();
@@ -23,8 +23,11 @@ function Nav({addHandler, logOut, closeHandler, createCharacterHandler, advanced
     const collapsed = useSelector(state => state.menuCollapse);
 
     // HANDLERS
+    const logOut = () => dispatch(sendAlert('Wait!', 'Are you sure you want to leave?', 'yesno', () => dispatch(removeAccess())));
     const navigateHandler = (e) => navigate(`/${e.target.id}`)
     const menuCollapseHandler = () => dispatch(menuCollapse());
+    const closeHandler = () => dispatch(sendAlert('Wait!', 'Are you sure you want to remove all characters?', 'yesno', () => dispatch(removeCharacter(-1))));
+    const addHandler = (id) => dispatch(getCharacter(id));
 
     return (
         <div className={styles.navbar}>

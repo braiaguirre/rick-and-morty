@@ -7,13 +7,13 @@ import {useDispatch} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 
 // ACTIONS
-import {sendAlert} from '../../redux/actions/actions';
+import {getAccess, sendAlert} from '../../redux/actions/actions';
 
 // ASSETS + UTILS
 import logo from '../../assets/logo.png';
 import validation from '../../utils/loginValidation.js';
 
-export default function Login({logIn}) {
+export default function Login() {
     // HOOKS
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -25,6 +25,9 @@ export default function Login({logIn}) {
         setUserData({...userData, [e.target.name]: e.target.value})
         setErrors(validation(userData));
     }
+
+    // HANDLERS
+    const logIn = ({emailUsername, password}) => dispatch(getAccess(emailUsername, password));
 
     const submitHandler = (e) =>  {
         e.preventDefault();
