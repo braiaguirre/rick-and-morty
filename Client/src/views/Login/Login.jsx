@@ -21,7 +21,6 @@ export default function Login({logIn}) {
     // STATES
     const [userData, setUserData] = useState({emailUsername: '', password: ''})
     const [errors, setErrors] = useState({emailUsername: true, password: true});
-    console.log(userData);
     const changeHandler = (e) => {
         setUserData({...userData, [e.target.name]: e.target.value})
         setErrors(validation(userData));
@@ -57,6 +56,11 @@ export default function Login({logIn}) {
                         onChange={changeHandler} 
                         placeholder="Password" />
                 </div>
+                {/* <div>
+                    <label>
+                        <input type="checkbox" />Remember me next time
+                    </label>
+                </div> */}
                 <button onClick={signUpHandler}>Sign Up</button>
                 <button type="submit">Log In</button>
             </form>

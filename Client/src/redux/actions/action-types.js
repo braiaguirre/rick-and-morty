@@ -14,6 +14,7 @@ export const CLEAR_LOCATIONS = 'CLEAR_LOCATIONS';
 export const GET_IMAGE = 'GET_IMAGE';
 export const CLEAR_IMAGE = 'CLEAR_IMAGE';
 export const ACCESS = 'ACCESS';
+export const REMOVE_ACCESS = 'REMOVE_ACCESS';
 export const SIGNUP = 'SIGNUP';
 export const ALERT = 'ALERT';
 export const CLEAR_ALERT = 'CLEAR_ALERT';

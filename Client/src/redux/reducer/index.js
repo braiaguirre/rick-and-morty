@@ -17,6 +17,7 @@ import {
     GET_IMAGE,
     CLEAR_IMAGE,
     ACCESS,
+    REMOVE_ACCESS,
     SIGNUP,
     ALERT,
     CLEAR_ALERT,
@@ -206,7 +207,6 @@ export default function reducer (state = initialState, {type, payload}) {
 
         // ACCESS
         case ACCESS:
-            console.log(payload);
             if ((state.user.username === payload.emailUsername || state.user.email === payload.emailUsername) && state.user.password === payload.password) {
                 return {
                     ...state,
@@ -221,6 +221,13 @@ export default function reducer (state = initialState, {type, payload}) {
                         alertType: 'accept'
                         }
                 }
+            }
+
+        // REMOVE ACCESS
+        case REMOVE_ACCESS:
+            return {
+                ...state,
+                access: false
             }
 
         // SIGN UP

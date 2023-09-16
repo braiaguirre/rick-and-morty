@@ -17,6 +17,7 @@ import {
     GET_IMAGE,
     CLEAR_IMAGE,
     ACCESS,
+    REMOVE_ACCESS,
     SIGNUP,
     ALERT,
     CLEAR_ALERT,
@@ -227,9 +228,8 @@ export const signUp = (name, username, email, password, image) => {
 
 export const removeAccess = () => {
     return {
-        type: ACCESS,
-        payload: false,
-       };
+        type: REMOVE_ACCESS,
+    };
 }
 
 // ALERT
