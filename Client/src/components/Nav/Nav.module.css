@@ -84,6 +84,19 @@
   font-size: 25px;
 }
 
+.profile img {
+  border: 4px solid #ffffff;
+  border-radius: 100%;
+  cursor: pointer;
+  height: 40px;
+  transition: 500ms;
+}
+
+.profile img:hover {
+  border: 4px solid #e89ac7;
+  transition: 500ms;
+}
+
 .collapse {
   align-items: center;
   display: flex;

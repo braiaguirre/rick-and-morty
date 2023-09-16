@@ -19,6 +19,7 @@ function Nav({addHandler, logOut, closeHandler, createCharacterHandler, advanced
     const {pathname} = useLocation();
     
     // STATES
+    const userImage = useSelector(state => state.user.image);
     const collapsed = useSelector(state => state.menuCollapse);
 
     // HANDLERS
@@ -66,9 +67,7 @@ function Nav({addHandler, logOut, closeHandler, createCharacterHandler, advanced
                     advancedSearchHandler={advancedSearchHandler} />
                 
                 <div className={styles.profile}>
-                    <span className="material-symbols-outlined">
-                    account_circle
-                    </span>
+                    <img src={userImage} />
                 </div>
             </div>
         </div>

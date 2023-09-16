@@ -1,12 +1,13 @@
 .login {
+    align-items: center;
+    animation: glow 1s infinite alternate;
+    background-color: #0f0f0f;
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    text-align: center;
     padding: 40px 60px 70px 60px;
-    border-radius: 10px;
-    animation: glow 1s infinite alternate;
+    text-align: center;
 }
 
 @keyframes glow {
@@ -19,8 +20,8 @@
 }
 
 .login div {
-    display: flex;
     align-items: center;
+    display: flex;
 }
 
 .login img {
