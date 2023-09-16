@@ -7,14 +7,17 @@ import {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 
 // ACTIONS
-import {createCharacter, sendAlert, getLocations, clearLocations, getImage, clearImage} from '../../redux/actions/actions.js';
+import {closePopup, createCharacter, sendAlert, getLocations, clearLocations, getImage, clearImage} from '../../redux/actions/actions.js';
 
 // ASSETS + UTILS
 import validation from '../../utils/createCharacterValidation.js';
 
-function CreateCharacter({closeCreateCharacter}) {
+function CreateCharacter() {
+
+    // HOOKS
     const dispatch = useDispatch();
 
+    // STATES
     const locations = useSelector(state => state.locations);
     const image = useSelector(state => state.image);
     const [loading, setLoading] = useState(false);
@@ -29,7 +32,12 @@ function CreateCharacter({closeCreateCharacter}) {
         }, time);
     }
 
-    // CHANGE HANDLER (LOCAL STATE)
+    // HANDLERS
+    const closeHandler = (e) => {
+        e.preventDefault();
+        dispatch(closePopup());
+    }
+    
     function changeHandler(e) {      
         if (e.target.name === 'origin') {
             setCharacter({
@@ -60,13 +68,7 @@ function CreateCharacter({closeCreateCharacter}) {
             return;
         }
         dispatch(createCharacter({...character, image: image}));
-        closeCreateCharacter();
-    }
-
-    // CLOSE POPUP
-    function closeHandler(e) {
-        e.preventDefault();
-        closeCreateCharacter();
+        dispatch(closePopup());
     }
 
     // LOAD DATA

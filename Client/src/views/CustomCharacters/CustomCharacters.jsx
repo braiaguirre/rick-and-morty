@@ -7,7 +7,10 @@ import Cards from '../../components/Cards/Cards.jsx';
 // DEPENDENCIES
 import {useDispatch, useSelector} from 'react-redux';
 
-function CustomCharacters({createCharacterHandler, closeHandler, editCharacterHandler}) { // TODO: ADD FILTERS
+// ACTIONS
+import {createPopup} from '../../redux/actions/actions';
+
+function CustomCharacters() { // TODO: ADD FILTERS
     document.title = 'Rick and Morty > Custom Characters';
     
     // HOOKS
@@ -15,6 +18,9 @@ function CustomCharacters({createCharacterHandler, closeHandler, editCharacterHa
     
     // STATES
     const customCharacters = useSelector(state => state.customCharacters);
+
+    // HANDLERS
+    const createCharacterHandler = () => dispatch(createPopup('CREATE_CHARACTER'));
 
     return (
         <>
@@ -32,9 +38,7 @@ function CustomCharacters({createCharacterHandler, closeHandler, editCharacterHa
                 {customCharacters.length > 0 &&
                     <div className={styles.cards}>
                         <Cards 
-                            characters={customCharacters}
-                            closeHandler={closeHandler}
-                            editCharacterHandler={editCharacterHandler} />
+                            characters={customCharacters} />
                     </div>}
             </div>
         </>

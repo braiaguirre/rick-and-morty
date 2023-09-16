@@ -19,11 +19,14 @@ function AdvancedSearch() {
     const [filters, setFilters] = useState({name: '', gender: '', species: '', origin: {name: ''}, status: ''});
 
     // HANDLERS
-    const closeAdvancedSearch = () => dispatch(closePopup());
+    const closeHandler = (e) => {
+        e.preventDefault();
+        dispatch(closePopup());
+    }
     function submitHandler(e) {
         e.preventDefault();
         dispatch(getCharacter(null, filters.name, filters.gender, filters.species, filters.origin.name, filters.status));
-        closeAdvancedSearch();
+        dispatch(closePopup());
     }
 
     function changeHandler(e) {
@@ -105,7 +108,7 @@ function AdvancedSearch() {
                     </div>
                     
                     <button type="submit">Add Characters</button>
-                    <button onClick={closeAdvancedSearch}>Close</button>
+                    <button onClick={closeHandler}>Close</button>
             </form>
         </div>
     )

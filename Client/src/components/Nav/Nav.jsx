@@ -11,7 +11,7 @@ import {useNavigate, useLocation} from 'react-router-dom';
 // ACTIONS
 import {getCharacter, removeCharacter, menuCollapse, removeAccess} from '../../redux/actions/actions';
 
-function Nav({createCharacterHandler}) {
+function Nav() {
 
     // HOOKS
     const navigate = useNavigate();
@@ -62,9 +62,7 @@ function Nav({createCharacterHandler}) {
                         {collapsed ? 'expand_all' : 'collapse_all'}
                     </span>
                 </div>
-                <SearchBar 
-                    addHandler={addHandler} 
-                    createCharacterHandler={createCharacterHandler} />
+                <SearchBar />
                 
                 <div className={styles.profile}>
                     <img src={userImage} />

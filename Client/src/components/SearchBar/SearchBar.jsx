@@ -7,9 +7,9 @@ import {useRef, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 
 // ACTIONS
-import {sendAlert, createPopup} from '../../redux/actions/actions';
+import {createPopup, getCharacter, sendAlert} from '../../redux/actions/actions';
 
-function SearchBar({addHandler, createCharacterHandler}) {
+function SearchBar() {
 
    // HOOKS
    const dispatch= useDispatch();
@@ -17,18 +17,19 @@ function SearchBar({addHandler, createCharacterHandler}) {
    
    // STATES
    const menuCollapse = useSelector(state => state.menuCollapse);
-   const [inputValue, setInputValue] = useState('');
+   const [idInput, setIdInput] = useState('');
 
    // SEARCH FROM API
-   const changeHandler = (e) => setInputValue(e.target.value);
-   const randomHandler = () => addHandler(rand());
+   const createCharacterHandler = () => dispatch(createPopup('CREATE_CHARACTER'));
+   const changeHandler = (e) => setIdInput(e.target.value);
+   const randomHandler = () => dispatch(getCharacter(rand()));
    const clearHandler = () => dispatch(sendAlert('Wait!', 'Are you sure you want to remove all characters?', 'yesno', () => dispatch(removeCharacter(-1))));
    const advancedSearchHandler = () => dispatch(createPopup('ADVANCED_SEARCH'));
-   const clickHandler = () => {
-      if (!inputValue) dispatch(sendAlert('Error', 'Have you entered an ID?', 'accept'));
+   const quickAddHandler = () => {
+      if (!idInput) dispatch(sendAlert('Error', 'Have you entered an ID?', 'accept'));
       else {
-         addHandler(inputValue);
-         setInputValue('');
+         dispatch(getCharacter(idInput));
+         setIdInput('');
          inputRef.current.focus();
       }
    }
@@ -39,10 +40,10 @@ function SearchBar({addHandler, createCharacterHandler}) {
             <input 
                type='search' 
                ref={inputRef}
-               value={inputValue} 
+               value={idInput} 
                onChange={changeHandler} 
                placeholder="ID" />
-            <button onClick={clickHandler}>
+            <button onClick={quickAddHandler}>
                {menuCollapse ? <span className="material-symbols-outlined">add</span> : 'Quick Add'}
             </button>
             <button onClick={randomHandler}>
