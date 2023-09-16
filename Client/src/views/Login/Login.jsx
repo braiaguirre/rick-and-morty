@@ -19,9 +19,9 @@ export default function Login({logIn}) {
     const navigate = useNavigate();
 
     // STATES
-    const [userData, setUserData] = useState({email: '', password: ''})
-    const [errors, setErrors] = useState({email: true, password: true});
-
+    const [userData, setUserData] = useState({emailUsername: '', password: ''})
+    const [errors, setErrors] = useState({emailUsername: true, password: true});
+    console.log(userData);
     const changeHandler = (e) => {
         setUserData({...userData, [e.target.name]: e.target.value})
         setErrors(validation(userData));
@@ -29,7 +29,7 @@ export default function Login({logIn}) {
 
     const submitHandler = (e) =>  {
         e.preventDefault();
-        if (!errors.email && !errors.password) logIn(userData);
+        if (!errors.emailUsername && !errors.password) logIn(userData);
         else dispatch(sendAlert('Error', 'Incorrect email or password.', 'accept'));
     }
 
@@ -44,10 +44,10 @@ export default function Login({logIn}) {
             <form onSubmit={submitHandler}>
                 <div>
                     <input 
-                        name="email" 
-                        value={userData.email} 
+                        name="emailUsername" 
+                        value={userData.emailUsername} 
                         onChange={changeHandler} 
-                        placeholder="Email"/> 
+                        placeholder="Username or email"/> 
                 </div>
                 <div>
                     <input 

@@ -36,8 +36,11 @@ const initialState = {
     alert: {},
     menuCollapse: false,
     user: {
-        name: '',
-        image: ''
+        name: 'Brian',
+        username: 'brianprueba',
+        email: 'prueba@gmail.com',
+        password: '12345PO',
+        image: 'https://rickandmortyapi.com/api/character/avatar/696.jpeg'
     }
 };
 
@@ -203,9 +206,21 @@ export default function reducer (state = initialState, {type, payload}) {
 
         // ACCESS
         case ACCESS:
-            return {
-                ...state,
-                access: payload
+            console.log(payload);
+            if ((state.user.username === payload.emailUsername || state.user.email === payload.emailUsername) && state.user.password === payload.password) {
+                return {
+                    ...state,
+                    access: true
+                }
+            } else {
+                return {
+                    ...state,
+                    alert: {
+                        title: 'Error',
+                        message: 'Invalid email, username or password.',
+                        alertType: 'accept'
+                        }
+                }
             }
 
         // SIGN UP

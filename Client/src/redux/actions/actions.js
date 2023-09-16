@@ -192,12 +192,11 @@ export const clearImage = () => {
 }
 
 // ACCESS HANDLERS
-export const getAccess = (email, password) => {
-    
+export const getAccess = (emailUsername, password) => {
     return {
         type: ACCESS,
         payload: {
-            email: email,
+            emailUsername: emailUsername,
             password: password
         }
     };

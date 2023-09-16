@@ -39,7 +39,7 @@ function App() {
    const alert = useSelector(state => state.alert);
 
    // ACCESS HANDLERS
-   const logIn = ({email, password}) => dispatch(getAccess(email, password));
+   const logIn = ({emailUsername, password}) => dispatch(getAccess(emailUsername, password));
    const logOut = () => dispatch(sendAlert('Wait!', 'Are you sure you want to leave?', 'yesno', () => dispatch(removeAccess())));
    useEffect(() => {
       access ? navigate('/home') : navigate('/')
