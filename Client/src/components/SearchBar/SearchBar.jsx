@@ -7,11 +7,13 @@ import {useRef, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 
 // ACTIONS
-import {sendAlert} from '../../redux/actions/actions';
+import {sendAlert, createPopup} from '../../redux/actions/actions';
 
-function SearchBar({addHandler, closeHandler, createCharacterHandler, advancedSearchHandler}) {
-   const inputRef = useRef(null);
+function SearchBar({addHandler, createCharacterHandler}) {
+
+   // HOOKS
    const dispatch= useDispatch();
+   const inputRef = useRef(null);
    
    // STATES
    const menuCollapse = useSelector(state => state.menuCollapse);
@@ -20,7 +22,8 @@ function SearchBar({addHandler, closeHandler, createCharacterHandler, advancedSe
    // SEARCH FROM API
    const changeHandler = (e) => setInputValue(e.target.value);
    const randomHandler = () => addHandler(rand());
-   const clearHandler = () => closeHandler();
+   const clearHandler = () => dispatch(sendAlert('Wait!', 'Are you sure you want to remove all characters?', 'yesno', () => dispatch(removeCharacter(-1))));
+   const advancedSearchHandler = () => dispatch(createPopup('ADVANCED_SEARCH'));
    const clickHandler = () => {
       if (!inputValue) dispatch(sendAlert('Error', 'Have you entered an ID?', 'accept'));
       else {

@@ -7,15 +7,19 @@ import {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 
 // ACTIONS
-import {getCharacter, getLocations, clearLocations, sendAlert} from '../../redux/actions/actions.js';
+import {closePopup, getCharacter, getLocations, clearLocations, sendAlert} from '../../redux/actions/actions.js';
 
-function AdvancedSearch({closeAdvancedSearch}) {
+function AdvancedSearch() {
+
+    // HOOKS
     const dispatch = useDispatch();
 
+    // STATES
     const locations = useSelector(state => state.locations);
     const [filters, setFilters] = useState({name: '', gender: '', species: '', origin: {name: ''}, status: ''});
 
-    // SUBMIT FORM
+    // HANDLERS
+    const closeAdvancedSearch = () => dispatch(closePopup());
     function submitHandler(e) {
         e.preventDefault();
         dispatch(getCharacter(null, filters.name, filters.gender, filters.species, filters.origin.name, filters.status));

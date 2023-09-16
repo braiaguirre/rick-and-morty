@@ -18,4 +18,6 @@ export const REMOVE_ACCESS = 'REMOVE_ACCESS';
 export const SIGNUP = 'SIGNUP';
 export const ALERT = 'ALERT';
 export const CLEAR_ALERT = 'CLEAR_ALERT';
+export const CREATE_POPUP = 'CREATE_POPUP';
+export const CLOSE_POPUP = 'CLOSE_POPUP';
 export const MENU_COLLAPSE = 'MENU_COLLAPSE';

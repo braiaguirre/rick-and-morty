@@ -35,15 +35,16 @@ function App() {
    // STATES
    const [createCharacter, setCreateCharacter] = useState(false);
    const [editCharacter, setEditCharacter] = useState({character: {}, open: false});
-   const [advancedSearch, setAdvancedSearch] = useState(false);
+   // const [advancedSearch, setAdvancedSearch] = useState(false);
    const access = useSelector(state => state.access);
    const alert = useSelector(state => state.alert);
+   const popup = useSelector(state => state.popup);
 
    // HANDLERS
    const closeCreateCharacter = () => setCreateCharacter(false);
    const createCharacterHandler = () => setCreateCharacter(true);
-   const closeAdvancedSearch = () => setAdvancedSearch(false);
-   const advancedSearchHandler = () => setAdvancedSearch(true);
+   // const closeAdvancedSearch = () => setAdvancedSearch(false);
+   // const advancedSearchHandler = () => setAdvancedSearch(true);
    const closeEditCharacter = () => setEditCharacter({character: {name: '', gender: '', species: '', origin: '', status: ''}, open: false});
    const editCharacterHandler = (character) => {
       if (character.id < 825) {
@@ -60,10 +61,9 @@ function App() {
    return (
       <>
          {/* ADVANCED SEARCH */}
-         {advancedSearch && 
+         {popup.popupType === 'ADVANCED_SEARCH' && 
                <div className={styles.popupContainer}>
-                  <AdvancedSearch
-                     closeAdvancedSearch={closeAdvancedSearch} />
+                  <AdvancedSearch />
                </div>}
 
          {/* CREATE CHARACTER POPUP */}
@@ -95,8 +95,7 @@ function App() {
          {access && 
             <div className={styles.navbar}>
                <Nav 
-                  createCharacterHandler={createCharacterHandler}
-                  advancedSearchHandler={advancedSearchHandler} />
+                  createCharacterHandler={createCharacterHandler} />
             </div>}
          <>
             {/* LOGIN ROUTE */}
@@ -112,7 +111,7 @@ function App() {
             {access && 
                <div className={styles.app}>
                   <Routes>
-                     <Route path='/home' element={<Home advancedSearchHandler={advancedSearchHandler} editCharacterHandler={editCharacterHandler} />} />
+                     <Route path='/home' element={<Home editCharacterHandler={editCharacterHandler} />} />
                      <Route path='/favorites' element={<Favorites editCharacterHandler={editCharacterHandler} />} />
                      <Route path='/custom' element={<CustomCharacters createCharacterHandler={createCharacterHandler} editCharacterHandler={editCharacterHandler} />} />
                      <Route path='/about' element={<About />} />

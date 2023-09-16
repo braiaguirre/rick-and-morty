@@ -11,7 +11,7 @@ import {useNavigate, useLocation} from 'react-router-dom';
 // ACTIONS
 import {getCharacter, removeCharacter, menuCollapse, removeAccess} from '../../redux/actions/actions';
 
-function Nav({createCharacterHandler, advancedSearchHandler}) {
+function Nav({createCharacterHandler}) {
 
     // HOOKS
     const navigate = useNavigate();
@@ -26,7 +26,6 @@ function Nav({createCharacterHandler, advancedSearchHandler}) {
     const logOut = () => dispatch(sendAlert('Wait!', 'Are you sure you want to leave?', 'yesno', () => dispatch(removeAccess())));
     const navigateHandler = (e) => navigate(`/${e.target.id}`)
     const menuCollapseHandler = () => dispatch(menuCollapse());
-    const closeHandler = () => dispatch(sendAlert('Wait!', 'Are you sure you want to remove all characters?', 'yesno', () => dispatch(removeCharacter(-1))));
     const addHandler = (id) => dispatch(getCharacter(id));
 
     return (
@@ -65,9 +64,7 @@ function Nav({createCharacterHandler, advancedSearchHandler}) {
                 </div>
                 <SearchBar 
                     addHandler={addHandler} 
-                    closeHandler={closeHandler} 
-                    createCharacterHandler={createCharacterHandler}
-                    advancedSearchHandler={advancedSearchHandler} />
+                    createCharacterHandler={createCharacterHandler} />
                 
                 <div className={styles.profile}>
                     <img src={userImage} />

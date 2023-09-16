@@ -21,6 +21,8 @@ import {
     SIGNUP,
     ALERT,
     CLEAR_ALERT,
+    CREATE_POPUP,
+    CLOSE_POPUP,
     MENU_COLLAPSE
 } from '../actions/action-types.js';
 
@@ -36,6 +38,10 @@ const initialState = {
     error: '',
     alert: {},
     menuCollapse: false,
+    popup: {
+        popupType: '',
+        payload: {}
+    },
     user: {
         name: 'Brian',
         username: 'brianprueba',
@@ -254,6 +260,25 @@ export default function reducer (state = initialState, {type, payload}) {
             return {
                 ...state,
                 alert: {}
+            }
+
+        // CREATE_POPUP
+        case CREATE_POPUP:
+            return {
+                ...state,
+                popup: {
+                    popupType: payload.popupType,
+                    payload: payload.payload
+                }
+            }
+
+        case CLOSE_POPUP:
+            return {
+                ...state,
+                popup: {
+                    popupType: '',
+                    payload: {}
+                }
             }
 
         // MENU COLLAPSE

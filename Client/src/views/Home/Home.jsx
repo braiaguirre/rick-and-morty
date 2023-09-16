@@ -6,22 +6,24 @@ import Cards from '../../components/Cards/Cards.jsx';
 
 // DEPENDENCIES
 import rand from '../../utils/rand';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 
 // ACTIONS
-import {getCharacter} from '../../redux/actions/actions';
+import {createPopup, getCharacter} from '../../redux/actions/actions';
 
-function App({closeHandler, advancedSearchHandler, editCharacterHandler}) {
+function App({closeHandler, editCharacterHandler}) {
    document.title = 'Rick and Morty > Home'
 
    // HOOKS
+   const dispatch= useDispatch();
    const navigate = useNavigate();
 
    // STATES
    const allCharacters = useSelector(state => state.allCharacters);
 
    // HANDLERS
+   const advancedSearchHandler = () => dispatch(createPopup('ADVANCED_SEARCH'));
    const randomHandler = () => {
       let id = rand();
       dispatch(getCharacter(id));

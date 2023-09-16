@@ -21,6 +21,8 @@ import {
     SIGNUP,
     ALERT,
     CLEAR_ALERT,
+    CREATE_POPUP,
+    CLOSE_POPUP,
     MENU_COLLAPSE
 } from './action-types';
 
@@ -248,6 +250,23 @@ export const sendAlert = (title, message, alertType, action) => {
 export const clearAlert = () => {
     return {
         type: CLEAR_ALERT
+    }
+}
+
+// POPUP
+export const createPopup = (popupType, payload) => {
+    return {
+        type: CREATE_POPUP,
+        payload: {
+            popupType: popupType,
+            payload: payload
+        }
+    }
+}
+
+export const closePopup = () => {
+    return {
+        type: CLOSE_POPUP,
     }
 }
 
