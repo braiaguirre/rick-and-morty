@@ -31,10 +31,14 @@ const initialState = {
     filteredFavs: [],
     locations: [],
     image: '',
-    access: true,
+    access: false,
     error: '',
     alert: {},
-    menuCollapse: false
+    menuCollapse: false,
+    user: {
+        name: '',
+        image: ''
+    }
 };
 
 export default function reducer (state = initialState, {type, payload}) {
@@ -202,6 +206,17 @@ export default function reducer (state = initialState, {type, payload}) {
             return {
                 ...state,
                 access: payload
+            }
+
+        // SIGN UP
+        case SIGNUP:
+            return {
+                ...state,
+                access: true,
+                user: {
+                    name: payload.name,
+                    image: payload.image
+                }
             }
 
         // ALERT

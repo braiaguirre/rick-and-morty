@@ -202,6 +202,17 @@ export const getAccess = (email, password) => {
     };
 }
 
+// SIGN UP
+export const signUp = (name, image) => {
+    return {
+        type: ACCESS,
+        payload: {
+            name: name,
+            image: image
+        }
+    };
+}
+
 export const removeAccess = () => {
     return {
         type: ACCESS,
