@@ -212,10 +212,12 @@ export default function reducer (state = initialState, {type, payload}) {
         case SIGNUP:
             return {
                 ...state,
-                access: true,
                 user: {
                     name: payload.name,
-                    image: payload.image
+                    username: payload.username,
+                    email: payload.email,
+                    image: payload.image,
+                    password: payload.password
                 }
             }
 

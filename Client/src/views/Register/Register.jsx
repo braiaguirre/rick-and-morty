@@ -38,7 +38,10 @@ export default function Login({logIn}) {
 
     function submitHandler(e) {
         e.preventDefault();
-        if (!errors.email && !errors.password) signUp(userData);
+        if (!errors.email && !errors.password) {
+            dispatch(signUp(userData));
+            navigate('/');
+        }
         else dispatch(sendAlert('Error', 'Incorrect email or password.', 'accept'));
     }
     

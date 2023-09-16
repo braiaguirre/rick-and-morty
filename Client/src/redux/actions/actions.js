@@ -193,21 +193,34 @@ export const clearImage = () => {
 
 // ACCESS HANDLERS
 export const getAccess = (email, password) => {
-    return async (dispatch) => {
-        const {data} = await axios.get(`${URL}/login/?email=${email}&password=${password}`);
-        return dispatch({
-            type: ACCESS,
-            payload: data,
-        });
-    };
-}
-
-// SIGN UP
-export const signUp = (name, image) => {
+    
     return {
         type: ACCESS,
         payload: {
+            email: email,
+            password: password
+        }
+    };
+    
+    
+    // return async (dispatch) => {
+    //     const {data} = await axios.get(`${URL}/login/?email=${email}&password=${password}`);
+    //     return dispatch({
+    //         type: ACCESS,
+    //         payload: data,
+    //     });
+    // };
+}
+
+// SIGN UP
+export const signUp = (name, username, email, password, image) => {
+    return {
+        type: SIGNUP,
+        payload: {
             name: name,
+            username: username,
+            email: email,
+            password: password,
             image: image
         }
     };
