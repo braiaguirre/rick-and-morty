@@ -33,20 +33,9 @@ function App() {
    const dispatch = useDispatch();
 
    // STATES
-   const [editCharacter, setEditCharacter] = useState({character: {}, open: false});
    const access = useSelector(state => state.access);
    const alert = useSelector(state => state.alert);
    const popup = useSelector(state => state.popup);
-
-   // HANDLERS
-   const closeEditCharacter = () => setEditCharacter({character: {name: '', gender: '', species: '', origin: '', status: ''}, open: false});
-   const editCharacterHandler = (character) => {
-      if (character.id < 825) {
-         dispatch(sendAlert('Wait!', 'Editing this character will convert it to a custom character, are you sure?', 'yesno', () => setEditCharacter({character: character, open: true})));
-      } else {
-         setEditCharacter({character: character, open: true});
-      }
-   }
 
    useEffect(() => {
       access ? navigate('/home') : navigate('/')
@@ -67,11 +56,9 @@ function App() {
                </div>}
 
          {/* EDIT CHARACTER POPUP */}
-         {editCharacter.open && 
+         {popup.popupType === 'EDIT_CHARACTER' && 
                <div className={styles.popupContainer}>
-                  <EditCharacter
-                     closeEditCharacter={closeEditCharacter}
-                     character={editCharacter.character} />
+                  <EditCharacter />
                </div>}
 
          {/* ALERT POPUP */}
@@ -103,11 +90,11 @@ function App() {
             {access && 
                <div className={styles.app}>
                   <Routes>
-                     <Route path='/home' element={<Home editCharacterHandler={editCharacterHandler} />} />
-                     <Route path='/favorites' element={<Favorites editCharacterHandler={editCharacterHandler} />} />
-                     <Route path='/custom' element={<CustomCharacters editCharacterHandler={editCharacterHandler} />} />
+                     <Route path='/home' element={<Home />} />
+                     <Route path='/favorites' element={<Favorites />} />
+                     <Route path='/custom' element={<CustomCharacters />} />
                      <Route path='/about' element={<About />} />
-                     <Route path='/detail/:id' element={<Detail editCharacterHandler={editCharacterHandler} />}  />
+                     <Route path='/detail/:id' element={<Detail />} />
                      <Route path='*' element={<Error404 />} />
                   </Routes>
                </div>}

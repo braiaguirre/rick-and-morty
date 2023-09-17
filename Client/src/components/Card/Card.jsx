@@ -7,27 +7,34 @@ import {useSelector, useDispatch} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 
 // ACTIONS
-import {removeCharacter, addFav, removeFav} from '../../redux/actions/actions.js';
+import {createPopup, removeCharacter, addFav, removeFav} from '../../redux/actions/actions.js';
 
-function Card({character, about, editCharacterHandler}) {
+function Card({character, about}) {
     // HOOKS
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     // STATES
     const [loading, setLoading] = useState(false);
-    const [isFav, setIsFav] = useState(false);
+    const [isFav, setIsFav] = useState(false);  // TODO: PASAR A REDUX
     const filteredFavs = useSelector(state => state.filteredFavs);
 
     // NAVIGATE
     const navigateHandler = () => navigate(`/detail/${character.id}`);
 
-    const closeHandler = (id) => {
-        if (id >= 826) dispatch(sendAlert('Wait!', 'This is a custom character, are you sure you want to remove it?', 'yesno', () => dispatch(removeCharacter(id))));
-        else dispatch(removeCharacter(id))
+    const closeHandler = () => {
+        if (character.id >= 826) dispatch(sendAlert('Wait!', 'This is a custom character, are you sure you want to remove it?', 'yesno', () => dispatch(removeCharacter(character.id))));
+        else dispatch(removeCharacter(character.id))
     };
 
-    // FAVORITES
+    const editHandler = () => {
+        if (character.id < 825) {
+            dispatch(sendAlert('Wait!', 'Editing this character will convert it to a custom character, are you sure?', 'yesno', () => dispatch(createPopup('EDIT_CHARACTER', character))));
+        } else {
+            dispatch(createPopup('EDIT_CHARACTER', character));
+        }
+    }
+
     const favoriteHandler = () => {
         if (isFav) {
             setIsFav(false);
@@ -37,14 +44,9 @@ function Card({character, about, editCharacterHandler}) {
             dispatch(addFav(character));
     }  }
 
-    // ABOUT CARD
     const aboutHandler = () => {
         const URL = 'https://github.com/braiaguirre';
         window.open(URL, '_blank', 'noreferrer');
-    }
-
-    const editHandler = () => {
-        editCharacterHandler(character);
     }
 
     useEffect(() => {
@@ -54,12 +56,12 @@ function Card({character, about, editCharacterHandler}) {
     }, [filteredFavs]);
 
     // LOADING   // TODO: CREAR LOADING REAL
-        useEffect(() => {
-            setLoading(true);
-            setTimeout(() => {
-                setLoading(false)
-            }, 500);
-        }, []);
+    useEffect(() => {
+        setLoading(true);
+        setTimeout(() => {
+            setLoading(false)
+        }, 500);
+    }, []);
 
     return (
         <div className={styles.card}>
@@ -72,33 +74,27 @@ function Card({character, about, editCharacterHandler}) {
                         
                         {!isFav ? 
                             <button onClick={favoriteHandler}>
-                                <span className='material-symbols-outlined'>
-                                    favorite
-                                </span>
+                                <span className='material-symbols-outlined'>favorite</span>
                             </button> 
                         : 
                             <button onClick={favoriteHandler}>
-                                <span className={`material-symbols-outlined ${styles.isFav}`}>
-                                    favorite
-                                </span>
+                                <span className={`material-symbols-outlined ${styles.isFav}`}>favorite</span>
                             </button>}
-                        {editCharacterHandler &&
+
+                        {!about &&
                             <button onClick={editHandler}>
                                 <span className='material-symbols-outlined'>edit_document</span>
                             </button>}
-                        {closeHandler ? 
-                            <button onClick={() => closeHandler(character.id)}>
+
+                        {!about && 
+                            <button onClick={closeHandler}>
                                 <span className='material-symbols-outlined'>close</span>
-                            </button> 
-                        :
-                            <></>}
+                            </button>}
+
                         {about && 
                             <button onClick={aboutHandler}>
-                                <span className="material-symbols-outlined">
-                                    open_in_new
-                                </span>
-                            </button>
-                        }
+                                <span className="material-symbols-outlined">open_in_new</span>
+                            </button>}
                     </div>
 
                     {/* CHARACTER INFO */}

@@ -7,16 +7,20 @@ import {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 
 // ACTIONS
-import {editCharacter, sendAlert, getLocations, clearLocations, getImage, clearImage} from '../../redux/actions/actions.js';
+import {closePopup, editCharacter, sendAlert, getLocations, clearLocations, getImage, clearImage} from '../../redux/actions/actions.js';
 
 // ASSETS + UTILS
 import validation from '../../utils/createCharacterValidation.js';
 
-function EditCharacter({character, closeEditCharacter}) {
+function EditCharacter() {
+
+    // HOOKS
     const dispatch = useDispatch();
 
+    // STATES
     const locations = useSelector(state => state.locations);
     const image = useSelector(state => state.image);
+    const character = useSelector(state => state.popup.payload);
     const [loading, setLoading] = useState(false);
     const [newCharacter, setNewCharacter] = useState({id: character.id, name: character.name, gender: character.gender, species: character.species, origin: character.origin, image: character.image, status: character.status});
     const [errors, setErrors] = useState({name: false, gender: false, species: false, origin: false, status: false});
@@ -29,7 +33,7 @@ function EditCharacter({character, closeEditCharacter}) {
         }, time);
     }
 
-    // CHANGE HANDLER (LOCAL STATE)
+    // HANDLERS
     function changeHandler(e) {      
         if (e.target.name === 'origin') {
             setNewCharacter({
@@ -44,7 +48,6 @@ function EditCharacter({character, closeEditCharacter}) {
         }
     }
 
-    // IMAGE
     function imageHandler(e) {
         e.preventDefault();
         let id = rand();
@@ -53,22 +56,19 @@ function EditCharacter({character, closeEditCharacter}) {
         loader(1000);
     }
 
-    // SUBMIT FORM
     function submitHandler(e) {
         e.preventDefault();
         for (let error in errors) {
             if (error) dispatch(sendAlert('Wait!', 'All fields are required to edit a character.', 'accept'));
             return;
         }
-
         dispatch(editCharacter(character, newCharacter));
-        closeEditCharacter();
+        dispatch(closePopup());
     }
 
-    // CLOSE POPUP
-    function closeHandler(e) {
+    const closeHandler = (e)  => {
         e.preventDefault();
-        closeEditCharacter();
+        dispatch(closePopup());
     }
 
     // LOAD DATA
