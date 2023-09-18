@@ -7,7 +7,7 @@ import {useRef, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 
 // ACTIONS
-import {createPopup, getCharacter, sendAlert} from '../../redux/actions/actions';
+import {removeCharacter, createPopup, getCharacter, sendAlert} from '../../redux/actions/actions';
 
 function SearchBar() {
 

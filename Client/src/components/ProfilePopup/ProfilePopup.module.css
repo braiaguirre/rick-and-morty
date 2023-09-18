@@ -1,16 +1,33 @@
+.container {
+    height: 100%;
+    position: absolute;
+    width: 100%;
+}
+
 .profilePopup {
     animation: glow 1s infinite alternate;
-    background-color: #0f0f0f;
     border-color: 1px solid #97ce4c;
+    background-color: #0f0f0f;
     border-radius: 8px;
-    padding: 50px;
+    padding: 15px;
+    width: 150px;
+    height: 200px;
+    position: absolute;
+    top: 90px;
+    right: 55px;
+}
+
+.profilePopup h3 {
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: 500;
 }
 
 @keyframes glow {
     from {
-      box-shadow: 0 0 20px 3px #98ce4c00;
+      box-shadow: 0 0 10px 3px #e89ac818;
     }
     to {
-      box-shadow: 0 0 20px 3px #98ce4cb0;
+      box-shadow: 0 0 10px 3px #e89ac7;
     }
   }
