@@ -9,14 +9,15 @@ import {useDispatch} from 'react-redux';
 import {clearAlert} from '../../redux/actions/actions.js';
 
 function Alert({title, message, alertType, action}) {
+
+    // HOOKS
     const dispatch = useDispatch();
 
-    function acceptAlertHandler() {
+    // HANDLERS
+    const clearAlertHandler = () => dispatch(clearAlert());
+    
+    const acceptAlertHandler = () => {
         dispatch(action);
-        dispatch(clearAlert());
-    }
-
-    function clearAlertHandler() {
         dispatch(clearAlert());
     }
 

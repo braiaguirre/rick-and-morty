@@ -7,9 +7,10 @@ import {useSelector, useDispatch} from 'react-redux';
 import {useNavigate, useLocation} from 'react-router-dom';
 
 // ACTIONS
-import {createPopup, removeCharacter, addFav, removeFav} from '../../redux/actions/actions.js';
+import {createPopup, sendAlert, removeCharacter, addFav, removeFav} from '../../redux/actions/actions.js';
 
-function Card({character, about}) {
+function Card({character}) {
+
     // HOOKS
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -20,7 +21,7 @@ function Card({character, about}) {
     const [isFav, setIsFav] = useState(false);  // TODO: PASAR A REDUX
     const filteredFavs = useSelector(state => state.filteredFavs);
 
-    // NAVIGATE
+    // HANDLERS
     const navigateHandler = () => navigate(`/detail/${character.id}`);
 
     const closeHandler = () => {
@@ -29,11 +30,8 @@ function Card({character, about}) {
     };
 
     const editHandler = () => {
-        if (character.id < 825) {
-            dispatch(sendAlert('Wait!', 'Editing this character will convert it to a custom character, are you sure?', 'yesno', () => dispatch(createPopup('EDIT_CHARACTER', character))));
-        } else {
-            dispatch(createPopup('EDIT_CHARACTER', character));
-        }
+        if (character.id < 825) dispatch(sendAlert('Wait!', 'Editing this character will convert it to a custom character, are you sure?', 'yesno', () => dispatch(createPopup('EDIT_CHARACTER', character))));
+        else dispatch(createPopup('EDIT_CHARACTER', character));
     }
 
     const favoriteHandler = () => {
@@ -50,6 +48,7 @@ function Card({character, about}) {
         window.open(URL, '_blank', 'noreferrer');
     }
 
+    // LOAD DATA
     useEffect(() => {
         filteredFavs.forEach(fav => {
             if (fav.id === character.id) setIsFav(true);
@@ -82,12 +81,12 @@ function Card({character, about}) {
                                 <span className={`material-symbols-outlined ${styles.isFav}`}>favorite</span>
                             </button>}
 
-                        {!pathname === '/about' &&
+                        {pathname !== '/about' &&
                             <button onClick={editHandler}>
                                 <span className='material-symbols-outlined'>edit_document</span>
                             </button>}
 
-                        {!pathname === '/about' && 
+                        {pathname !== '/about' && 
                             <button onClick={closeHandler}>
                                 <span className='material-symbols-outlined'>close</span>
                             </button>}

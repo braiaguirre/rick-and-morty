@@ -9,7 +9,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {useNavigate, useLocation} from 'react-router-dom';
 
 // ACTIONS
-import {getCharacter, removeCharacter, menuCollapse, removeAccess} from '../../redux/actions/actions';
+import {menuCollapse, removeAccess} from '../../redux/actions/actions';
 
 function Nav() {
 
@@ -26,10 +26,11 @@ function Nav() {
     const logOut = () => dispatch(sendAlert('Wait!', 'Are you sure you want to leave?', 'yesno', () => dispatch(removeAccess())));
     const navigateHandler = (e) => navigate(`/${e.target.id}`)
     const menuCollapseHandler = () => dispatch(menuCollapse());
-    const addHandler = (id) => dispatch(getCharacter(id));
 
     return (
         <div className={styles.navbar}>
+
+            {/* NAV LINKS */}
             <div className={styles.menu}>
                 <ul>
                     <li 
@@ -56,6 +57,8 @@ function Nav() {
                     </li>
                 </ul>
             </div>
+
+            {/* SEARCH BAR + PROFILE*/}
             <div className={styles.navRight}>
                 <div className={styles.collapse}>
                     <span className="material-symbols-outlined" onClick={menuCollapseHandler}>

@@ -34,21 +34,17 @@ function EditCharacter() {
     }
 
     // HANDLERS
-    function changeHandler(e) {      
+    const changeHandler = (e) => {      
         if (e.target.name === 'origin') {
-            setNewCharacter({
-                ...newCharacter, origin: {name: e.target.value}});
-            setErrors(validation({
-                ...newCharacter, origin: {name: e.target.value}}));
+            setNewCharacter({...newCharacter, origin: {name: e.target.value}});
+            setErrors(validation({...newCharacter, origin: {name: e.target.value}}));
         } else {
-            setNewCharacter({
-                ...newCharacter, [e.target.name]: e.target.value})
-            setErrors(validation({
-                ...newCharacter, [e.target.name]: e.target.value}));
+            setNewCharacter({...newCharacter, [e.target.name]: e.target.value})
+            setErrors(validation({...newCharacter, [e.target.name]: e.target.value}));
         }
     }
 
-    function imageHandler(e) {
+    const imageHandler = (e) => {      
         e.preventDefault();
         let id = rand();
         dispatch(getImage(id));
@@ -56,7 +52,7 @@ function EditCharacter() {
         loader(1000);
     }
 
-    function submitHandler(e) {
+    const submitHandler = (e) => {      
         e.preventDefault();
         for (let error in errors) {
             if (error) dispatch(sendAlert('Wait!', 'All fields are required to edit a character.', 'accept'));

@@ -21,13 +21,14 @@ export default function Login() {
     // STATES
     const [userData, setUserData] = useState({emailUsername: '', password: ''})
     const [errors, setErrors] = useState({emailUsername: true, password: true});
+
+    // HANDLERS
+    const logIn = ({emailUsername, password}) => dispatch(getAccess(emailUsername, password));
+
     const changeHandler = (e) => {
         setUserData({...userData, [e.target.name]: e.target.value})
         setErrors(validation(userData));
     }
-
-    // HANDLERS
-    const logIn = ({emailUsername, password}) => dispatch(getAccess(emailUsername, password));
 
     const submitHandler = (e) =>  {
         e.preventDefault();

@@ -5,8 +5,11 @@ import styles from './Error404.module.css';
 import {useNavigate} from 'react-router-dom';
 
 function Error404() {
+
+    // HOOKS
     const navigate = useNavigate();
 
+    // HANDLERS
     const navigateHandler = () => {
         navigate('/home');
     }

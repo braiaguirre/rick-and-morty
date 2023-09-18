@@ -2,12 +2,11 @@
 import styles from './AdvancedSearch.module.css';
 
 // DEPENDENCIES
-import axios from 'axios';
 import {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 
 // ACTIONS
-import {closePopup, getCharacter, getLocations, clearLocations, sendAlert} from '../../redux/actions/actions.js';
+import {closePopup, getCharacter, getLocations, clearLocations} from '../../redux/actions/actions.js';
 
 function AdvancedSearch() {
 
@@ -23,24 +22,16 @@ function AdvancedSearch() {
         e.preventDefault();
         dispatch(closePopup());
     }
-    function submitHandler(e) {
+    
+    const submitHandler = (e) => {
         e.preventDefault();
         dispatch(getCharacter(null, filters.name, filters.gender, filters.species, filters.origin.name, filters.status));
         dispatch(closePopup());
     }
 
-    function changeHandler(e) {
-        if (e.target.name === 'origin') {
-            setFilters({
-                ...filters, origin: {name: e.target.value}});
-        } else {
-            setFilters({
-                ...filters, [e.target.name]: e.target.value})
-        }
-    }
-
-    function keyDownHandler(e) {
-        console.log(e.key);
+    const changeHandler = (e) => {
+        if (e.target.name === 'origin') setFilters({...filters, origin: {name: e.target.value}});
+        else setFilters({...filters, [e.target.name]: e.target.value});
     }
 
     // LOAD DATA
@@ -53,7 +44,7 @@ function AdvancedSearch() {
 
     return (
         <div className={styles.advancedSearch}>
-            <h2 onKeyDown={keyDownHandler}>Advanced Search</h2>
+            <h2>Advanced Search</h2>
             <p>All characters matching the filters will be added to the app.</p>
             
             <form onSubmit={submitHandler}>

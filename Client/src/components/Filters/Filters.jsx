@@ -9,26 +9,25 @@ import {useDispatch} from 'react-redux';
 import {orderFilter, statusFilter, genderFilter} from '../../redux/actions/actions.js';
 
 function Filters() {
+
+    // HOOKS
     const dispatch = useDispatch();
     const genderRef = useRef();
     const orderRef = useRef();
     const statusRef = useRef();
 
-    const initialFiltersState = {
-        order: 'N',
-        status: 'All',
-        gender: 'All'
-    };
-
+    // STATES
+    const initialFiltersState = {order: 'N', status: 'All', gender: 'All'};
     const [filtersState, setfiltersState] = useState(initialFiltersState);
 
-    // FILTERS
+    // HANDLERS
     const orderHandler = (e) => {
         setfiltersState({...filtersState, order: e.target.value});
         dispatch(orderFilter(e.target.value));
         if (filtersState.status !== 'All') dispatch(statusFilter(filtersState.status));
         if (filtersState.gender !== 'All') dispatch(genderFilter(filtersState.gender));
     }
+    
     const statusHandler = (e) => {
         setfiltersState({...filtersState, status: e.target.value});
         dispatch(statusFilter(e.target.value));

@@ -19,7 +19,7 @@ function SearchBar() {
    const menuCollapse = useSelector(state => state.menuCollapse);
    const [idInput, setIdInput] = useState('');
 
-   // SEARCH FROM API
+   // HANDLERS
    const createCharacterHandler = () => dispatch(createPopup('CREATE_CHARACTER'));
    const changeHandler = (e) => setIdInput(e.target.value);
    const randomHandler = () => dispatch(getCharacter(rand()));

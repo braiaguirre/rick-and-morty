@@ -13,7 +13,7 @@ import {getImage, clearImage, signUp, sendAlert} from '../../redux/actions/actio
 // ASSETS + UTILS
 import validation from '../../utils/registerValidation.js';
 
-export default function Login({logIn}) {
+export default function Login() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -23,20 +23,13 @@ export default function Login({logIn}) {
     const [userData, setUserData] = useState({name: '', username: '', email: '', password: '', confirmPassword: '', image: ''})
     const [errors, setErrors] = useState({name: 'Enter a valid name.', username: 'Enter a valid username', email: 'Enter a valid email.', password: 'Enter a valid password.', confirmPassword: 'Passwords does not match.'});
 
-    // UTILS
-    const loader = (time) => {
-        setLoading(true);
-        setTimeout(() => {
-            setLoading(false);
-        }, time);
-    }
-
-    function changeHandler(e) {        
+    // HANDLERS
+    const changeHandler = (e) => {
         setUserData({...userData, [e.target.name]: e.target.value})
         setErrors(validation({...userData, [e.target.name]: e.target.value}));
     }
 
-    function submitHandler(e) {
+    const submitHandler = (e) => {
         e.preventDefault();
         if (!errors.email && !errors.password) {
             dispatch(signUp(userData));
@@ -50,13 +43,19 @@ export default function Login({logIn}) {
         navigate('/');
     }
 
-    // IMAGE
-    function imageHandler(e) {
+    const imageHandler = (e) => {
         e.preventDefault();
-        let id = rand();
-        dispatch(getImage(id));
+        dispatch(getImage(rand()));
         setUserData({...userData, image: image});
         loader(1000);
+    }
+
+    // UTILS
+    const loader = (time) => {
+        setLoading(true);
+        setTimeout(() => {
+            setLoading(false);
+        }, time);
     }
 
     // LOAD DATA

@@ -38,22 +38,17 @@ function CreateCharacter() {
         dispatch(closePopup());
     }
     
-    function changeHandler(e) {      
+    const changeHandler = (e) => {      
         if (e.target.name === 'origin') {
-            setCharacter({
-                ...character, origin: {name: e.target.value}});
-            setErrors(validation({
-                ...character, origin: {name: e.target.value}}));
+            setCharacter({...character, origin: {name: e.target.value}});
+            setErrors(validation({...character, origin: {name: e.target.value}}));
         } else {
-            setCharacter({
-                ...character, [e.target.name]: e.target.value})
-            setErrors(validation({
-                ...character, [e.target.name]: e.target.value}));
+            setCharacter({...character, [e.target.name]: e.target.value})
+            setErrors(validation({...character, [e.target.name]: e.target.value}));
         }
     }
 
-    // IMAGE
-    function imageHandler(e) {
+    const imageHandler = (e) => {
         e.preventDefault();
         let id = rand();
         dispatch(getImage(id));
@@ -61,7 +56,7 @@ function CreateCharacter() {
     }
 
     // SUBMIT FORM
-    function submitHandler(e) {
+    const submitHandler = (e) => {
         e.preventDefault();
         for (let error in errors) {
             if (error) dispatch(sendAlert('Wait!', 'All fields are required to create a new character.', 'accept'));

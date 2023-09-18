@@ -2,12 +2,9 @@
 import styles from './App.module.css';
 
 // DEPENDENCIES
-import {useState, useEffect} from 'react';
+import {useEffect} from 'react';
 import {Route, Routes, useNavigate} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
-
-// ACTIONS
-import {sendAlert} from './redux/actions/actions.js';
 
 // VIEWS
 import Home from './views/Home/Home'
@@ -30,7 +27,6 @@ function App() {
 
    // HOOKS
    const navigate = useNavigate();
-   const dispatch = useDispatch();
 
    // STATES
    const access = useSelector(state => state.access);
