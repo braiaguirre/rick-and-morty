@@ -145,7 +145,7 @@ h3 {
   margin: 10px 0;
 }
 
-/* ------- ERROR POPUP CONTAINER ------- */
+/* ------- POPUPS ------- */
 
 .popupContainer {
   display: flex;
@@ -155,6 +155,18 @@ h3 {
   height: 100%;
   top: 0;
   position: fixed;
+  text-align: center;
+  background-color: rgba(22,22,22,0.7);
+}
+
+.profilePopupContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  position: absolute;
   text-align: center;
   background-color: rgba(22,22,22,0.7);
 }
