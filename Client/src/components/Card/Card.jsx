@@ -4,7 +4,7 @@ import styles from './Card.module.css'
 // DEPENDENCIES
 import {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, useLocation} from 'react-router-dom';
 
 // ACTIONS
 import {createPopup, removeCharacter, addFav, removeFav} from '../../redux/actions/actions.js';
@@ -13,6 +13,7 @@ function Card({character, about}) {
     // HOOKS
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const {pathname} = useLocation();
 
     // STATES
     const [loading, setLoading] = useState(false);
@@ -81,17 +82,17 @@ function Card({character, about}) {
                                 <span className={`material-symbols-outlined ${styles.isFav}`}>favorite</span>
                             </button>}
 
-                        {!about &&
+                        {!pathname === '/about' &&
                             <button onClick={editHandler}>
                                 <span className='material-symbols-outlined'>edit_document</span>
                             </button>}
 
-                        {!about && 
+                        {!pathname === '/about' && 
                             <button onClick={closeHandler}>
                                 <span className='material-symbols-outlined'>close</span>
                             </button>}
 
-                        {about && 
+                        {pathname === '/about' && 
                             <button onClick={aboutHandler}>
                                 <span className="material-symbols-outlined">open_in_new</span>
                             </button>}

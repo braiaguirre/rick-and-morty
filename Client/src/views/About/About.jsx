@@ -1,9 +1,6 @@
 // STYLES
 import styles from './About.module.css';
 
-// DEPENDENCIES
-import {useNavigate} from 'react-router-dom';
-
 // COMPONENTS
 import Card from '../../components/Card/Card.jsx';
 
@@ -12,10 +9,6 @@ import img from '../../assets/about-profile.jpg';
 
 function About() {
     document.title = 'Rick and Morty > About'
-
-    const navigate = useNavigate();
-
-    const closeHandler = () => navigate('/home');
 
     // PERSONALIZED CHARACTER
     const character = {
@@ -34,8 +27,7 @@ function About() {
         <div className={styles.about}>
             <Card 
                 character={character} 
-                key = {character.id}
-                about = {true} />
+                key = {character.id} />
         </div>
     )
 }
