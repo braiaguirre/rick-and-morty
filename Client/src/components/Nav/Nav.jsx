@@ -9,7 +9,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {useNavigate, useLocation} from 'react-router-dom';
 
 // ACTIONS
-import {menuCollapse, removeAccess} from '../../redux/actions/actions';
+import {createPopup, menuCollapse, removeAccess} from '../../redux/actions/actions';
 
 function Nav() {
 
@@ -26,6 +26,7 @@ function Nav() {
     const logOut = () => dispatch(sendAlert('Wait!', 'Are you sure you want to leave?', 'yesno', () => dispatch(removeAccess())));
     const navigateHandler = (e) => navigate(`/${e.target.id}`)
     const menuCollapseHandler = () => dispatch(menuCollapse());
+    const profileHandler = () => dispatch(createPopup('PROFILE_POPUP'))
 
     return (
         <div className={styles.navbar}>
@@ -68,7 +69,7 @@ function Nav() {
                 <SearchBar />
                 
                 <div className={styles.profile}>
-                    <img src={userImage} />
+                    <img onClick={profileHandler} src={userImage} />
                 </div>
             </div>
         </div>

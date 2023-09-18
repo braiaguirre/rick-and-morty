@@ -22,6 +22,7 @@ import Alert from './components/Alert/Alert';
 import CreateCharacter from './components/CreateCharacter/CreateCharacter';
 import EditCharacter from './components/EditCharacter/EditCharacter';
 import AdvancedSearch from './components/AdvancedSearch/AdvancedSearch';
+import ProfilePopup from './components/ProfilePopup/ProfilePopup';
 
 function App() {
 
@@ -39,34 +40,20 @@ function App() {
    
    return (
       <>
-         {/* ADVANCED SEARCH */}
-         {popup.popupType === 'ADVANCED_SEARCH' && 
-               <div className={styles.popupContainer}>
-                  <AdvancedSearch />
-               </div>}
-
-         {/* CREATE CHARACTER POPUP */}
-         {popup.popupType === 'CREATE_CHARACTER' && 
-               <div className={styles.popupContainer}>
-                  <CreateCharacter />
-               </div>}
-
-         {/* EDIT CHARACTER POPUP */}
-         {popup.popupType === 'EDIT_CHARACTER' && 
-               <div className={styles.popupContainer}>
-                  <EditCharacter />
-               </div>}
-
-         {/* ALERT POPUP */}
-         {Object.keys(alert).length > 0 && 
-            <div className={styles.popupContainer}>
+         {/* POPUPS */}
+         <div className={styles.popupContainer}>
+            {popup.popupType === 'ADVANCED_SEARCH' && <AdvancedSearch />}
+            {popup.popupType === 'CREATE_CHARACTER' && <CreateCharacter />}
+            {popup.popupType === 'EDIT_CHARACTER' && <EditCharacter />}
+            {popup.popupType === 'PROFILE_POPUP' && <ProfilePopup />}
+            {Object.keys(alert).length > 0 && 
                <Alert 
                   title={alert.title}
                   message={alert.message} 
                   alertType={alert.alertType}
-                  action={alert.action} />
-            </div>}
-            
+                  action={alert.action} />}
+         </div>
+
          {/* ACCESS */}
          {access && 
             <div className={styles.navbar}>
