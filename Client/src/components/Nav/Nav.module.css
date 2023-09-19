@@ -41,8 +41,8 @@
   align-items: center;
   border-bottom: 1px solid #98ce4c00;
   cursor: pointer;  
-  display:flex;
-  font-weight: 500;
+  display: flex;
+  font-weight: 400;
   text-transform: uppercase;
   margin-right: 40px;
   transition: 500ms;

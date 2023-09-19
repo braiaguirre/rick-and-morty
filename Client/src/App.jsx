@@ -4,7 +4,7 @@ import styles from './App.module.css';
 // DEPENDENCIES
 import {useEffect} from 'react';
 import {Route, Routes, useNavigate} from 'react-router-dom';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 
 // VIEWS
 import Home from './views/Home/Home'
@@ -44,7 +44,7 @@ function App() {
             {popup.popupType === 'ADVANCED_SEARCH' && <div className={styles.popupContainer}><AdvancedSearch /></div>}
             {popup.popupType === 'CREATE_CHARACTER' && <div className={styles.popupContainer}><CreateCharacter /></div>}
             {popup.popupType === 'EDIT_CHARACTER' && <div className={styles.popupContainer}><EditCharacter /></div>}
-            {Object.keys(alert).length > 0 && 
+            {alert.title !== '' && 
                <div className={styles.popupContainer}>
                   <Alert 
                      title={alert.title}

@@ -19,8 +19,11 @@ function ProfilePopup() {
         <div className={styles.container} onClick={closeHandler}>
             <div className={styles.profilePopup}>
                 <h3>Hi, Brian</h3>
-                <br /><br />
-                <p>Component in progress...</p>
+                <ul>
+                    <li>Profile</li>
+                    <li>Preferences</li>
+                    <li>Log Out</li>
+                </ul>
             </div>
         </div>
     )

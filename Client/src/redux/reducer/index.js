@@ -1,5 +1,3 @@
-import ERROR_CODES from '../utils/errorCodes.js'
-
 import {
     GET_CHARACTER,
     GET_CHARACTER_DETAIL,
@@ -34,9 +32,13 @@ const initialState = {
     filteredFavs: [],
     locations: [],
     image: '',
-    access: false,
+    access: true,
     error: '',
-    alert: {},
+    alert: {
+        title: '',
+        message: '',
+        alertType: ''
+    },
     menuCollapse: false,
     popup: {
         popupType: '',
@@ -261,7 +263,11 @@ export default function reducer (state = initialState, {type, payload}) {
         case CLEAR_ALERT:
             return {
                 ...state,
-                alert: {}
+                alert: {
+                    title: '',
+                    message: '',
+                    alertType: ''
+                }
             }
 
         // CREATE_POPUP
