@@ -104,12 +104,14 @@ export default function reducer (state = initialState, {type, payload}) {
 
         // REMOVE CHARACTER
         case REMOVE_CHARACTER:
-            if (payload === -1) return {
-                ...state,
-                allCharacters: [],
-                allFavs: [],
-                customCharacters: [],
-                filteredFavs: []
+            if (payload === -1) {
+                return {
+                    ...state,
+                    allCharacters: [],
+                    allFavs: [],
+                    customCharacters: [],
+                    filteredFavs: []
+                }
             }
             return {
                 ...state,
