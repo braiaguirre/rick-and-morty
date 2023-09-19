@@ -41,19 +41,19 @@ function App() {
    return (
       <>
          {/* POPUPS */}
-            {popup.popupType === 'ADVANCED_SEARCH' && <div className={styles.popupContainer}><AdvancedSearch /></div>}
-            {popup.popupType === 'CREATE_CHARACTER' && <div className={styles.popupContainer}><CreateCharacter /></div>}
-            {popup.popupType === 'EDIT_CHARACTER' && <div className={styles.popupContainer}><EditCharacter /></div>}
-            {alert.title !== '' && 
-               <div className={styles.popupContainer}>
-                  <Alert 
-                     title={alert.title}
-                     message={alert.message} 
-                     alertType={alert.alertType}
-                     action={alert.action} />
-                  </div>}
+         {popup.popupType !== '' &&
+            <div className={styles.popupContainer}>
+               {popup.popupType === 'ADVANCED_SEARCH' && <AdvancedSearch />}
+               {popup.popupType === 'CREATE_CHARACTER' && <CreateCharacter />}
+               {popup.popupType === 'EDIT_CHARACTER' && <EditCharacter />}
+            </div>}
+            
+         {/* ALERTS */}
+         {alert.title !== '' && 
+            <div className={styles.popupContainer}>
+               <Alert />
+            </div>}
          
-
          {/* PROFILE POPUP */}
             {popup.popupType === 'PROFILE_POPUP' && <div className={styles.profilePopupContainer}><ProfilePopup /></div>}
 
