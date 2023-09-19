@@ -69,7 +69,6 @@ function EditCharacter() {
 
     // LOAD DATA
     useEffect(() => {
-        let id = rand();
         dispatch(getLocations());
         dispatch(getImage(newCharacter.id));
         loader(1000);
@@ -153,8 +152,8 @@ function EditCharacter() {
                     </div>
                 </div>
 
-                <button onClick={closeHandler}>Close</button>
                 <button type="submit">Edit</button>
+                <button onClick={closeHandler}>Cancel</button>
             </form>
         </div>
     )

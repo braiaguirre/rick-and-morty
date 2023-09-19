@@ -35,8 +35,11 @@ function DetailedCard({character}) {
         else dispatch(createPopup('EDIT_CHARACTER', character));
     }
 
-    const closeHandler = () => {
-        navigate('/home');
+    const closeHandler = () => navigate('/home');
+
+    const searchHandler = () => {
+        const URL = `https://www.google.com/search?q=Rick+And+Morty+${character.name}`;
+        window.open(URL, '_blank', 'noreferrer');
     }
 
     // LOAD DATA
@@ -77,9 +80,12 @@ function DetailedCard({character}) {
                         <button onClick={editHandler}>
                             <span className='material-symbols-outlined'>edit_document</span>
                         </button>
-                        <button onClick={closeHandler}>
-                            <span className='material-symbols-outlined'>arrow_back</span>
+                        <button onClick={searchHandler}>
+                            <span className='material-symbols-outlined'>open_in_new</span>
                         </button>
+                        {/* <button onClick={closeHandler}>
+                            <span className='material-symbols-outlined'>arrow_back</span>
+                        </button> */}
                     </div>
 
                     {/* CHARACTER INFO */}

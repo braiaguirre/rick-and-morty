@@ -27,8 +27,8 @@ function Alert({title, message, alertType, action}) {
             <p>{message}</p>
             {alertType === 'yesno' && 
                 <>
-                    <button onClick={clearAlertHandler}>No</button>
                     <button onClick={acceptAlertHandler}>Yes</button>
+                    <button onClick={clearAlertHandler}>No</button>
                 </>}
             {alertType === 'accept' && 
                 <>

@@ -9,7 +9,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {useNavigate, useLocation} from 'react-router-dom';
 
 // ACTIONS
-import {createPopup, menuCollapse, removeAccess} from '../../redux/actions/actions';
+import {sendAlert, createPopup, menuCollapse, removeAccess} from '../../redux/actions/actions';
 
 function Nav() {
 
