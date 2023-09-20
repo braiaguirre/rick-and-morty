@@ -12,23 +12,23 @@ module.exports = (sequelize) => {
          allowNull: false
       },
       status: {
-         type: DataType.ENUM('Alive', 'Dead', 'unknown'),
+         type: DataTypes.ENUM('Alive', 'Dead', 'unknown'),
          allowNull: false
       },
       species: {
-         type: DataType.STRING,
+         type: DataTypes.STRING,
          allowNull: false
       },
       gender: {
-         type: DataType.ENUM('Female', 'Male', 'Genderless', 'unknown'),
+         type: DataTypes.ENUM('Female', 'Male', 'Genderless', 'unknown'),
          allowNull: false
       },
       origin: {
-         type: DataType.STRING,
+         type: DataTypes.STRING,
          allowNull: false
       },
       image: {
-         type: DataType.STRING,
+         type: DataTypes.STRING,
          allowNull: false
       }
    }, { timestamps: false });
