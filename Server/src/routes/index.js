@@ -8,7 +8,8 @@ const login = require('../controllers/login');
 const postUser = require('../controllers/postUser');
 const getLocations = require('../controllers/getLocations');
 const getImage = require('../controllers/getImage');
-const {addFav, removeFav} = require('../controllers/handleFavorites');
+const postFavorite = require('../controllers/postFavorite');
+const deleteFavorite = require('../controllers/deleteFavorite');
 
 const mainRouter = Router();
 
@@ -19,7 +20,7 @@ mainRouter.get('/location', getLocations);
 mainRouter.get('/image/:id', getImage);
 mainRouter.get('/login', login);
 mainRouter.post('/login', postUser);
-mainRouter.post('/fav', addFav);
-mainRouter.delete('/fav/:id', removeFav);
+mainRouter.post('/fav', postFavorite);
+mainRouter.delete('/fav/:id', deleteFavorite);
 
 module.exports = mainRouter;
