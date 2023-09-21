@@ -32,7 +32,7 @@ const initialState = {
     filteredFavs: [],
     locations: [],
     image: '',
-    access: true,
+    access: false,
     error: '',
     alert: {
         title: '',
