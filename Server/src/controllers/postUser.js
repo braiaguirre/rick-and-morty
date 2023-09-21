@@ -3,11 +3,16 @@ const {User} = require('../DB_connection');
 const postUser = async (req, res) => {
     try {
         const {email, password} = req.body;
-        if (!email || !password ) res.status(400).send('Empty data');
-        const user = await User.create({email, password});
-        res.send(200).send(user);
-    } catch(err) {
-        res.send(500).send(err.message);
+        if (!email || !password ) return res.status(400).send('Empty data');
+        const [user, created] = await User.findOrCreate({
+            where: {
+                email,
+                password
+            }
+        });
+        return created ? res.status(200).json(user) : res.status(400).send('Already exists');
+    } catch (error) {
+        return res.status(404).json({error: error.message});
     }
 }
 
