@@ -3,7 +3,7 @@ const {User} = require('../DB_connection');
 const postUser = async (req, res) => {
     try {
         const {name, username, email, image, password} = req.body;
-        if (!email || !password ) return res.status(400).send('Empty data');
+        if (!name || !username || !email || !image || !password ) return res.status(400).send('Empty data');
         const [user, created] = await User.findOrCreate({
             where: {name, username, email, image, password}
         });

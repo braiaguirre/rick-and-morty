@@ -204,7 +204,6 @@ export const getAccess = (emailUsername, password) => {
         }
     };
     
-    
     // return async (dispatch) => {
     //     const {data} = await axios.get(`${URL}/login/?email=${email}&password=${password}`);
     //     return dispatch({
