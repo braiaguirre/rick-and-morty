@@ -5,6 +5,7 @@ const Router = require('express');
 const getCharacter = require('../controllers/getCharacter');
 const postCustomCharacter = require('../controllers/postCustomCharacter');
 const login = require('../controllers/login');
+const postUser = require('../controllers/postUser');
 const getLocations = require('../controllers/getLocations');
 const getImage = require('../controllers/getImage');
 const {addFav, removeFav} = require('../controllers/handleFavorites');
@@ -17,6 +18,7 @@ mainRouter.post('/character', postCustomCharacter);
 mainRouter.get('/location', getLocations);
 mainRouter.get('/image/:id', getImage);
 mainRouter.get('/login', login);
+mainRouter.post('/login', postUser);
 mainRouter.post('/fav', addFav);
 mainRouter.delete('/fav/:id', removeFav);
 
