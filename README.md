@@ -39,4 +39,4 @@ This repository contains the integrative proyect for Henry's bootcamp's module 4
 
 ![custom-characters-3](https://raw.githubusercontent.com/braiaguirre/rick-and-morty/main/app_info/home-custom-tab.jpg)
 
-![custom-characters-4](https://raw.githubusercontent.com/braiaguirre/rick-and-morty/main/app_info/favorite-chars-tab.jpg))
+![custom-characters-4](https://raw.githubusercontent.com/braiaguirre/rick-and-morty/main/app_info/favorite-chars-tab.jpg)
